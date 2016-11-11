@@ -54,6 +54,8 @@ module.exports = function(config) {
       'bower_components/angulartics/src/angulartics.js',
       'bower_components/angulartics-google-analytics/lib/angulartics-ga.js',
       'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'bower_components/angular-growl-v2/build/angular-growl.js',
+      'bower_components/lodash/dist/lodash.compat.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

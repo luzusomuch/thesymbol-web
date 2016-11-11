@@ -23,7 +23,8 @@ angular
         'socialLogin',
         'angularPayments',
         'angular-stripe',
-        'infinite-scroll'
+        'infinite-scroll',
+        'angular-growl'
     ])
     .config(function(stripeProvider) {
         stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
@@ -215,59 +216,76 @@ angular
 
 
 .run(['$rootScope', '$location', 'sessionService', '$http', function($rootScope, $location, sessionService, $http) {
-        $rootScope.$on('$routeChangeStart', function(event, newUrl) {
-            $http.defaults.headers.common['Authorization'] = sessionService.get('user_token');
-            if (sessionService.get("token") == null) {
-                var d = new Date().getTime();
-                if (window.performance && typeof window.performance.now === "function") {
-                    d += performance.now(); //use high-precision timer if available
-                }
-                var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                    var r = (d + Math.random() * 16) % 16 | 0;
-                    d = Math.floor(d / 16);
-                    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-                });
-                sessionService.set("token", uuid);
+    $rootScope.$on('$routeChangeStart', function(event, newUrl) {
+        $http.defaults.headers.common['Authorization'] = sessionService.get('user_token');
+        if (sessionService.get("token") == null) {
+            var d = new Date().getTime();
+            if (window.performance && typeof window.performance.now === "function") {
+                d += performance.now(); //use high-precision timer if available
             }
-            if (newUrl.requireAuth && !sessionService.get('user')) {
-                event.preventDefault();
-                $location.path('/login');
-            }
-            if (newUrl.controller == "LoginCtrl" && sessionService.get('user')) {
-                event.preventDefault();
-                $location.path('/');
-            }
-        });
-    }])
-    .config(function(socialProvider) {
-        //socialProvider.setLinkedInKey("75uycyp6us7n1l");
-        socialProvider.setGoogleKey("631542298819-7bpqphmjec9mg4ak7v7a1onpr4pr0058.apps.googleusercontent.com");
-        socialProvider.setFbKey({
-            appId: "1665314757112099",
-            apiVersion: "v2.7"
-        });
-    })
-    // Angular debug info
-    .config(function($compileProvider, DEBUG_MODE) {
-        if (!DEBUG_MODE) {
-            $compileProvider.debugInfoEnabled(false); // disables AngularJS debug info
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = (d + Math.random() * 16) % 16 | 0;
+                d = Math.floor(d / 16);
+                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            sessionService.set("token", uuid);
         }
-    })
-    // Angular Translate
-    .config(function($translateProvider, DEBUG_MODE, LOCALES) {
-        if (DEBUG_MODE) {
-            $translateProvider.useMissingTranslationHandlerLog(); // warns about missing translates
+        if (newUrl.requireAuth && !sessionService.get('user')) {
+            event.preventDefault();
+            $location.path('/login');
         }
+        if (newUrl.controller == "LoginCtrl" && sessionService.get('user')) {
+            event.preventDefault();
+            $location.path('/');
+        }
+    });
 
-        $translateProvider.useStaticFilesLoader({
-            prefix: 'resources/locale-',
-            suffix: '.json'
+    gapi.load('auth2:client', () => {
+        gapi.auth2.init({
+            // apiKey: 'AIzaSyBCptVIl-Ib0M8Q9pNQnHQiXOtRjm1gtyU',
+            client_id: '1053545390049-kh8pd75t6g8tkg1lti7j08dg3o4a6ghi.apps.googleusercontent.com',
+            scope: 'profile email https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.emails.read'
         });
+        gapi.client.load('plus');
+    });
+    
+    if (!window.gapi) {
+        window.gapi = gapi;
+    }
+}])
+.config(function(socialProvider) {
+    //socialProvider.setLinkedInKey("75uycyp6us7n1l");
+    socialProvider.setGoogleKey("631542298819-7bpqphmjec9mg4ak7v7a1onpr4pr0058.apps.googleusercontent.com");
+    socialProvider.setFbKey({
+        appId: "1665314757112099",
+        apiVersion: "v2.7"
+    });
+})
+// Angular debug info
+.config(function($compileProvider, DEBUG_MODE) {
+    if (!DEBUG_MODE) {
+        $compileProvider.debugInfoEnabled(false); // disables AngularJS debug info
+    }
+})
+// Angular Translate
+.config(function($translateProvider, DEBUG_MODE, LOCALES) {
+    if (DEBUG_MODE) {
+        $translateProvider.useMissingTranslationHandlerLog(); // warns about missing translates
+    }
 
-        $translateProvider.preferredLanguage(LOCALES.preferredLocale);
-        $translateProvider.useLocalStorage();
-    })
-    // Angular Dynamic Locale
-    .config(function(tmhDynamicLocaleProvider) {
-        tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
-    })
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'resources/locale-',
+        suffix: '.json'
+    });
+
+    $translateProvider.preferredLanguage(LOCALES.preferredLocale);
+    $translateProvider.useLocalStorage();
+})
+// Angular Dynamic Locale
+.config(function(tmhDynamicLocaleProvider) {
+    tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
+})
+.config(function(growlProvider) {
+    growlProvider.globalTimeToLive(3000);
+    growlProvider.globalDisableCountDown(true);
+})

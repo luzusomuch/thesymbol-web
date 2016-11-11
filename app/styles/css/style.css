@@ -1,0 +1,92 @@
+
+
+.box-invite {
+    position: relative;
+    padding:30px;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.box-invite i {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -18px;
+    font-size: 35px;
+    background: #fff;
+}
+.box-invite i.fa-facebook-square {
+    color: #3b5998;
+}
+.box-invite i.fa-twitter-square {
+    color: #61aadd;
+}
+.box-invite i.fa-envelope-square {
+    color: #e04c40;
+}
+#owl-products .item {
+    padding:0px 15px;
+}
+.owl-button  {
+    position: absolute;
+    top:50%;
+    margin-top: -15px;
+    font-size: 30px;
+}
+.owl-button.next {
+    right: 0px;
+}
+.owl-button.prev {
+    left: 0px;
+}
+.slider-products {
+    position: relative;
+}
+.list-reviews {
+    padding:0px;
+}
+.list-reviews li {
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.list-reviews li .media-left img {
+    width: 64px;
+    border-radius: 50%;
+}
+.list-reviews li .media-heading {
+    font-size: 15px;
+}
+.search-line, .search-line .row {
+    margin:0px -5px;
+}
+.search-line .col-sm-4, .search-line .col-sm-3, .search-line .col-sm-2, .search-line .col-sm-8, .search-line .col-sm-6  {
+    padding:0px 5px;
+}
+.search-line .form-control {
+    margin: 3px 0px;
+}
+.image-detailed {
+    position: relative;
+}
+.right-show-review {
+    float: right;
+}
+.star-review {
+    font-size: 16px;
+    color: #aeabab;
+    margin-bottom: 5px;
+}
+.star-review i.active {
+    color: #f4a806;
+}
+.modal-content {
+    box-shadow: none;
+}
+@media (min-width: 768px) {
+    .modal-sm {
+        width: 400px;
+    }
+}

@@ -4,6 +4,7 @@
 	<div class="user-setting-outer">
 		<header-bar></header-bar>
 	</div>
+
 	<div class="container setting-container">
 		<div class="col-md-12">
 			<div class="panel panel-default">
@@ -16,21 +17,21 @@
               <div class="box-invite">
                 <i class="fa fa-facebook-square"></i>
                 <h4>Facebook</h4>
-                <a href="#" class="btn btn-default">Invite Friends</a>
+                <a ng-click="invitefr.inviteFriend('facebook')" class="btn btn-default">Invite Friends</a>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="box-invite">
                 <i class="fa fa-twitter-square"></i>
                 <h4>Twitter</h4>
-                <a href="#" class="btn btn-default">Invite Friends</a>
+                <a ng-click="invitefr.inviteFriend('twitter')" class="btn btn-default">Invite Friends</a>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="box-invite">
                 <i class="fa fa-envelope-square "></i>
                 <h4>Gmail</h4>
-                <a href="#" class="btn btn-default">Invite Friends</a>
+                <a ng-click="invitefr.inviteFriend('google')" class="btn btn-default">Invite Friends</a>
               </div>
             </div>
 	        </div>
@@ -38,4 +39,6 @@
 		  </div>
 		</div>
 	</div>
+
+	<footer-bar></footer-bar>
 </div>			
