@@ -1,0 +1,203 @@
+<title>Products</title>
+<style>
+.loadmore {
+    background: #ef6644 none repeat scroll 0 0;
+    border: 1px solid #ef6644;
+    color: #fff;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 400ms ease-out 0s;
+  
+}
+
+.nomore {
+    background: gray none repeat scroll 0 0;
+    border: medium none gray;
+   
+}
+
+#cat ul
+{
+	padding:0px;
+	list-style-type:none;
+}
+#cat ul>li
+{
+	margin:10px 0px;
+}
+									
+</style>
+<!--outer-starts-->
+		<div class="outer">
+			<div class="index-outer">
+				<header-bar></header-bar>
+					<div class="news-feed">
+						<div class="container">
+							<div class="row">
+								<!--news-feed-left-->
+								<div class="col-lg-2 col-sm-2 col-xs-12" style="padding:0px;">
+									<div class="news-feed-left">
+										
+										<dl>
+											<dt>Shop</dt>
+											<dd>
+												<a href="#/shop">
+												<i class="fa fa-paper-plane" aria-hidden="true"></i>
+													Explore
+												</a>
+											</dd>
+											
+										</dl>
+										<!--phone-view-->
+										<dl class="hidden-lg">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category" on-finish-render=ngRepeatFinisheds>
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+										<!--web and tab view-->
+										<dl class="hidden-xs hidden-md hidden-sm" id="trending">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category" on-finish-render=ngRepeatFinisheds>
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+									</div>
+								</div>
+								<!--news-feed-center-->
+								<div class="col-lg-10 col-sm-10 col-xs-12">
+									<div class="row">
+										<div class="col-lg-8 col-sm-8 col-xs-12">
+											<div class="search-outer">
+									<div class="user-actions">
+										<div class="user-action-inner">
+											<div class="row nav nav-tabs">
+												<p>
+													<a href="" data-toggle="tab">Products <span>{{header.length}}</span></a>
+												</p>
+												
+											</div>
+										</div>
+											
+									</div>
+									</div>
+									 <div class="tab-content">
+										<div id="home" class="tab-pane fade in active">
+											<div class="no-data" ng-if="header.length == 0">
+												<div class="data-inner text-center">
+													<p><i class="fa fa-search fa-3x"></i></p>
+													<p>We couldn't find any result </p>
+													<p>Try a different search term.</p>
+												</div>
+											</div>
+											<div class="container-fluid">
+										    <div class="row">
+												<div class="col-lg-4 col-sm-6 col-xs-12" style="padding:0px;" ng-repeat="prod in header.products | orderBy:sortBy   | filter:header.colourFilter | filter:{name:sname}" on-finish-render=ngRepeatImagePreview>
+													<div class="item">
+														<div class="item-img">
+														<Span class="bg-img"></span>
+															<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
+														</div>
+														<div class="item-data">
+															<p>
+																<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:88:' ...'}}</a><br/>
+																<span>${{prod.pricing.after_discount}}</span>
+															</p>
+														</div>
+													</div>
+												</div>
+												
+												
+											</div>
+											 <button  ng-if="header.length > header.products.length && header.length!=header.products.length" ng-click="header.pageSearch(header.products.length)" class="loadmore btn-block" type="button">Load More</button>
+											<button  ng-if="header.length == header.products.length && header.length" class="loadmore nomore btn-block" type="button">No product found</button>
+											</div>
+											
+										</div>
+									
+									  </div>
+										</div>
+										<div class="col-lg-4 col-sm-4 col-xs-12">
+											<div class="trending_collections" id="cat">
+												<div class="col-lg-12 col-xs-12">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h5>VENDORS</h5>
+														</div>
+														<div class="panel-body">
+															<p>
+																<ul>
+																		 <li ng-repeat="vendor in header.group"   >    
+																			<input id="check{{vendor.name}}"  ng-click="header.includeColour(vendor.name)" class="checkbox-custom"   type="checkbox">
+																			<label for="check{{vendor.name}}" class="checkbox-custom-label"></label>&nbsp;&nbsp;{{vendor.name}}</li>
+																	</ul>
+															</p>
+														</div>
+														
+													</div>
+												</div>
+												<div class="col-lg-12 col-xs-12"  >
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h5>REFINE BY</h5>
+														</div>
+														<div class="panel-body">
+															<p>
+																	<ul>
+																		<li>
+																			<div class=price-filter>
+																			<div id=slider-range></div>
+																			<br>
+																			<div class=price_slider_amount>
+																				<input type=text id=amount class="form-control" ng-model=header.srch.price name=price placeholder="Add Your Price">
+																				<input id=minp ng-model=header.srch.minp type=hidden>
+																				<input id=maxp ng-model=header.srch.maxp type=hidden><br>
+																				<input class="btn btn-info pull-right"  type=submit  style="margin-top: -21px;" ng-click=header.priceSearch() value=Search>
+																			</div>
+																		</div>
+																		
+																		</li>
+																		<li>
+																			<h5>Filter</h5>
+																			<div class="form-group">
+																				<input ng-model='sname' ng-trim='false'  type="text" class="form-control" placeholder="filter by keywords" style="margin-top:12px;"/>
+																			</div>
+																		</li>
+																		
+																	</ul>
+															</p>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									</div>
+								</div><!--col-lg-9 col-sm-9 col-xs-12-->
+							</div>
+						</div><!--container-->
+						<footer-bar></footer-bar>
+
+					</div><!--news-feed-->
+					
+			</div><!--index-outer-->

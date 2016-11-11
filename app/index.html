@@ -1,0 +1,151 @@
+<!doctype html>
+<html class="no-js app-loading" ng-app="eCommerceUserApp">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width">
+
+    <link href="styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="styles/css/setting.css" rel="stylesheet" type="text/css">
+    <link href="styles/css/default.css" rel="stylesheet" type="text/css">
+    <link href="styles/css/hover-min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="styles/css/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="styles/css/build.css">
+    <link href="styles/css/bootstrap-toggle.css" rel="stylesheet">
+    <link href="styles/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="styles/css/owl.theme.css" rel="stylesheet" type="text/css" />
+    <link href="styles/css/progress-wizard.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/ng-img-crop.css">
+
+
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link rel="stylesheet" href="styles/css/animate.css" type="text/css">
+    <link rel="stylesheet" href="styles/css/bootstrap-dropdownhover.css" type="text/css">
+
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+
+    <!--plugin-->
+    <link rel="stylesheet" href="styles/css/jquery-ui.min.css">
+
+
+    <link href="styles/css/pgwslideshow.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <!-- endbuild -->
+</head>
+
+<body>
+
+    <div autoscroll="true" ng-view=""></div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angularjs-social-login/angularjs-social-login.js"></script>
+    <script src="bower_components/angular-payments/lib/angular-payments.js"></script>
+    <script src="bower_components/angular-stripe/release/angular-stripe.js"></script>
+    <script src="bower_components/angularytics/dist/angularytics.min.js"></script>
+    <script src="bower_components/SHA-1/sha1.js"></script>
+    <script src="bower_components/angulartics/src/angulartics.js"></script>
+    <script src="bower_components/angulartics-google-analytics/lib/angulartics-ga.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/invite-friend.js"></script>
+    <script src="scripts/controllers/account.js"></script>
+    <script src="scripts/controllers/cancel.js"></script>
+    <script src="scripts/controllers/cart.js"></script>
+    <script src="scripts/controllers/checkout.js"></script>
+    <script src="scripts/controllers/forgot.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/order.js"></script>
+    <script src="scripts/controllers/payment.js"></script>
+    <script src="scripts/controllers/product.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/return.js"></script>
+    <script src="scripts/controllers/review.js"></script>
+    <script src="scripts/controllers/shop.js"></script>
+    <script src="scripts/controllers/success.js"></script>
+    <script src="scripts/directives/angularstarrating.js"></script>
+    <script src="scripts/directives/footerbar.js"></script>
+    <script src="scripts/directives/headerbar.js"></script>
+    <script src="scripts/directives/LanguageSelectDirective.js"></script>
+    <script src="scripts/directives/loginheaderbar.js"></script>
+    <script src="scripts/directives/logout.js"></script>
+    <script src="scripts/directives/onfinishrender.js"></script>
+    <script src="scripts/directives/partials.js"></script>
+    <script src="scripts/directives/ulogout.js"></script>
+    <script src="scripts/services/account.js"></script>
+    <script src="scripts/services/auth.js"></script>
+    <script src="scripts/services/cart.js"></script>
+    <script src="scripts/services/category.js"></script>
+    <script src="scripts/services/checkout.js"></script>
+    <script src="scripts/services/confirmuser.js"></script>
+    <script src="scripts/services/forgot.js"></script>
+    <script src="scripts/services/LocalService.js"></script>
+    <script src="scripts/services/main.js"></script>
+    <script src="scripts/services/newpassword.js"></script>
+    <script src="scripts/services/order.js"></script>
+    <script src="scripts/services/payment.js"></script>
+    <script src="scripts/services/product.js"></script>
+    <script src="scripts/services/register.js"></script>
+    <script src="scripts/services/search.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/sociallogin.js"></script>
+
+
+
+    <!-- endbuild -->
+
+    <script src="styles/js/angularjs-social-login.js"></script>
+    <script src="styles/js/jquery-ui.min.js"></script>
+    <script src="styles/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="styles/js/jquery.rateit.js"></script>
+    <script src="styles/js/angular-socialshare.js"></script>
+    <script src="styles/ng-img-crop.js"></script>
+    <script src="styles/js/bootstrap-toggle.js"></script>
+    <script type="text/javascript" src="styles/js/jquery.sticky-sidebar-scroll.js"></script>
+
+
+</body>
+
+</html>

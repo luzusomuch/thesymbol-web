@@ -1,0 +1,67 @@
+<title>{{"views.reg.Login" | translate}}</title>
+<!--outer-starts-->
+		<div class="outer">
+			<div class="login_outer">
+			<div ng-if=LC.dataLoading style="width:400px;position:absolute;height:400px;background-color:rgba(0,0,0,.39);box-shadow:0 0 36px #000;z-index:80"><img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" style=margin-left:50%;margin-top:50%;z-index:80;position:absolute></div>
+				<div class="padd03">
+					<h3>Log In </h3>
+					<p class="alert btn-danger" ng-show=LC.error>
+							<button class=close type=button data-ng-click=LC.close(this)>x</button><strong>Sorry!</strong>{{LC.error.statusMessage}}</p>
+							<p class="alert btn-success" ng-show=LC.success>
+							<button class=close type=button data-ng-click=LC.close(this)>x</button><strong>WELCOME!</strong>{{LC.success.statusMessage}}</p>
+					<div class="gplus_twitter_btn col-xs-12 grid_cls">
+						<a  g-login href="javascript:void(0);" class="btn btn-default gplus col-xs-6">
+							Google+
+						</a>
+						<a fb-login href="javascript:void(0);" class="btn btn-primary col-xs-6 facebook-btn">
+							{{"views.reg.Facebook" | translate}}
+						</a>
+						
+					</div>
+					
+					<!--contact_details-starts-->
+					<div class="contact_details">
+						<hr/>
+						<form name=form ng-submit=LC.loginAsUser() role=form>
+							
+							<input  class="form-control mailid" name=email type="email" ng-model=LC.login.email ng-required=true placeholder=" {{'views.reg.Email Address' | translate}}"  >
+							<div class="input-group">
+								<input  class="form-control" name=password ng-model=LC.login.password ng-required=true placeholder="{{'views.reg.Password' | translate}}" type=password  aria-describedby="basic-addon2"   >
+								<span class="input-group-addon" id="basic-addon2">
+									<a ng-href="#/forgotpassword">
+										<i class="fa fa-question-circle fa-1x circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Forgot Password?"></i>
+									</a>
+								</span>
+							</div>
+							<button type="submit" class="btn  col-xs-12 login" >Log in </button>
+						</form>
+						<div class="social_media">
+							<!--<a href="javascript:void(0);">More social networks</a>--><br/>
+								<span class="new">New to Fancy?&nbsp; </span><a ng-href="#/register">Sign Up now
+							</a>
+						</div>
+						
+					</div>
+					<!--contact_details-ends-->
+				</div>
+				<!--<div class="Selling">
+					<span class="new">Interested in selling?</span>
+						<a href="javascript:void(0);">
+							<b>Get started</b>
+						</a>
+				</div>-->
+				<div class="Selling ">
+					<span class="new">Start to purchase?</span>
+						<a href="#/">
+							<b>Get started</b>
+						</a>
+			</div>
+			</div>
+			
+		</div>
+		<!--outer-ends-->
+<script>
+            setInterval(function() {
+              $('.close').trigger('click');
+            }, 11110);
+          </script>

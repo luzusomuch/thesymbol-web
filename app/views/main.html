@@ -1,0 +1,322 @@
+<title> {{"views.pd.Home" | translate}}</title>
+<!--outer-starts-->
+		<div class="outer" infinite-scroll="Main.myPagingFunction(allp.product.length)" >
+			<div class="index-outer">
+				<header-bar></header-bar>
+					<div class="news-feed">
+						<div class="container">
+							<div class="row">
+								<!--news-feed-left-->
+								<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;">
+									<div class="news-feed-left">
+										
+										<div class="join_fancy hidden-lg hidden-sm" ng-if="!header.user">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<b>Join {{admin.title}}</b>
+												</div>
+												<div class="panel-body">
+													<p>
+														{{admin.title}} is more fun with friends!
+														Log in to see what your friends are up to.
+														<button fb-login type="button" class="btn btn-facebook btn-block" >Login with Facebook</button>
+														<button  g-login type="button" style="width: 100% !important;" class="btn  gplus btn-block">Login with Google+</button>
+													</p>
+												</div>
+												<div class="panel-footer text-center">
+													<a href="#/register">Join {{admin.title}}</a>
+												</div>
+											</div>
+										</div>
+										<dl>
+											<dt>Shop</dt>
+											<dd>
+												<a href="#/shop">
+												<i class="fa fa-paper-plane" aria-hidden="true"></i>
+													Explore
+												</a>
+											</dd>
+											
+											
+										</dl>
+										<!--phone-view-->
+										<dl class="hidden-lg">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+										<!--web and tab view-->
+										<dl class="hidden-xs hidden-md hidden-sm" id="trending">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+										
+									</div>
+								</div>
+								<!--news-feed-center-->
+								<div class="col-lg-9 col-sm-9 col-xs-12">
+									<div class="container-fluid">
+									<div class="row">
+									<div class="col-lg-8 news-feed-center">
+										<div class="news-feed-center-inner" > 
+											<!--first-feed-->
+											<div class="news-feed-product-details" data-id="{{$index}}" ng-repeat="prod in allp.product"  >
+												<div style="width:100% !important; height:100% !important" class="embed-responsive embed-responsive-4by3" ng-if="($index%4==1 || $index%4==0 ) && prod.product_videos.length"  >
+												 <iframe  ng-repeat="vid in prod.product_videos | limitTo:1" width="560" height="315"  src="{{getIframeSrc(vid.url)}}" frameborder="0" allowfullscreen></iframe>
+												</div>
+												<div ng-if="($index%4==0 || $index%4==1) && !prod.product_videos.length" >
+												<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive" /></a></div>
+												
+												<div class="news-feed-product-details-data " ng-if="$index%4==0 || $index%4==1">
+													<div class="product-details-data-inner clearfix">
+														<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+														<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+															<div class="user-img">
+																<button class="btn btn-default likes_btn">
+																	<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
+																</button>
+															
+																<span data-toggle="tooltip" data-placement="top" title="{{rate.user.name}}" ng-repeat="rate in prod.ratings">
+																	<img ng-src="styles/img/female.png" width="34" height="34"  ng-if="!rate.user.logo && header.cuser.gender=='female'"/>
+																	<img ng-src="styles/img/male.png" width="34" height="34"  ng-if="!rate.user.logo"/>
+																	<img ng-src="{{rate.user.logo.cdn.url}}" width="34" height="34"  ng-if="rate.user.logo"/>
+																	</span>
+															</div>
+													</div>
+												</div>
+												
+													<div class="col-lg-6 col-sm-6 col-xs-12 first_col6" ng-if="$index%4==2">
+														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
+														<div class="news-feed-product-details-data data6">
+															<div class="product-details-data-inner clearfix">
+																<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+																<div class="user-img">
+																	<button class="btn btn-default likes_btn">
+																		<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
+																	</button>
+																	<span data-toggle="tooltip" data-placement="top" title="{{rate.user.name}}" ng-repeat="rate in prod.ratings">
+																	<img ng-src="styles/img/female.png" width="34" height="34"  ng-if="!rate.user.logo && header.cuser.gender=='female'"/>
+																	<img ng-src="styles/img/male.png" width="34" height="34"  ng-if="!rate.user.logo"/>
+																	<img ng-src="{{rate.user.logo.cdn.url}}" width="34" height="34"  ng-if="rate.user.logo"/>
+																	</span>
+																	
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-lg-6 col-sm-6 col-xs-12 second_col6" ng-if="$index%4==3">
+														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
+														<div class="news-feed-product-details-data data6">
+															<div class="product-details-data-inner clearfix">
+																<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+																<div class="user-img">
+																	<button class="btn btn-default likes_btn">
+																		<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
+																	</button>
+																	<span data-toggle="tooltip" data-placement="top" title="{{rate.user.name}}" ng-repeat="rate in prod.ratings">
+																	<img ng-src="styles/img/female.png" width="34" height="34"  ng-if="!rate.user.logo && header.cuser.gender=='female'"/>
+																	<img ng-src="styles/img/male.png" width="34" height="34"  ng-if="!rate.user.logo && header.cuser.gender=='male'"/>
+																	<img ng-src="{{rate.user.logo.cdn.url}}" width="34" height="34"  ng-if="rate.user.logo"/>
+																	</span>
+																	
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
+											
+											
+										</div><!--news-feed-center-->
+									</div><!--col-lg-8-->
+									<!--news-feed-right-->
+								<div class="col-lg-4 col-sm-12 col-md-4 col-xs-12">
+									<div class="news-feed-right">
+										<!--Join fancy-->
+										<div class="join_fancy hidden-xs hidden-md" ng-if="!header.user">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<b>Join {{admin.title}}</b>
+												</div>
+												<div class="panel-body">
+													<p>
+														{{admin.title}} is more fun with friends!
+														Log in to see what your friends are up to.
+														<button fb-login type="button" class="btn btn-facebook btn-block">Login with Facebook</button>
+														<button  g-login type="button" style="width: 100% !important;" class="btn  gplus btn-block">Login with Google+</button>
+													</p>
+												</div>
+												<div class="panel-footer text-center">
+													<a href="#/register">Join {{admin.title}}</a>
+												</div>
+											</div>
+										</div>
+										<!--join fancy-->
+										<!--newsletter
+										<div class="newsletter">
+											<div class="newsletter-inner">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<b>Newsletter</b>
+													</div>
+													<div class="panel-body">
+														<p>
+															Subscribe with us<br/>
+														Get noticed of every activites
+														</p>
+														<div class="form-group">
+															<input type="text" class="form-control" placeholder="emailid" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>-->
+										<!--newsletter-->
+										<!--popular-->
+										<div class="popular">
+											<div class="popular-inner">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<div class="popular-panel-heading clearfix">
+															<b>Best Sale</b>
+														</div>
+													</div>
+													<div class="panel-body" style="padding: 0px 15px;padding-top: 5px;">
+														<div class="row">
+															<div class="col-lg-6 col-xs-6 popular_section_img_outer" ng-repeat="rel in Main.best_offer | limitTo:8">
+																<a ng-href=#/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="img-responsive" /></a>
+															</div>
+															
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+										<!--popular-->
+										<!--collections
+											<div class="collections ">
+												<div class="collections-inner">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<b>Collections</b>
+														</div>
+														<div class="panel-body" style="padding:0px 15px;padding-bottom: 4px;">
+															<div class="row">
+																<div class="col-lg-12 col-xs-12 collection_img_outer" ng-repeat="cate in category | limitTo:5" >
+																	<a ng-href="#/search/category/{{cate._id}}" >
+																		<img src="{{cate.image.cdn.url}}" class="img-responsive"  alt="img" />
+																		<!--<div class="data">{{cate.name}}</div>
+																		<div class="bg"></div>
+																	</a>
+																</div>
+																
+																
+															</div>
+														</div>
+														
+													</div>
+												</div>
+											</div>-->
+										<!--collections-->
+										<!--store-mbl-view-->
+											<div class="stores hidden-lg ">
+												<div class="stores-inner">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<b>Stores</b>
+														</div>
+														<div class="panel-body" style="padding:0px 15px;">
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="stores-heading clearfix" >
+																		<!--1-->
+																		<div class="main-store-heading clearfix" ng-repeat="shop in Main.shops">
+																			<div class="store-heading-inner">
+																				<img alt={{shop.name}} ng-if=shop.logo.url src={{shop.logo.cdn.url}} > <img alt={{shop.name}} ng-if=!shop.logo.url ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shop.name | limitTo:1}}_7.png" >
+																			</div>
+																			<div class="store-heading-right-inner">
+																				<a href=#/shop/{{shop._id}}>{{shop.name}}</a><br>
+																				<em>{{shop.overall_ratings.length}} Reviews</em>
+																				
+																			</div>
+																		</div>
+																		
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel-footer text-center">
+															<a href="#/shop">SEE MORE</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										<!--stores-web-tab-view-->
+											<div class="stores hidden-xs hidden-md hidden-sm" id="stores">
+												<div class="stores-inner">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<b>Stores</b>
+														</div>
+														<div class="panel-body" style="padding:0px 15px;">
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="stores-heading clearfix" >
+																		<!--1-->
+																		<div class="main-store-heading clearfix" ng-repeat="shop in Main.shops">
+																			<div class="store-heading-inner">
+																				<img alt={{shop.name}} ng-if=shop.logo.url src={{shop.logo.cdn.url}} > <img alt={{shop.name}} ng-if=!shop.logo.url ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shop.name | limitTo:1}}_7.png" >
+																			</div>
+																			<div class="store-heading-right-inner">
+																				<a href=#/shop/{{shop._id}}>{{shop.name}}</a><br>
+																				<em >{{shop.overall_ratings.length}} Reviews</em>
+																				
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel-footer text-center">
+															<a href="#/shop">SEE MORE</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										<!--stores-->
+									</div>
+								</div>
+								</div><!--row-->
+								</div><!--container-fluid-->
+								</div><!--col-lg-9 col-sm-9 col-xs-12-->
+							</div>
+						</div><!--container-->
+					</div><!--news-feed-->
+		<footer-bar></footer-bar>
+
+			</div><!--index-outer-->
+			
+		</div>
+		<!--outer-ends-->

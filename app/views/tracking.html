@@ -1,0 +1,115 @@
+
+<title>Order Details</title>
+<div class="tracking-outer" ng-repeat="pro in ReturnC.product">
+				<div class="container" ng-repeat="prd in pro.product">
+					<header-bar></header-bar>
+					
+					<div class="track-product order-data">
+						<div class="row">
+
+							<div class="col-lg-3 col-sm-3 col-xs-12">
+								<div class="track-product-img">
+									<a ng-href="#/product/{{prd._id}}"><img  data-ng-repeat="img in prd.images |  limitTo:1" ng-src="{{img.cdn.url}}" alt="img" class="image-responsive" width="100%" /></a>
+								</div>
+							</div>
+							<div class="col-lg-9 col-sm-9 col-xs-12">
+								<div class="track-product-description">
+									<div class="p-data clearfix">
+										<span class="pull-left">
+											{{pro.created_at | date:'mediumDate'}}<br/>
+											<a ng-href="#/product/{{prd._id}}">{{prd.title}}</a>
+										</span>
+										<span class="pull-right">
+											<b>${{pro.products.price}}</b>
+										</span>
+									</div>
+									<p style="margin-top:20px;font-weight:900;" class="trach_h">Order details</p>
+									<div class="row">
+										<div class="col-lg-4 col-sm-4">
+											<b>Product:</b><br/>
+											<a ng-href="#/product/{{prd._id}}">{{prd.title}}</a>
+										</div>
+										<div class="col-lg-2 col-sm-2">
+											<b>Quantity:</b><br/>
+												{{pro.products.quantity}}
+										</div>
+										<div class="col-lg-2 col-sm-2" ng-if="prd.paid_by_buyer==false">
+												<b>Shiping:</b><br/>
+												Free
+										</div>
+										<div class="col-lg-2 col-sm-2" ng-if="prd.paid_by_buyer==true">
+												<b>Shiping:</b><br/>
+												{{prd.shipping_details.fee}}
+										</div>
+										<div class="col-lg-2 col-sm-2">
+												<b>Subtotal:</b><br/>
+											${{pro.products.price}}
+										</div>
+										<div class="col-lg-2 col-sm-2" ng-if="prd.paid_by_buyer==false">
+											<b>Total:</b><br/>
+											${{pro.products.price}}
+										</div>
+										<div class="col-lg-2 col-sm-2" ng-if="prd.paid_by_buyer==true">
+											<b>Total:</b><br/>
+											${{pro.products.price + prd.shipping_details.fee}}
+										</div>
+									</div>
+									<p style="margin-top:20px;font-weight:900;" class="trach_h">Customer Details</p>
+									<div class="row">
+									
+										<div class="col-lg-4 col-sm-4">
+											<b>Name/Phone:</b><br/>
+											{{pro.shipping.name}}<br/>
+											{{pro.shipping.phone}}
+											
+										</div>
+										<div class="col-lg-4 col-sm-4">
+											<b>Billing address:</b><br/>
+												{{pro.billing.address}},{{pro.billing.city}},<br/>
+												{{pro.billing.state}}, {{pro.billing.country}} - {{pro.billing.pincode}}
+										</div>
+										<div class="col-lg-4 col-sm-4">
+												<b>Shipping address:</b><br/>
+												{{pro.shipping.address}},{{pro.shipping.city}},<br/>
+												{{pro.shipping.state}}, {{pro.shipping.country}} - {{pro.shipping.pincode}}
+										</div>
+										
+									</div>
+									<div class="inner-table">
+										<p class="trach_h">
+											Trak your product here
+										</p>
+										<ul class="progress-indicator">
+													<li class="completed">
+														<span class="bubble"></span></span>
+														Ordered
+													</li>
+													<li class="completed" ng-if="pro.products.tracking.status=='Pickup Scheduled' || pro.products.tracking.status=='Delivered' || pro.products.tracking.status=='Shipped' ">
+														<span class="bubble"></span></span>Reviewed
+													</li>
+
+													<li class="" ng-if="pro.products.tracking.status!='Shipped' && pro.products.tracking.status!='Delivered'">
+														<span class="bubble"></span></span>Reviewed
+													</li>
+
+													<li class="completed" ng-if="pro.products.tracking.status=='Shipped' || pro.products.tracking.status=='Delivered'">
+														<span class="bubble"></span>Shipped
+													</li>
+													<li class="" ng-if="pro.products.tracking.status!='Delivered' && pro.products.tracking.status!='Pickup Scheduled' ">
+														<span class="bubble"></span>Shipped
+													</li>
+													<li class="completed" ng-if="pro.products.tracking.status=='Delivered'">
+														<span class="bubble"></span><span class="fa fa-calender">Delivered
+													</li>
+													<li  ng-if="pro.products.tracking.status!='Delivered'">
+														<span class="bubble"></span><span class="fa fa-calender">Delivered
+													</li>
+												</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>

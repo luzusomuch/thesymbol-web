@@ -1,0 +1,85 @@
+<header-bar></header-bar>
+<title>Return</title>
+<div class="return-outer" ng-repeat="pro in ReturnC.product">
+			<div class="return-inner" ng-repeat="prd in pro.product">
+				<div class="panel panel-default return_panel">
+					<div class="panel-heading">
+						<h4>Request Return </h4>
+					</div>
+					<div class="panel-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="product_title">
+									<div class="table-">
+									  <table class="table table-responsive">
+										<tr>
+										  <td >
+											{{pro._id}}
+										  </td>
+										  <td>
+											ITEM DETAILS
+										  </td>
+										  <td>
+											QTY
+										  </td>
+										  <td>
+											SUBTOTAL
+										  </td>
+										  
+										</tr>
+										<tr>
+										  <td>
+											<img alt=item class=img-responsive data-ng-repeat="img in prd.images |  limitTo:1" ng-src="{{img.cdn.url}}" width=120px>
+										  </td>
+										  <td >
+											{{prd.title}}
+										  </td>
+										  <td>
+											{{pro.products.variant}}  Qty: {{pro.products.quantity}}
+										  </td>
+										  <td>
+											${{pro.products.price}}
+										  </td>
+										</tr>
+									  </table>
+									</div>
+								</div>
+								<div class="cancellation_data">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-lg-12">
+											<form name=form ng-submit=ReturnC.addToReturn() role=form>
+												<div class="form-group">
+													<label>
+														Reason for cancellation
+													</label>
+													<input name=quantity ng-init="ReturnC.return.quantity=pro.products.quantity" ng-model=ReturnC.return.quantity type=hidden value={{pro.products.quantity}}>
+                                <input name=price ng-init="ReturnC.return.price=pro.products.price" ng-model=ReturnC.return.price type=hidden value={{pro.products.price}}>
+													<select class="form-control" autocomplete=off class=form-control a-native-dropdown name=reason ng-model=ReturnC.return.reason ng-required=true tabindex=-1><option value=""class=a-prompt>Choose a response.<option value="Performance or quality not adequate">Performance or quality not adequate<option value="Product damaged, but shipping box OK">Product damaged, but shipping box OK<option value="Missing parts or accessories">Missing parts or accessories<option value="Both product and shipping box damaged">Both product and shipping box damaged<option value="Wrong item was sent">Wrong item was sent<option value="Item defective or doesn’t work">Item defective or doesn’t work
+													</select>
+												</div>
+												<!--<div class="form-group">
+													<label>
+														comments
+													</label>
+													<textarea rows="5" class="form-control"></textarea>
+													<p>Note: There will be no refund as this order is placed as Cash-on-delivery</p>
+												</div>-->
+												<div class="alert alert-success"ng-show=ReturnC.success><button class=close type=button data-ng-click=ReturnC.close(this)>x</button><strong>Success!</strong>{{ReturnC.success.statusMessage}}</div><div class="alert alert-danger"ng-show=ReturnC.error><button class=close type=button data-ng-click=ReturnC.close(this)>x</button><strong>Oops!</strong>{{ReturnC.error.statusMessage}}</div>
+												<div class="user_review_btn clearfix">
+													<button type=submit class="btn btn-primary pull-right confirm_cancel">CONFIRM RETURN</button>
+													<!--<a href="#" class="btn btn-danger  confirm_close">CLOSE</a>-->
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!--return-outer-->
+		</div>	
+
+<footer-bar></footer-bar>

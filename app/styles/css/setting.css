@@ -1,0 +1,301 @@
+
+/* usersetting.html */
+a{
+	color:#333;
+}
+a:hover
+{
+	color:#333;
+}
+
+.setting-searchbox
+{
+	margin:13px 0px;
+	padding-left: 26px;
+	
+}
+.brand
+{
+	height: 50px;
+	padding: 15px 15px;
+	font-size: 18px;
+	line-height: 20px;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	font-size: 23px;
+	letter-spacing: 2px;
+	margin-top:4px;
+}
+.search-setting
+{
+	position:relative;
+}
+.search-icon
+{
+	position:absolute;
+	top:10px;
+	left:7px;
+}
+.iconbox
+{
+	margin:15px 0px;
+	text-align:center;
+}
+.iconbox>i
+{
+	font-size: 18px;
+	color: #91979c;
+	margin:0px 9px;
+}
+.user-setting
+{
+	background: #ebeced;
+}
+.tabs-left
+{
+	background:#fff;
+	border:none;
+	border-radius: 4px;
+	border-right:none !important;
+}
+.tabs-left>li.active>a, .tabs-left>li.active>a:hover, .tabs-left>li.active>a:focus
+{
+	border-bottom-color:none;
+	background:#fff;
+
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+{
+	border:none;
+	
+}
+.nav-tabs>li>a:hover
+{
+	background:#fff;
+	color:#000;
+}
+.nav-tabs>li>a
+{
+	border:none;
+	padding:7px 15px;
+	color:#61687a;
+}
+.icon-cls
+{
+	margin-right: 4px;
+}
+.icon-cls:hover
+{
+	color:#333;
+	cursor:pointer;
+}
+.first-tag
+{
+	font-size:12.5px;
+	font-weight:600;
+	display:block;
+	margin:11px 0px;
+}
+.tag-line, .para-tagline
+{
+	margin:7px 0px;
+	display:block;
+	font-size: 12.5px;
+    color: #999;
+}
+
+.panel-part-two
+{
+	border-top:1px solid #ddd;
+}
+.para-first-tag
+{
+	font-size:12.5px;
+	font-weight:600;
+	display:block;
+	margin-top:9px;
+	margin-bottom: 4px;
+}
+.button-radio
+{
+	margin-top:7px;
+}
+.PaDD07
+{
+	margin-top:13px;
+}
+@media(max-width:991px)
+{
+	.navstarting
+	{
+		margin-top:75px;
+	}
+}
+@media(max-width:991px)
+{
+	.tab-content
+	{
+		margin-top:20px;
+	}
+}
+.email-notification
+{
+	border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 12px;
+}
+.noteone
+{
+	font-weight:500;
+	color:#777;
+}
+.accounts
+{
+	margin-top:2px;
+}
+.fb-para
+{
+	font-size: 12px;
+    margin-top: 4px;
+	color:#999;
+}
+.fb-check
+{
+	margin-right:4px !important;
+}
+.fb-inner
+{
+	margin-bottom:61px;
+}
+.inner-form .form-cnt
+{
+	display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	margin:5px 2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.birthday-row
+{
+	margin-left:0px;
+}
+.Photo-preview
+{
+	width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    line-height: 87px;
+    margin: 0px 12px 6px 0;
+}
+.profile-pic
+{
+	height:100%;
+	background-size:cover;
+}
+.delete
+{
+	cursor:pointer;
+}
+.pay-button
+{
+	margin-top: 9px;
+    margin-right: 10px;
+}
+.no-data
+{
+	text-align: center;
+    padding: 39px 0;
+    background: #EBECED;
+}
+.no-data-icon
+{
+	color:#9a9ea3;
+	font-size:100px;
+}
+.no-data p
+{
+	color: #9a9ea3;
+    font-size: 18px;
+}
+#pay .payment_details, #ship .payment_details
+{
+	margin-top:10px;
+}
+#pay small, #ship small
+{
+	    margin-bottom: 4px;
+    display: inline-block;
+	font-size:12px;
+}
+#payment ul>li
+{
+	list-style-type:none;
+}
+#payment  label
+{
+	color:#999;
+	font-size:12px;
+	letter-spacing:0.2px;
+	text-transform:uppercase;
+}
+@media(max-width:320px)
+{
+	.container.setting-container
+	{
+		padding:0px;
+	}
+	.grid_08
+	{
+		padding:5px;
+	}
+}
+#shipping label
+{
+	color:#999;
+	font-size:12px;
+	letter-spacing:0.2px;
+	text-transform:uppercase;
+}
+#order .action_group button
+{
+	margin: 0px 6px;
+    border-radius: 2px;
+}
+@media(max-width:400px)
+{
+	.third_box
+	{
+		margin-left:0px;
+		margin-top:5px;
+	}
+}
+
+.user-setting
+{
+	overflow-x:hidden;
+	font-family:'MUli', sans-serif;
+}
+.setting-container
+{
+	margin-top:80px;
+	min-height:50em;
+}
+@media(max-width:991px)
+{
+	.setting-container
+	{
+		margin-top:0px;
+	}
+}

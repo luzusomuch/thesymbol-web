@@ -1,0 +1,49 @@
+
+		<footer>
+			<style>
+				.right-section  a
+				{
+					text-decoration:none;
+					color:#000;
+				}
+				.right-section  a:visited
+				{
+					text-decoration:none;
+					color:#000;
+				}
+				.right-section ul
+				{
+					list-style-type:none;
+				}
+				.right-section ul>li
+				{
+					display:inline;
+					    padding: 0px 10px;
+					
+				}
+				@media(max-width:500px)
+				{
+					.left-section
+					{
+						    padding-left: 50px;
+							margin:10px 0px;
+					}
+				}
+			</style>
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="container">
+						<div class="row">
+							<div class="pull-left left-section">
+								All rights reserved Copyright &#169; 2016 {{admin.title}}
+							</div>
+							<div class="pull-right right-section">
+								<ul>
+									<li ng-repeat="page in header.pages"><a ng-href="#/page/{{page._id}}" >{{page.name}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>

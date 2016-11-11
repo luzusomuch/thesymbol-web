@@ -1,0 +1,555 @@
+
+
+
+<title>{{acc.ud.name}} - Profile
+</title>
+<!--outer-starts-->
+		<div class="outer user-setting">
+			<div class="user-setting-outer">
+					<header-bar></header-bar>
+			</div>
+		
+			<div class="container setting-container">
+			<div class="col-md-12">
+				<div class="row navstarting">
+				<div ng-if=acc.dataLoading style="width:100%;position:absolute;height:100%;background-color:rgba(0,0,0,.39);box-shadow:0 0 36px #000;z-index:80"><img style=margin-left:50%;margin-top:25%;z-index:80;position:absolute src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></div>
+					<div class="col-md-3">
+						 <ul class="nav nav-tabs tabs-left">
+							<li class="">
+								<a href="" title="home" onclick='openCitys(event,"")' data-toggle="tab">
+									<i class="fa fa-cog icon-cls" aria-hidden="true"></i>
+									Edit Profile
+								</a>
+							</li>
+							
+							<li>
+								<a href=""  title="messages" onclick='openCitys(event,"")' data-toggle="tab">
+									<i class="fa fa-key icon-cls" aria-hidden="true"></i>
+									Password
+								</a>
+							</li>
+							<li>
+								<a href="" title="payment" onclick='openCitys(event,"")'  data-toggle="tab">
+									<i class="fa fa-bell icon-cls" aria-hidden="true"></i>
+									Address
+								</a>
+							</li>
+							
+							<li class="active tablinkimg">
+								<a href="" title="order" onclick='openCitys(event,"")' data-toggle="tab">
+									<i class="fa fa-sticky-note icon-cls" aria-hidden="true"></i>
+									Order
+								</a>
+							</li>
+							
+							
+						  </ul>
+					</div>
+					<div class="col-md-8 grid_08" >
+						<div class="tab-content">
+							<div class="tab-pane tab-paneimg" id="home">
+								<div class="panel panel-default">
+								<form name=form ng-submit=acc.updateUser() role=form >
+									<div class="panel-heading">
+										<b>Edit Profile</b>
+									</div>
+									
+									<div class="panel-body">
+										<div class="container-fluid">
+											<div class="row">
+											<div class="alert btn-danger"ng-show=acc.error><button class=close type=button data-ng-click=acc.close(this)>x</button><strong>Sorry!</strong> {{acc.error.statusMessage}}
+									</div>
+
+									<div class="alert btn-success"ng-show=acc.success><button class=close type=button data-ng-click=acc.close(this)>x</button><strong>GREAT GOING! SUCCESSFUL!</strong> {{acc.success.statusMessage}}
+									</div>
+												<div class="col-xs-12">
+													<div class="col-xs-3">
+														<div class="heading">
+															Profile
+														</div>
+													</div>
+													<div class="col-xs-12 col-lg-6">
+														<div class="inner-form">
+															<span class="small first-tag">Photo</span>
+																<div class="Photo-preview">
+																	<img ng-if=acc.ud.logo id="image_id" ng-src={{acc.ud.logo.cdn.url}} class="profile-pic"/>
+																</div>
+																<input type="file"  id="fileInput">
+																<small class="tag-line">Allowed file types JPG, GIF or PNG. Maximum size of 700K</small>
+																
+															
+															<div class="form-group">
+											<div class="cropArea">
+											<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+										  </div>
+										</div>
+										<style>
+										.cropArea {
+										  background: #E4E4E4;
+										  overflow: hidden;
+										  height:250px;
+										  margin:10px 0px;
+										}
+										</style>
+										<span class="small first-tag">Full Name</span>
+																<input type="text" readonly ng-model=acc.ud.name class="form-control" placeholder="Enter MailID" />
+															<small class="tag-line">Your real name, so your friends can find you.</small>
+															<span class="small first-tag">Email</span>
+																<input type="email" readonly ng-model=acc.ud.email class="form-control" placeholder="Enter MailID" />
+															<!--<small class="tag-line">https://fancy.com/AarthyPalanivelu</small>-->
+															
+															<span class="small first-tag">Phone</span>
+																<input type="text" class="form-control"  ng-model="acc.ud.phone" name="phone" />
+															
+															
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="panel-footer">
+										
+										<div class="clearfix">
+											<!--<a  data-toggle="modal" data-target="#deactivate" class="delete">Deactivate My account</a>-->
+											<button type="submit" class="btn btn-default pull-right">Save Profile</button>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+							
+							<div class="tab-pane tab-paneimg" id="messages">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										Change Password
+									</div>
+									<form name=form ng-submit=acc.changePassword(form.$valid) role=form>
+										
+										<div class="alert btn-danger" ng-show=acc.error>
+										<button class=close type=button data-ng-click=acc.close(this)>x</button><strong>Sorry!</strong> {{acc.error.statusMessage}}</div>
+										<div class="alert btn-success" ng-show=acc.success>
+										<button class=close type=button data-ng-click=acc.close(this)>x</button><strong> SUCCESSFUL!</strong> {{acc.success.statusMessage}}</div>
+									<div class="panel-body">
+										<div class="pwd-inner">
+											<div class="col-md-6">
+												<span class="small para-first-tag">
+													Current Password
+												</span>
+												<input name=old_password class="form-control"  ng-model=acc.change.old_password ng-required=true placeholder="Old Password" type=password />
+												<span class="small para-first-tag">
+													New Password
+												</span>
+												<input name=password class="form-control"  ng-model=acc.change.password ng-required=true placeholder="New Password" type=password id="password" />
+												<span class="small para-first-tag">
+													Confirm Password
+												</span>
+												<input name=confirm_password class="form-control"  ng-model=acc.change.password_verify  ng-required=true placeholder="Confirm Password" type=password id="confirm_password" />
+											</div>
+										</div>
+									</div>
+									<div class="panel-footer text-right">
+										<button type=submit ng-disabled="form.$invalid || acc.dataLoading" class="btn btn-default ">Change Password</button>
+									</div>
+									</form>
+								</div>
+							</div>
+							
+							<div class="tab-pane tab-paneimg active" id="order">
+								<div class="navbar navbar-default">
+									<div class="navbar-brand">
+										Order
+									</div>
+								</div>
+								<div class="panel panel-default" ng-repeat="oder in acc.orders">
+									<div class="panel-heading">
+										<div class="track_product clearfix">
+											<a class="order-num btn btn-medium btn-blue col-xs-12 col-lg-3 col-sm-4 col-md-4" target="_blank" href="">#{{oder._id}}</a>
+											
+										</div>
+									</div>
+									<div class="panel-body order-body">
+										<div id="order-panel">
+											<div class="order-item" ng-repeat="pro in oder.products">
+												<div class="row">
+													
+													<div class="col-lg-2 col-md-2 col-sm-2">
+														<div class="product_image text-center">
+															<a href="#/product/{{pro.id._id}}" style="color:#337ab7"><img width="100px" height="100px"	 src="{{img.cdn.url}}" ng-repeat="img in pro.id.images | limitTo:1" /></a>
+														</div>
+													</div>
+													<div class="col-lg-3 col-md-3 col-sm-3">
+														<div class="product_descp">
+															<a href="#/product/{{pro.id._id}}" style="color:#337ab7">{{pro.id.title}} </a>
+															<p class="small" ng-if="pro.id.type=='normal'" >
+																 {{pro.variant}} &nbsp; Qty: {{pro.quantity}} &nbsp;
+																<br>Seller: <a ng-href="#/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a> </p>
+																<p class="small" ng-if="pro.id.type=='digital'" >
+																 {{pro.license.name}} &nbsp; 
+																<br>Seller: <a ng-href="#/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a></p>
+																<a data-backdrop="static"  data-toggle="modal" data-target="#return" data-keyboard="false"  ng-if="pro.id.type=='normal' && pro.tracking.status=='Delivered'"   ng-click="acc.returnShow(pro.id._id,oder._id)" href="" class="">Return</a>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-2 col-sm-2">
+														<div class="product_rate">
+															<p class="small">
+																${{pro.pricing.after_discount}} <br/>
+																<span ng-if="oder.coupon" class="offers">OFFERS:</span> {{oder.coupon.code}} <span style="color:green;" ng-if="oder.coupon">Offer Price: ${{oder.coupon.discount}}</span>&nbsp;&nbsp; 
+															</p>
+														</div>
+													</div>
+													<div class="col-lg-1 col-md-1 col-sm-1">
+														<div class="product_status">
+															<p>{{pro.tracking.status}}</p>
+															
+														</div>
+													</div>
+												<div class="col-lg-4 col-md-4 col-sm-4">
+													<a ng-if="pro.id.type=='normal' && pro.tracking.status!='Rejected'" href="#/track-product/{{pro.id._id}}/{{oder._id}}" class="btn btn-default track pull-right ">
+														<i class="fa fa-map-marker map-tack-icon"></i>
+																&nbsp; Track
+														</a>
+														
+
+														<a  ng-if="pro.id.type=='digital'" href="{{acc.download_url}}/users/order/digital-products/{{pro.id._id}}?dt={{pro.download_token}}" target="_blank" class="btn btn-info pull-right">Download</a>
+														
+														<a  href="#/review-product/{{pro.id._id}}/{{oder._id}}"  class="btn btn-default pull-right">Review</a>
+													</div>
+												</div><hr>
+												
+											</div>
+											<div class="line order-total panel-footer">
+												<div class="line clearfix"> 
+													<div class="pull-right">
+														<span class="smallText">Order Total:</span> 
+														<strong>${{(oder.total_price + oder.total_shipping) - oder.coupon.discount}}</strong>
+													</div>
+													<div class="order_data">
+														<span>Date:</span> {{oder.created_at | date:'MMM d, y @ h:mma'}}
+													</div>
+														
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="no-data" ng-if="acc.orders.length==0">
+									<span class="no-data-icon"><i class="fa fa-sticky-note-o" aria-hidden="true"></i></span>
+									<p>You haven’t made any purchases yet.</p>
+								</div>
+								
+							</div>
+							<div class="tab-pane tab-paneimg" id="payment">
+								<div class="navbar navbar-default">
+									<div class="navbar-brand">
+										Address 
+									</div>
+									<div class="pay-button clearfix">
+										<button type="button" data-backdrop="static"  data-keyboard="false"  class="btn btn-default pull-right btn-sm" data-toggle="modal" data-target="#pay">Add Address</button>
+									</div>
+								</div>
+								<div class="alert btn-danger" ng-show=acc.error>
+										<button class=close type=button data-ng-click=acc.close(this)>x</button><strong>Sorry!</strong> {{acc.error.statusMessage}}</div>
+										<div class="alert btn-success" ng-show=acc.success>
+										<button class=close type=button data-ng-click=acc.close(this)>x</button><strong>SUCCESS!</strong> {{acc.success.statusMessage}}</div>
+								<div class="payment_list_view">
+									<div class="row">
+										
+										<div class="col-lg-6"  ng-repeat="add in acc.ud.address"  >
+											<div class="payment_list_view_inner">
+												<div class="panel panel-default clearfix">
+													
+													<div class="panel-body">
+														<div class="row clearfix">
+															<div class="col-lg-6 col-sm-6 col-xs-12" >
+																<label>NAME ON CARD</label>
+																<p> {{add.name}}
+																</p>
+																<label>Phone No</label>
+																<p>
+																	 {{add.phone}}
+																</p>
+																
+															</div>
+															<div class="col-lg-6  col-sm-6 col-xs-12 pull-right">
+																<label>ADDRESS</label>
+																<p>
+																	{{add.address}}<br/>
+															{{add.city}} {{add.pincode}}<br/>
+															{{add.state}}<br/>
+															{{add.country}}<br/>
+																</p>
+															</div>
+														</div>
+														
+													</div>
+													<div class="panel-footer clearfix">
+														<div class="pull-right">
+														 <button type="button" ng-click="acc.removeAddress(add._id)" class="btn btn-danger ">Remove</button>
+														<button type="button" data-backdrop="static"  data-keyboard="false"  ng-click="acc.editShow(add._id)"  data-toggle="modal" data-target="#edit-add"  class="btn btn-primary">Edit</button>
+														</div>
+													</div>
+										
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="no-data" ng-if="acc.ud.address.length==0">
+									<span class="no-data-icon"><i class="fa fa-ship" aria-hidden="true"></i></span>
+									<p>No Address found</p>
+								</div>
+								
+							</div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			<!--payment modal-->
+				<div class="modal fade" tabindex="-1" role="dialog" id="pay">
+				  <div class="modal-dialog " role="document">
+					<div class="modal-content">
+					<form name=form ng-submit=acc.addAddress(form.$valid) role=form>
+					<div class="modal-header">
+						 
+						 <h4 class="modal-title">Add a new address</h4>
+					</div>
+					<div class="modal-body">
+					
+					
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Name</small>
+								<input name=name class="form-control"  ng-model=acc.add.name ng-required=true placeholder="Name" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Phone Number</small>
+								<input name=phone class="form-control"  ng-model=acc.add.phone ng-required=true placeholder="Phone" type=text />
+							</div>
+						</div>
+					</div>	
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Address</small>
+								<input name=address class="form-control"  ng-model=acc.add.address ng-required=true placeholder="address" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>City</small>
+								<input name=city class="form-control"  ng-model=acc.add.city ng-required=true placeholder="City" type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>State</small>
+								<input name=state class="form-control"  ng-model=acc.add.state ng-required=true placeholder="State" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Zip</small>
+								<input name=pincode class="form-control"  ng-model=acc.add.pincode ng-required=true placeholder="postal code"  type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-12 col-sm-12">
+								<small>Country</small>
+								<select class=form-control  ng-required="true"  name=country ng-model=acc.add.country>
+									<option value="">--select--
+									<option ng-repeat="con in acc.country | orderBy:'countryName'" value={{con.countryName}}>{{con.countryName}}</select>
+							</div>
+							
+						</div>
+					</div>
+					</div>
+					 <div class="modal-footer">
+						<button type="button" id="addaddress" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type=submit  ng-disabled="form.$invalid || acc.dataLoading" class="btn btn-primary">Add</button>
+					  </div>
+					  </form>
+					 </div>
+					 
+				  </div>
+				</div>
+				<!--payment modal-->
+				<div class="modal fade" tabindex="-1" role="dialog" id="edit-add">
+				  <div class="modal-dialog " role="document">
+					<div class="modal-content">
+					<form name=form ng-submit=acc.updateAddress(form.$valid)  role=form>
+					<div class="modal-header">
+						 
+						 <h4 class="modal-title">Edit Address</h4>
+					</div>
+					<div class="modal-body">
+					
+					
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Name</small>
+								<input name=name class="form-control"  ng-model=acc.edit.name ng-required=true placeholder="Name" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Phone Number</small>
+								<input name=phone class="form-control"  ng-model=acc.edit.phone ng-required=true placeholder="Phone" type=text />
+							</div>
+						</div>
+					</div>	
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Address</small>
+								<input name=address class="form-control"  ng-model=acc.edit.address ng-required=true placeholder="address" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>City</small>
+								<input name=city class="form-control"  ng-model=acc.edit.city ng-required=true placeholder="City" type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>State</small>
+								<input name=state class="form-control"  ng-model=acc.edit.state ng-required=true placeholder="State" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Zip</small>
+								<input name=pincode class="form-control"  ng-model=acc.edit.pincode ng-required=true placeholder="postal code"  type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-12 col-sm-12">
+								<small>Country</small>
+								<select class=form-control  ng-required="true"  name=country ng-model=acc.edit.country>
+									<option value="">--select--
+									<option ng-repeat="con in acc.country | orderBy:'countryName'" value={{con.countryName}}>{{con.countryName}}</select>
+							</div>
+							
+						</div>
+					</div>
+					</div>
+					 <div class="modal-footer">
+						<button type="button" id="editaddress" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type=submit  ng-disabled="form.$invalid || acc.dataLoading" class="btn btn-primary">Save
+					  </div>
+					  </form>
+					 </div>
+					 
+				  </div>
+				</div>
+				
+				
+						<!--Return- Modal -->
+		<div class="modal fade" id="return" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document" ng-repeat="pro in acc.rproduct">
+			<div class="modal-content"  ng-repeat="prd in pro.product">
+			 
+			  <div class="modal-body" style="padding:0px;">
+				<div class="return-inner">
+				<div class="panel panel-default return_panel" style="border:none;">
+					<div class="panel-heading">
+						<h4>Request Cancellation </h4>
+					</div>
+					<div class="panel-body" style="padding:0px;">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="product_title">
+									<div class="table-responsive">
+									 <table class="table">
+										<tr>
+										  <td >
+											{{pro._id}}
+										  </td>
+										  <td>
+											ITEM DETAILS
+										  </td>
+										  <td>
+											QTY
+										  </td>
+										  <td>
+											SUBTOTAL
+										  </td>
+										  
+										</tr>
+										<tr>
+										  <td>
+											<img alt=item class=img-responsive data-ng-repeat="img in prd.images |  limitTo:1" ng-src="{{img.cdn.url}}" width=120px>
+										  </td>
+										  <td >
+											{{prd.title}}
+										  </td>
+										  <td>
+											{{pro.products.variant}}  Qty: {{pro.products.quantity}}
+										  </td>
+										  <td>
+											${{pro.products.price}}
+										  </td>
+										</tr>
+									  </table>
+									</div>
+								</div>
+								<div class="cancellation_data">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-lg-12">
+											<form name=form ng-submit=acc.addToReturn() role=form>
+												<div class="form-group">
+													<label>
+														Reason for cancellation
+													</label>
+													<input name=quantity ng-init="acc.return.quantity=pro.products.quantity" ng-model=acc.return.quantity type=hidden value={{pro.products.quantity}}>
+                                <input name=price ng-init="acc.return.price=pro.products.price" ng-model=acc.return.price type=hidden value={{pro.products.price}}>
+													<select class="form-control" autocomplete=off class=form-control a-native-dropdown name=reason ng-model=acc.return.reason ng-required=true tabindex=-1><option value=""class=a-prompt>Choose a response.<option value="Performance or quality not adequate">Performance or quality not adequate<option value="Product damaged, but shipping box OK">Product damaged, but shipping box OK<option value="Missing parts or accessories">Missing parts or accessories<option value="Both product and shipping box damaged">Both product and shipping box damaged<option value="Wrong item was sent">Wrong item was sent<option value="Item defective or doesn’t work">Item defective or doesn’t work
+													</select>
+												</div>
+												<div class="form-group">
+													<div class="alert alert-success"ng-show=acc.success><button class=close type=button data-ng-click=acc.close(this)>x</button><strong>Success!</strong>{{acc.success.statusMessage}}</div><div class="alert alert-danger"ng-show=acc.error><button class=close type=button data-ng-click=acc.close(this)>x</button><strong>Oops!</strong>{{acc.error.statusMessage}}</div>
+												</div>
+												<div class="user_review_btn clearfix">
+													<button type="button" class="btn btn-default  confirm_close " data-dismiss="modal">Close</button>
+				<button type=submit class="btn btn-primary pull-right confirm_cancel" >Confirm Return</button>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			  </div>
+			  
+			</div>
+		  </div>
+		</div>
+		</div>
+<script>function readURL(e){if(e.files&&e.files[0]){var a=new FileReader;a.onload=function(e){$(".imgs").attr("src",e.target.result)},a.readAsDataURL(e.files[0])}}function readURL1(e){if(e.files&&e.files[0]){var a=new FileReader;a.onload=function(e){$("#heading-banner").css("background","rgba(0, 0, 0, 0) url('"+e.target.result+"') repeat scroll 0 0 !important")},a.readAsDataURL(e.files[0])}}$("#icon").change(function(){readURL(this)}),$("#icon1").change(function(){readURL1(this)})
+
+ var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>

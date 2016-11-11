@@ -1,0 +1,172 @@
+<title>Shop Details</title>
+<style>
+.loadmore {
+    background: #ef6644 none repeat scroll 0 0;
+    border: 1px solid #ef6644;
+    color: #fff;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 400ms ease-out 0s;
+   /* width: 169px; */
+}
+
+.nomore {
+    background: gray none repeat scroll 0 0;
+    border: medium none gray;
+   
+    
+}
+.shop_details_banner
+{
+	min-height:130px !important;
+}
+</style>
+<!--outer-starts-->
+		<div class="outer">
+			<div class="index-outer">
+				<header-bar></header-bar>
+				<div class="news-feed">
+						<div class="container">
+							<div class="row">
+								<!--news-feed-left-->
+								<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;">
+									<div class="news-feed-left">
+										<dl>
+											<dt>Shop</dt>
+											<dd>
+												<a href="#shop">
+												<i class="fa fa-paper-plane" aria-hidden="true"></i>
+													Explore
+												</a>
+											</dd>
+											
+											
+										</dl>
+										<!--phone-view-->
+										<dl class="hidden-lg">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+										<!--web and tab view-->
+										<dl class="hidden-xs hidden-md hidden-sm" id="trending">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+									</div>
+								</div>
+								<!--news-feed-center-->
+								<div class="col-lg-9 col-sm-9 col-xs-12">
+									<div class="shop-cover-outer">
+										<div class="shop-cover-inner">
+											<div class="shop-cover-image">
+												<img src="{{shopC.seller.banner.cdn.url}}" ng-if=shopC.seller.banner.cdn.url  alt="cover-banner" style="width: 962px; height: 274px;" class="img-responsive"/>
+												<img ng-if=!shopC.seller.banner.cdn.url src={{admin.overall_banner.cdn.url}} style="width: 962px; height: 274px;"   alt="cover-banner" class="img-responsive"/>
+												<div class="image-detailed">
+													<div class="row">
+														<div class="col-lg-2 col-xs-5">
+															<div class="info-img">
+																<img ng-if="!shopC.seller.logo" ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shopC.seller.name | limitTo:1}}_7.png"  alt="info-img" class="img-responsive"  />
+																<img  ng-if="shopC.seller.logo" src={{shopC.seller.logo.cdn.url}}  alt="info-img" class="img-responsive"  />
+															</div>
+														</div>
+														<div class="col-lg-6 col-xs-12">
+															<div class="info-img-description">
+																<h3>{{shopC.seller.name}}</h3>
+																	<small>{{shopC.seller.email}}</small><br/>
+																<em>Phone: {{shopC.seller.phone}}</em>
+																
+															</div>
+														</div>
+														<!--<div class="col-lg-4 col-xs-12">
+															<div class="info-details">
+																<div class="btn-group text-center">
+																	<button type="button" class="btn btn-default">Follow Store</button>
+																	<button type="button" class="btn btn-default">Send Message</button>
+																</div>
+															</div>
+														</div>-->
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="user-actions">
+										<div class="user-action-inner">
+											<div class="row nav nav-tabs">
+												<div class="col-lg-2">
+													<a href="" data-toggle="tab">Products <span>{{shopC.length}}</span></a>
+												</div>
+												
+												<div class="col-lg-2 pull-right" >
+													<select class="form-control" ng-model=sortBy>
+														<option value="">--sort--
+														<option value=created_at>Sort by newness
+														<option value=pricing.after_discount>Sort by price: low to high
+														<option value=-pricing.after_discount>Sort by price: high to low</select>
+												</div>
+												
+											</div>
+										</div>
+											
+									</div>
+									 <div class="tab-content">
+										
+										<div id="menu3" class=" tab-pane fade in active">
+										 	<div class="container-fluid" style="padding:0px;">
+										    <div class="row">
+												
+												<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+													<div class="item">
+														<div class="item-img">
+														<Span class="bg-img"></span>
+														<a href=#/product/{{prod._id}}  title="{{prod.name}}">	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
+														</div>
+														<div class="item-data">
+															<p>
+																<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+																<span>${{prod.pricing.after_discount}}</span>
+															</p>
+														</div>
+													</div>
+												</div>
+												
+												
+											</div>
+											<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
+											<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
+												</div>
+												
+											</div>
+											</div>
+										</div>
+									  </div>
+									</div>
+								</div><!--col-lg-9 col-sm-9 col-xs-12-->
+							</div>
+						</div><!--container-->
+					</div><!--news-feed-->
+			
+			</div><!--index-outer-->

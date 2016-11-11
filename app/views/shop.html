@@ -1,0 +1,99 @@
+<title>Shops</title>
+<!--outer-starts-->
+		<div class="outer">
+			<div class="index-outer">
+				<header-bar></header-bar>
+
+					<div class="news-feed">
+						<div class="container">
+							<div class="row">
+								<!--news-feed-left-->
+								<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;">
+									<div class="news-feed-left">
+										
+										<dl>
+											<dt>Shop</dt>
+											<dd>
+												<a href="#/shop">
+												<i class="fa fa-paper-plane" aria-hidden="true"></i>
+													Explore
+												</a>
+											</dd>
+											
+										</dl>
+										<!--phone-view-->
+										<dl class="hidden-lg">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+										<!--web and tab view-->
+										<dl class="hidden-xs hidden-md hidden-sm" id="trending">
+											<dt>
+												<a href="">
+													Browse
+												</a>
+											</dt>
+											<dd  ng-repeat="cate in category">
+											<a ng-href="#/search/category/{{cate._id}}">
+												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+												{{cate.name}}
+											</a>
+											</dd>
+											
+										</dl>
+									</div>
+								</div>
+								<!--news-feed-center-->
+								<div class="col-lg-9 col-sm-9 col-xs-12">
+									<div class="container-fluid">
+										<div class="row shop-outer" id="menu1">
+											
+											<div class="col-lg-4 col-sm-6 col-xs-12" ng-repeat="shop in shopC.shops">
+												<!--Card-->
+												<div class="card testimonial-card" >
+													<!--Bacground color-->
+													<div  ng-if=shop.banner class="card-up default-color-dark" style="background-image: url({{shop.banner.cdn.url}}) ! important;">
+													</div><!--Avatar-->
+													<div  ng-if=!shop.banner class="card-up default-color-dark" style="background-image: url({{admin.overall_banner.cdn.url}}) ! important;">
+													</div><!--Avatar-->
+													<div class="avatar"><img  ng-if=shop.logo ng-src={{shop.logo.cdn.url}}  class="img-circle img-responsive">
+													<img  ng-if=!shop.logo ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shop.name | limitTo:1}}_7.png"  class="img-circle img-responsive">
+													</div>
+													<div class="card-block text-center">
+														<h4>{{shop.name}}</h4>
+														<p class="location">{{shop.email}}</p>
+														<div class="row shop_detailed_images" style="min-height:65px">
+															<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4 shop_vi" ng-repeat="pro in shop.products" >
+																<div class="shop_view_img">
+																	<a href="#/product/{{pro._id}}"><img  ng-repeat="img in pro.images | limitTo:1"  style="height: 61px; width: 61px;" src="{{img.cdn.url}}" alt="img" class="img-responsive" /></a>
+																</div>
+															</div>
+															
+														</div>
+														<hr>
+														<a ng-href="#/shop/{{shop._id}}">more</a>
+													</div>
+												</div>
+												<!--/.Card-->
+											</div>
+
+										</div>
+									</div>
+									</div>
+								</div><!--col-lg-9 col-sm-9 col-xs-12-->
+							</div>
+						</div><!--container-->
+						<footer-bar></footer-bar>
+					</div><!--news-feed-->
+		
+			</div><!--index-outer-->

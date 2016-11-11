@@ -1,0 +1,180 @@
+<header-bar></header-bar>
+
+<title>Payment</title><div class="outer">
+<style>
+[data-abide] .error small.error, [data-abide] .error span.error, [data-abide] span.error, [data-abide] small.error {
+  display: block;
+  padding: 0.375rem 0.5625rem 0.5625rem;
+  margin-top: -1px;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: normal;
+  font-style: italic;
+  background: #f04124;
+  color: white; 
+ }
+[data-abide] span.error, [data-abide] small.error {
+  display: none; }
+
+.tablinkimg.active::before {
+    border-bottom: 40px solid transparent;
+    border-left: 30px solid grey;
+    border-top: 40px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    left: 100%;
+    width: 0;
+}
+.tablinkimg.active {
+background: grey none repeat scroll 0 0;
+}
+.tablinkimg {
+    background: #fff none repeat scroll 0 0;
+    height: 80px;
+    position: relative;
+    width: 120px;
+}
+.ng-invalid {
+    border-color: #f00 !important;
+}
+</style>
+
+			<div class="checkout">
+				<div class="checkout-top">
+					<div class="container header">
+					  <ul class="nav nav-tabs">
+						<li >
+							<a data-toggle="tab" href="">
+								<img src="https://www.simplyhike.co.uk/images/checkout/step1red.png" id="img_one"/>
+								<strong>Your Details</strong>
+							</a>
+						</li>
+						<li class="active">
+							<a data-toggle="tab" href="">
+								<img src="https://www.simplyhike.co.uk/images/checkout/step2grey.png" id="img_two"/>
+								<strong>Payment</strong>
+							</a>
+						</li>
+						<li>
+							<a data-toggle="tab" href="">
+								<img src="http://bit.ly/2cvWDhU" id="img_three"/>
+								<strong>Sumbit</strong>
+							</a>
+						</li>
+						
+					  </ul>
+					 
+					</div>
+					<div class="container">
+						<div class="row">
+						<!--step three-starts-->
+						<div class="step_three">
+							<div class="col-lg-8 col-xs-12">
+								<div class="checkout-form">
+									<div class="contact_form">
+										<h3 class="tag">I WOULD LIKE TO PAY BY CARD</h3>
+										<div style="margin:30px 0px;">
+											<div class="col-lg-3 col-sm-3 col-xs-12"> 
+											  <!-- Nav tabs -->
+											  <ul class="nav nav-tabs tabs-left payment_tab">
+												<li class="active tablinkimg"><a href="" data-toggle=tab onclick='openCitys(event,"")' role=tab  title="home">Credit Card</a></li>
+												<li class="tablinkimg"><a href="" data-toggle=tab onclick='openCitys(event,"")' role=tab  title="profile">Paypal</a></li>
+												<!--<li class="tablinkimg"><a href="" data-toggle=tab onclick='openCitys(event,"")' role=tab  title="messages">PayU</a></li>-->
+											  </ul>
+											</div>
+											<div class="col-lg-9 col-sm-9 col-xs-12">
+											  <!-- Tab panes -->
+											  <div class="tab-content">
+												<div class="tab-pane tab-paneimg active" id="home">
+													<div class="row">
+														<form name="checkoutForm" stripe-form="handleStripe" ng-submit="pay.onSubmit()" data-abide  >
+														<div class="user_details" ng-class="{error: checkoutForm.number.$invalid}">
+															<span class="col-lg-4  need">Card number</span>
+															<div class="col-lg-6 form-group">
+																<input class="form-control" ng-model="number" name="number" payments-format="card" payments-validate="card" placeholder="Card Number" type="text"  />
+																<small class="error">Invalid card number</small>
+															</div>
+															
+														</div>
+														<div class="user_details" ng-class="{error: checkoutForm.expiry.$invalid}">
+															<span class="col-lg-4  need">Card expiry date</span>
+															<div class="col-lg-6 form-group">
+																<input class="form-control" ng-model="expiry" name="expiry" payments-format="expiry" payments-validate="expiry"  placeholder="Expiry" type="text">
+																<small class="error">Invalid date.</small>
+															</div>
+														</div>
+														<div class="user_details" ng-class="{error: checkoutForm.cvc.$invalid}">
+															<span class="col-lg-4 need">Signature digits (CV2)</span>
+															<div class="col-lg-3 form-group">
+																<input ng-model="cvc" name="cvc" payments-format="cvc" payments-validate="cvc"  placeholder="CVC" type="text" class="form-control" />
+																<small class="error">Invalid CVC.</small>
+															</div>
+														</div>
+														
+														<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+															<div class="paynow_btn">
+																<button ng-disabled="checkoutForm.$invalid" type="submit" class="btn btn-danger btn-block secure" id="failed" style="margin:10px 0px;margin: 10px 0px;font-size: 15px;letter-spacing: 0px;padding-top: 9px;">PAY NOW </button>
+															</div>
+														</div>
+														<div  ng-if="stripeError" class="alert-danger btn" ng-click="pay.hideAlerts()">
+															Stripe returned an error: {{stripeError}}
+														</div>
+
+														
+														</form>
+													</div>
+												</div>
+												<div class="tab-pane tab-paneimg" id="profile">
+													<p>click the below button to proceed payment </p>
+													<button ng-click="pay.makePayment('payPal')" type="button" class="paypal-button paypal-style-checkout paypal-color-gold paypal-size-medium paypal-shape-pill en_US"><span class="paypal-button-logo"><img width="100px" src="styles/images/index.svg"><span> Check out</span></span><br><span class="paypal-button-tag-content">The safer, easier way to pay</span></button>
+													
+												</div>
+												<div class="tab-pane tab-paneimg" id="messages">
+													<p>click the below button to proceed payment </p>
+														<a href="#" target="_blank" class="btn payUmoney">PayUmoney</a>
+												</div>
+											  </div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="col-lg-4 col-xs-12">
+								<div class="checkout_history">
+									<p class="lead_new">CHECKOUT HISTORY</p>
+									<div class="billing_details clearfix">
+									<span ng-repeat="cat in pay.carts">
+										<span class="pull-right"> ${{cat.selected_pricing.after_discount}}</span>
+										<p class="product_title" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" id="product_one">{{cat.product_quantity}} x {{cat.product_id.title}} -  <span ng-if="cat.product_type='normal'">{{cat.selected_pricing.name}}</span>
+										<span ng-if="cat.product_type='digital'">{{cat.selected_pricing.license.name}}</span>
+										</p></span>
+										
+										<span class="pull-right"> ${{pay.shipprice}}</span>
+										<p class="lead_new"><b>Delivery</b></P>
+										<span class="pull-right" ng-if="pay.discount.amount"> ${{pay.discount.amount}}</span>
+										<p class="lead_new" ng-if="pay.discount.amount"><b>Discount</b></P>
+										<span class="pull-right"> ${{pay.overprice - pay.discount.amount}}</span>
+										<p class="lead_new"><b>Total</b></P>
+										
+										<p class="lead_new border_btm"><b>EMAIL</b></p>
+										<span class="user_data">{{pay.cuser.email}}</span>
+										<p class="lead_new border_btm"><b>DELIVERY SERVICE</b></p>
+										<span class="user_data">Standard Delivery</span>
+										
+									</div>
+								</div>
+								<div class="dc_images text-center">
+									<img src="https://www.simplyhike.co.uk/images/Card_Logos.png" alt="" />
+								</div>
+							</div>
+						</div>
+						<!--step-three-ends-->
+						</div>
+					</div>
+					</div>
+					</div>
+					<footer-bar></footer-bar>

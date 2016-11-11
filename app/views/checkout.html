@@ -1,0 +1,489 @@
+<title>Checkout</title><!--outer-starts-->
+<style>
+[data-abide] .error small.error, [data-abide] .error span.error, [data-abide] span.error, [data-abide] small.error {
+  display: block;
+  padding: 0.375rem 0.5625rem 0.5625rem;
+  margin-top: -1px;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: normal;
+  font-style: italic;
+  background: #f04124;
+  color: white; 
+ }
+[data-abide] span.error, [data-abide] small.error {
+  display: none; }
+
+.tablinkimg.active::before {
+    border-bottom: 40px solid transparent;
+    border-left: 30px solid grey;
+    border-top: 40px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    left: 100%;
+    width: 0;
+}
+.tablinkimg.active {
+background: grey none repeat scroll 0 0;
+}
+.tablinkimg {
+    background: #fff none repeat scroll 0 0;
+    height: 80px;
+    position: relative;
+    width: 120px;
+}
+.ng-invalid {
+    border-color: #f00 !important;
+}
+.checkout-outer .choose_address
+{
+	border:1px solid #ddd;
+	padding:20px;
+	border-radius:4px;
+	margin:10px 0px;
+}
+.checkout-outer .msg_pen
+{
+	border:1px solid #ddd;
+	padding:6px;
+	padding-right:3px;
+	border-radius:4px;
+}
+.checkout-outer 
+{
+	background:#f1f1f1;
+	min-height:663px;
+}
+</style>
+
+			<div class="checkout-outer" ng-init="checkout.pageLoading=true">
+			<div class="se-pre-con"  ng-if=checkout.pageLoading></div> 
+			<link rel="shortcut icon" type="image/png" ng-href="{{admin.fav_icon.cdn.url}}"/>
+<link rel="shortcut icon" type="image/png" ng-href="{{admin.fav_icon.cdn.url}}"/>
+
+
+				<div class="container">
+					<nav class="navbar navbar-default">
+						<div class="navbar-header">
+							<div class="navbar-brand">	
+							<a ng-href="#/">{{admin.title}}</a>
+							</div>
+						</div>
+					</nav>
+					<div class="checkout-inner">
+						<div class="row">
+							<div class="col-lg-8 col-sm-8">
+								<div class="center_section">
+									<!--panel-one-->
+									<div class="panel panel-default" ng-show="checkout.addresss.length==0">
+										<div class="panel-heading">
+											<p >Choose a shipping address</p>
+										</div>
+										<div class="panel-body">
+										<form role="form" name="form" ng-submit="checkout.saveAddress()" >
+											<div class="user-details">
+												<div class="form-group">
+													<label> Name </label>
+													<input type="text" ng-required="true" class="form-control" value="" ng-model=checkout.address.name />
+												</div>
+											</div>
+											<div class="user-details">
+												<div class="row">
+													<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>Phone</label>
+															<input type="text" ng-required="true"  class="form-control" ng-model=checkout.address.phone />
+														</div>
+													</div>
+													<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>Address</label>
+															<input type="text" ng-required="true"  class="form-control" ng-model=checkout.address.address />
+														</div>
+													
+													</div>
+												</div>
+											</div>
+											<div class="user-details">
+												<div class="row">
+													<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>City</label>
+															<input type="text" ng-required="true"  class="form-control" ng-model=checkout.address.city />
+														</div>
+													</div>
+													<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>Zip Code</label>
+															
+															<input type="text" ng-required="true"  class="form-control" ng-model=checkout.address.pincode />
+														</div>
+													
+													</div>
+												</div>
+											</div>
+											<div class="user-details">
+												<div class="row">
+												<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>State</label>
+															<input type="text" ng-required="true"  class="form-control" ng-model=checkout.address.state />
+														</div>
+													
+													</div>
+													<div class="col-lg-6 col-sm-6">
+														<div class="form-group">
+															<label>Country</label>
+															<select class=form-control  ng-required="true"  name=country ng-model=checkout.address.country>
+															<option value="">--select--
+																<option ng-repeat="con in checkout.country | orderBy:'countryName'" value={{con.countryName}}>{{con.countryName}}</select>
+																
+														</div>
+														
+													</div>
+													
+												</div>
+												<button  type="submit" class="btn pull-right btn-success">SAVE ADDRESS</button>
+											</div>
+											</form>
+										</div>
+									</div>
+									<!--panel-two-->
+									<div class="panel panel-default" ng-if="checkout.addresss.length">
+										<div class="panel-heading">
+											<div class="add_heading clearfix">
+											<a href="javascript:void(0);" ng-click="checkout.changeShipAddress()" ng-if="checkout.shipaddress" class="pull-right">Change</a>
+											<p> shipping address</p>
+											</div>
+										</div>
+										<div class="panel-body">
+											<address ng-if="checkout.shipaddress" >
+												{{checkout.shipaddress.name}},{{checkout.shipaddress.address}} {{checkout.shipaddress.city}},{{checkout.shipaddress.state}}, {{checkout.shipaddress.country}}  {{checkout.shipaddress.pincode}}
+												<abbr title="Phone">P:</abbr> {{checkout.shipaddress.phone}}
+											</address>
+											<div ng-if="!checkout.shipaddress" class="choose_address"  ng-repeat="addr in checkout.addresss" >
+											<input type="radio" name="ship_address" value="{{addr._id}}" id="optionsRadios1"   ng-model="$parent.checkout.add_ship" >
+												<span class="pull-right" data-backdrop="static"  data-keyboard="false"  ng-click="checkout.editShow(addr._id)" style="cursor:pointer;"  data-toggle="modal" data-target="#edit-add" ><i class="fa fa-pencil-square-o msg_pen" aria-hidden="true"></i></span>
+												{{addr.name}},{{addr.address}} {{addr.city}},{{addr.state}}, {{addr.country}}  {{addr.pincode}}
+												<abbr title="Phone">P:</abbr> {{addr.phone}}
+											</div>
+											
+											
+										</div>
+										<div ng-if="!checkout.shipaddress" class="panel-footer">
+											<button type="button"  data-backdrop="static"  data-keyboard="false" data-toggle="modal" data-target="#pay" class="btn btn-default pull-right ship_mbl_button">Ship to different address </button>
+											<button type="button" ng-click="checkout.Continue()" class="btn btn-primary ship_mbl_button">Ship to this address</button>
+											<div ng-if="checkout.error" class="btn col-md-4 col-bg-4 btn-danger pull-right ng-scope" id="saddr" style="margin-right: 95px;">
+											<button data-ng-click="checkout.close('checkout')" type="button" class="close">&times </button>Please select address</div>
+										</div>
+									</div>
+									<!--panel-three-->
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<p>Payment Method</p>
+										</div>
+										<div class="panel-body" ng-if="checkout.payment">
+											<div class="payment-type">
+												<h5>Select your method of payment</h5>
+												<label class="radio-inline checkout_radio">
+												<input onclick="showPayments(event,'red')" checked=true type="radio" name="colorRadio" value="red"> Paypal
+												</label>
+												<label class="radio-inline checkout_radio">
+												    <input type="radio" onclick="showPayments(event,'green')" name="colorRadio" value="green"> CreditCard
+												</label>
+												<!--<label class="radio-inline checkout_radio">
+												     <input  onclick="showPayments(event,'blue')" type="radio" name="colorRadio" value="blue"> PayUmoney
+												</label>-->
+												  <div class="red box">
+													<p>click the below button to proceed payment</p>
+													<button ng-click="checkout.makePayment('payPal')" type="button" class="paypal-button paypal-style-checkout paypal-color-gold paypal-size-medium paypal-shape-pill en_US"><span class="paypal-button-logo"><img width="100px" src="styles/images/index.svg"><span> Check out</span></span><br><span class="paypal-button-tag-content">The safer, easier way to pay</span></button>
+												  </div>
+												  <div class="green box">
+												  <form name="checkoutForm" stripe-form="handleStripe" ng-submit="checkout.onSubmit()" data-abide  >
+													<div class="user-details">
+														<div class="row">
+															
+															<div class="col-lg-12 col-sm-6"  ng-class="{error: checkoutForm.number.$invalid}">
+																<div class="form-group">
+																	<label>Card Number</label>
+																	<input class="form-control" ng-model="number" name="number" payments-format="card" payments-validate="card" placeholder="Card Number" type="text"  />
+																<small class="error">Invalid card number</small>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="user-details">
+														<div class="row">
+															<div class="col-lg-6 col-sm-3" ng-class="{error: checkoutForm.expiry.$invalid}">
+																<div class="form-group">
+																	<label>Card expiry date</label>
+																	<input class="form-control" ng-model="expiry" name="expiry" payments-format="expiry" payments-validate="expiry"  placeholder="Expiry" type="text">
+																<small class="error">Invalid date.</small>
+																</div>
+															</div>
+															
+															<div class="col-lg-6 col-sm-3" ng-class="{error: checkoutForm.cvc.$invalid}">
+																<div class="form-group">
+																	<label>Signature digits (CV2)</label>
+																	<input ng-model="cvc" name="cvc" payments-format="cvc" payments-validate="cvc"  placeholder="CVC" type="text" class="form-control" />
+																<small class="error">Invalid CVC.</small>
+																</div>
+															</div>
+														</div>
+													</div>
+													<button ng-disabled="checkoutForm.$invalid" type="submit" class="btn btn-danger btn-block secure" id="failed" style="margin:10px 0px;margin: 10px 0px;font-size: 15px;letter-spacing: 0px;padding-top: 9px;">PAY NOW </button>
+													<div  ng-if="stripeError" class="alert-danger btn" ng-click="checkout.hideAlerts()">
+															Stripe returned an error: {{stripeError}}
+														</div>
+												  </div>
+												  </form>
+											</div>
+										</div>
+									</div>
+									<!--panel four-->
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<p>Review Product</p>
+										</div>
+										<div class="panel-body" ng-if="checkout.review">
+											<div class="row" ng-repeat="cat in checkout.carts">
+												<div class="col-lg-2 col-sm-2 col-md-3 col-xs-12">
+													<div class="review_img">
+														<img alt={{cat.product_id.title}} data-ng-repeat="img in cat.product_id.images | limitTo:1" ng-src={{img.cdn.url}} class="img-responsive"/>
+													</div>
+												</div>
+												<div class="col-lg-6 col-sm-6 col-md-4 col-xs-12">
+												<div class="product_description">
+													<span ng-if="cat.product_type=='digital'">
+														{{cat.product_id.title}}<br/>
+														 {{cat.selected_pricing.license.name}}<br/>
+														Price:${{cat.selected_pricing.after_discount}}<br/>
+														
+													</span>
+													<span ng-if="cat.product_type=='normal'">
+													{{cat.product_id.title}}<br/>
+														{{cat.selected_pricing.name}}<br ng-if="cat.selected_pricing.name" />
+														Price:${{cat.selected_pricing.after_discount}}<br/>
+														Quantity: {{cat.product_quantity}}
+													</span>
+												</div>
+												</div>
+												<div class="col-lg-3 col-sm-3 col-md-4 col-xs-12">
+												<div class="shipping_details">
+													<span>
+														<div class="shopping-basket" ng-if="cat.product_type=='normal'">
+															<span ng-if="cat.product_id.paid_by_buyer==false">Free Shipping</span>
+															<span ng-if="cat.product_id.paid_by_buyer==true">${{cat.product_id.shipping_details.fee}} Shipping Charges</span><br>
+															<span>Delivered in {{cat.product_id.shipping_details.duration}}</span>
+														</div>
+														
+													</span>
+												</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-sm-4">
+								<div class="right_section">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<b>Order Summary</b>
+										</div>
+										<div class="panel-body">
+											<div class="order-summary-inner">
+												<ul class="list-group">
+												  <li class="list-group-item">
+													<span class=" pull-right">${{checkout.overprice - checkout.shipprice}}</span>
+													Subtotal
+												  </li>
+												  <li class="list-group-item">
+													<span class="pull-right">${{checkout.shipprice}}</span>
+													Shipping
+												  </li>
+												  <li class="list-group-item" ng-if="checkout.discount.amount">
+													<span class=" pull-right">${{checkout.discount.amount}}</span>
+													Discount
+												  </li>
+												  <li class="list-group-item">
+													<span class=" pull-right">${{checkout.overprice - checkout.discount.amount }}</span>
+													<b>Total</b>
+												  </li>
+												  <li ng-if="checkout.review" class="list-group-item">
+													<button type="button" ng-click="checkout.stripePay()" class="btn btn-default btn-success"  style="width: 100%;"><b>Place Your Order</b></button>
+												  </li> 
+												  <li ng-if="!checkout.review" class="list-group-item">
+													<button type="submit" class="btn btn-default btn-block disabled"><b>Place Your Order</b></button>
+													</li>
+													
+												</ul>
+											</div>
+										</div>
+									</div>
+									<span>By placing your order,you agree to Fancy's Privarcy policy and terms and conditions</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--payment modal-->
+				<div class="modal fade" tabindex="-1" role="dialog" id="pay">
+				  <div class="modal-dialog " role="document">
+					<div class="modal-content">
+					<form name=form ng-submit=checkout.addAddress(form.$valid) role=form>
+					<div class="modal-header">
+						 
+						 <h4 class="modal-title">Add a new address</h4>
+					</div>
+					<div class="modal-body">
+					
+					
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Name</small>
+								<input name=name class="form-control"  ng-model=checkout.add.name ng-required=true placeholder="Name" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Phone Number</small>
+								<input name=phone class="form-control"  ng-model=checkout.add.phone ng-required=true placeholder="Phone" type=text />
+							</div>
+						</div>
+					</div>	
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Address</small>
+								<input name=address class="form-control"  ng-model=checkout.add.address ng-required=true placeholder="address" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>City</small>
+								<input name=city class="form-control"  ng-model=checkout.add.city ng-required=true placeholder="City" type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>State</small>
+								<input name=state class="form-control"  ng-model=checkout.add.state ng-required=true placeholder="State" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Zip</small>
+								<input name=pincode class="form-control"  ng-model=checkout.add.pincode ng-required=true placeholder="postal code"  type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-12 col-sm-12">
+								<small>Country</small>
+								<select class=form-control  ng-required="true"  name=country ng-model=checkout.add.country>
+									<option value="">--select--
+									<option ng-repeat="con in checkout.country | orderBy:'countryName'" value={{con.countryName}}>{{con.countryName}}</select>
+							</div>
+							
+						</div>
+					</div>
+					</div>
+					 <div class="modal-footer">
+						<button type="button" id="addaddress" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type=submit   class="btn btn-primary">Add</button>
+					  </div>
+					  </form>
+					 </div>
+					 
+				  </div>
+				</div>
+				<!--payment modal-->
+				<div class="modal fade" tabindex="-1" role="dialog" id="edit-add">
+				  <div class="modal-dialog " role="document">
+					<div class="modal-content">
+					<form name=form ng-submit=checkout.updateAddress(form.$valid)  role=form>
+					<div class="modal-header">
+						 
+						 <h4 class="modal-title">Edit Address</h4>
+					</div>
+					<div class="modal-body">
+					
+					
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Name</small>
+								<input name=name class="form-control"  ng-model=checkout.edit.name ng-required=true placeholder="Name" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Phone Number</small>
+								<input name=phone class="form-control"  ng-model=checkout.edit.phone ng-required=true placeholder="Phone" type=text />
+							</div>
+						</div>
+					</div>	
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>Address</small>
+								<input name=address class="form-control"  ng-model=checkout.edit.address ng-required=true placeholder="address" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>City</small>
+								<input name=city class="form-control"  ng-model=checkout.edit.city ng-required=true placeholder="City" type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-6 col-sm-6">
+								<small>State</small>
+								<input name=state class="form-control"  ng-model=checkout.edit.state ng-required=true placeholder="State" type=text />
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<small>Zip</small>
+								<input name=pincode class="form-control"  ng-model=checkout.edit.pincode ng-required=true placeholder="postal code"  type=text />
+							</div>
+						</div>
+					</div>
+					<div class="payment_details">
+						<div class="row">
+							<div class="col-lg-12 col-sm-12">
+								<small>Country</small>
+								<select class=form-control  ng-required="true"  name=country ng-model=checkout.edit.country>
+									<option value="">--select--
+									<option ng-repeat="con in checkout.country | orderBy:'countryName'" value={{con.countryName}}>{{con.countryName}}</select>
+							</div>
+							
+						</div>
+					</div>
+					</div>
+					 <div class="modal-footer">
+						<button type="button" id="editaddress" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type=submit   class="btn btn-primary">Save
+					  </div>
+					  </form>
+					 </div>
+					 
+				  </div>
+				</div>
+					
+			<script type="text/javascript">
+			$(".green").hide();
+					//$(".red").hide();
+					$(".blue").hide();
+					function showPayments(evt,color){
+						if(color=="red"){
+							$(".box").not(".red").hide();
+							$(".red").show();
+						}
+						if(color=="green"){
+							$(".box").not(".green").hide();
+							$(".green").show();
+						}
+						if(color=="blue"){
+							$(".box").not(".blue").hide();
+							$(".blue").show();
+						}
+					}
+			</script>
