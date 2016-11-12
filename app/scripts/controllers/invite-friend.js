@@ -8,7 +8,6 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'growl', function($scope, growl) {
-
 	this.inviteFriend = (type) => {
 		if (type==='google') {
 			var auth2 = gapi.auth2.getAuthInstance();
@@ -31,6 +30,14 @@ angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'gr
 						console.log(friends);
 					}
 				});
+			});
+		} else if (type==='facebook') {
+			window.FB.login(function(resp) {
+		    if (resp.authResponse) {
+		    	FB.api('/me/friends', (resp) => {
+		    		console.log(resp);
+		    	});
+		    }
 			});
 		}
 	};
