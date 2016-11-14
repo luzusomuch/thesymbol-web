@@ -8,6 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'growl', function($scope, growl) {
+	
 	this.inviteFriend = (type) => {
 		if (type==='google') {
 			var auth2 = gapi.auth2.getAuthInstance();

@@ -70,8 +70,14 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
+        // production env
+        // port: 9000,
+        // // Change this to '0.0.0.0' to access the server from outside.
+        // hostname: '0.0.0.0',
+        // livereload: 35729
+
+        // development env
         port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
       },
