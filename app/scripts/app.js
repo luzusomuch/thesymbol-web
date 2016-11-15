@@ -24,7 +24,8 @@ angular
         'angularPayments',
         'angular-stripe',
         'infinite-scroll',
-        'angular-growl'
+        'angular-growl',
+        'slick'
     ])
     .config(function(stripeProvider) {
         stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
@@ -39,7 +40,8 @@ angular
         'preferredLocale': 'en_US'
     })
     .constant({
-        'endpoint': 'http://104.236.48.110:3000/api/v1',
+        // 'endpoint': 'http://104.236.48.110:3000/api/v1',
+        'endpoint': 'http://localhost:3000/api/v1',
         'dpath': 'http://www.thesymbol.store/#/',
         'seller': 'http://seller.thesymbol.store/#/'
     })

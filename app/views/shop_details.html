@@ -76,8 +76,12 @@
 										</dl>
 									</div>
 								</div>
+
+
+
 								<!--news-feed-center-->
 								<div class="col-lg-9 col-sm-9 col-xs-12">
+
 									<div class="shop-cover-outer">
 										<div class="shop-cover-inner">
 											<div class="shop-cover-image">
@@ -113,6 +117,39 @@
 											</div>
 										</div>
 									</div>
+
+									<!-- prime production -->
+									<div class="panel panel-default">
+	                  <div class="panel-heading">
+	                    <h3 class="panel-title">Prime Products</h3>
+	                  </div>
+	                    <div class="panel-body">
+	                      <div class="slider-products">
+	                        <div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
+	                          <div class="owl-wrapper-outer">
+	                          	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
+	                          		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
+	                          			<div class="item"> 
+	                            			<div class="item-img"> 
+	                            				<span class="bg-img"></span> 
+	                            				<a href="#">
+	                            					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
+                            					</a> 
+                          					</div> 
+                          					<div class="item-data"> 
+                          						<p> 
+                          							<a href="#/product/{{product._id}}" title="{{product.title}}" class="ng-binding">{{product.title}}</a><br> <span class="ng-binding">${{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay}}</span> 
+                        							</p> 
+                      							</div> 
+	                          			</div>
+                          			</div>
+	                          	</slick>
+                      			</div>
+	                      </div>
+	                  </div>
+	                </div>
+									<!-- prime production -->
+
 									<div class="user-actions">
 										<div class="user-action-inner">
 											<div class="row nav nav-tabs">

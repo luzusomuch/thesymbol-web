@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", function($routeParams, Product, Category, Cart, $location, sessionService, $scope) {
+    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint) {
 
         var _this = this;
 
@@ -22,6 +22,22 @@ angular.module('eCommerceUserApp')
 		this.expand = function(limit) {
 		  _this.limit += limit;
 		}
+
+        this.primeProducts = [];
+        this.getPrimeProducts = () => {
+            var primesubscriptionData_url = endpoint + '/primesubscriptions';
+            $http.get(primesubscriptionData_url).success(resp => {
+              $scope.primesubscriptionData = resp.response[0];
+            });
+
+            var CProduct = new Product.shopProducts();
+            CProduct.$get({limit: 10, seller: $routeParams.sid, primesubscription: true}, (resp) => {
+                this.primeProducts = resp.response.product;
+            }, (err) => {
+                console.log(err);
+            });
+        }
+        this.getPrimeProducts();
 
         this.shopDetails = function() {
             var CProduct = new Product.shopProducts();
@@ -80,4 +96,21 @@ angular.module('eCommerceUserApp')
 		}
 
 
-    }]);
+    }])
+    .filter('productPrimeImageFilter', function() {
+        return function(images) {
+            let tmp = 'http://res.cloudinary.com/primefusion/image/upload/v1475749826/p2kb4zz0pi2zentrygnj.png';
+            if (images && images.length > 0) {
+                tmp = (images[0].cdn) ? images[0].cdn.url : tmp;
+            }
+            return tmp;
+        }
+    })
+    .filter('productPrimeExtraPay', function() {
+        return function(price, extra_pay) {
+            if (extra_pay) {
+                price += extra_pay;
+            }
+            return price;
+        }
+    });
