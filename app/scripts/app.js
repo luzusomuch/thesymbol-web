@@ -240,6 +240,17 @@ angular
             event.preventDefault();
             $location.path('/');
         }
+
+        if (!$rootScope.currentLocation) {
+            navigator.geolocation.getCurrentPosition(data => {
+                $rootScope.currentLocation = {
+                    lat: data.coords.latitude,
+                    lng: data.coords.longitude
+                };
+            }, err => {
+                console.log(err);
+            });
+        }
     });
 
     gapi.load('auth2:client', () => {
@@ -254,6 +265,7 @@ angular
     if (!window.gapi) {
         window.gapi = gapi;
     }
+
 }])
 .config(function(socialProvider) {
     //socialProvider.setLinkedInKey("75uycyp6us7n1l");

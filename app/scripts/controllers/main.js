@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('MainCtrl', ['Product', 'Category', 'search', 'Main', 'Cart', "$location", "sessionService", "$scope", "$sce", function(Product, Category, search, Main, Cart, $location, sessionService, $scope, $sce) {
+    .controller('MainCtrl', ['Product', 'Category', 'search', 'Main', 'Cart', "$location", "sessionService", "$scope", "$sce", '$rootScope', 'growl', function(Product, Category, search, Main, Cart, $location, sessionService, $scope, $sce, $rootScope, growl) {
 
         var _this = this;
 
@@ -109,6 +109,6 @@ angular.module('eCommerceUserApp')
         
 		  $.stickysidebarscroll("#stores",{offset: {top: 90, bottom: 200}});
 		   $.stickysidebarscroll("#trending",{offset: {top: 90, bottom: 200}});
-		    $('[data-toggle="tooltip"]').tooltip()
+		    $('[data-toggle="tooltip"]').tooltip();
     }])
 	
