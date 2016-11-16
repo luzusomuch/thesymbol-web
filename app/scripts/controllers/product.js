@@ -168,7 +168,10 @@ angular.module('eCommerceUserApp')
                     }
                 })
 		
-		
+		this.addWishlist = function () {
+			
+		}
+
         this.buyNow = function() {
             var CProduct = new Product.AddtoCart({
                 product_id: $routeParams.pid,

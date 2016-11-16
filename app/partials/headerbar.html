@@ -24,9 +24,9 @@
 								<div class="iconbox" style="display:inline-flex;padding-left:10px;">
 									
 										<a ng-href="{{header.sellerurl}}register" class="btn">Become A Seller</a>
-										<a  ng-if="!header.user"  ng-href="#/register" class="btn">Join {{admin.title}}</a>
+										<a ng-if="!header.user"  ng-href="#/register" class="btn">Join {{admin.title}}</a>
 										<a ng-if="!header.user" ng-href="#/login" class="btn">Login</a>
-										<a  ng-href="#/shop" class="btn">Shop</a>
+										<a ng-href="#/shop" class="btn">Shop</a>
 										<a href="#/cart" class="btn"><i class="fa fa-shopping-cart">{{header.carts.length}}</i></a>
 										 <!--3-->
 					  <div class="dropdown dropdown-inline"  ng-if="header.user">
@@ -48,8 +48,8 @@
 						  <li class="divider"></li>
 						  <li><a href="#/account">{{"views.headerbar.My Account" | translate}}</a></li>
 						  <li><a href="#/invite-friend">{{"views.headerbar.Invite Friend" | translate}}</a></li>
-						  <li><a href="#/order">My orders</a></li>
-						  
+						  <li><a href="#/order">My Orders</a></li>
+						  <li><a href="#/wishlist">My Wishlist</a></li>
 						  <logout></logout>
 						</ul>
 					  </div>
@@ -88,7 +88,8 @@
 							<li ng-if="header.user" ><a  ng-href="#/account" >Account</a></li>
 							<li ><a  ng-href="#/shop" >Shop</a></li>
 							<li ><a  ng-href="#/cart" >Cart</a></li>
-							<li ng-if="header.user"><a href="#/order">My orders</a></li>
+							<li ng-if="header.user"><a href="#/order">My Orders</a></li>
+							<li ng-if="header.user" ><a href="#/wishlist" >My Wishlist</a></li>
 							<li ng-if="header.user" ><logout></logout></li>
 						  </ul>
 						</div><!-- /.navbar-collapse -->

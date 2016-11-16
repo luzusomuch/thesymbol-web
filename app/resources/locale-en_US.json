@@ -4,13 +4,12 @@
   
   "views.headerbar.My Account":"My Account",
   "views.headerbar.My Orders":"My Orders",
+  "views.headerbar.My Wishlist":"My Wishlist",
   "views.headerbar.Join Virtusa":"Join Virtusa",
   "views.headerbar.log in":"log in",
   "views.headerbar.Become A Seller":"Become A Seller",
   "views.headerbar.Search":"Search",
   "views.headerbar.Invite Friend":"Invite Friend",
-  
-  
   
   "views.main.Popular products":"Popular products",
   "views.main.by":"by",
