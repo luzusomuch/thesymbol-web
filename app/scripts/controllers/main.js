@@ -44,7 +44,6 @@ angular.module('eCommerceUserApp')
             .$get({limit:9},function(data) {
                 if (data.status == "success") {
                     $scope.allp = data.response;
-                    console.log($scope.allp);
                 }
             }, function(data) {
                 if (data.status == "401") {

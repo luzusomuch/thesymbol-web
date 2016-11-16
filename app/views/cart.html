@@ -115,7 +115,7 @@
 												</div>
 												<div class="col-lg-2 col-sm-2 col-xs-12">
 													<div class="cart_product_rate">
-														<p><b>${{cat.selected_pricing.after_discount}}</b></p>
+														<p><b>{{cat.selected_pricing.after_discount | currencyTranslate: locationCurrency}}</b></p>
 														<select ng-change="cart.updateCart(cat.product_quantity,cat.product_id._id)" ng-model="cat.product_quantity" class="form-control" ng-if="cat.product_variant && cat.product_type=='normal'">
 															<option ng-repeat="n in cart.range(1,cat.selected_pricing.quantity)" value="{{n}}">{{n}}</option>
 														</select>
@@ -173,22 +173,22 @@
 											<div class="payment-inner">
 												<ul class="list-group" style="margin-bottom:0px;">
 												    <li class="list-group-item clearfix">
-														<span  class="pull-right">${{cart.totalprice}}</span>
+														<span  class="pull-right">{{cart.totalprice | currencyTranslate: locationCurrency}}</span>
 														subtotal
 												    </li>
 													<li class="list-group-item clearfix">
-														<span  class="pull-right">${{cart.shipprice}}</span>
+														<span  class="pull-right">{{cart.shipprice | currencyTranslate: locationCurrency}}</span>
 														Shippint
 												    </li>
 													<li class="list-group-item clearfix">
-														<span  class="pull-right" ng-if="cart.discount">${{cart.discount.amount}}</span>
-														<span  class="pull-right" ng-if="!cart.discount">$0</span>
+														<span  class="pull-right" ng-if="cart.discount">{{cart.discount.amount | currencyTranslate: locationCurrency}}</span>
+														<span  class="pull-right" ng-if="!cart.discount">0</span>
 														Discount
 												    </li>
 													
 													 <li class="list-group-item clearfix">
 														<b>TOTAL</b>
-														<span class="pull-right"><b>${{(cart.totalprice + cart.shipprice ) - cart.discount.amount}}</b></span>
+														<span class="pull-right"><b>{{(cart.totalprice + cart.shipprice ) - cart.discount.amount | currencyTranslate: locationCurrency}}</b></span>
 												    </li>
 												</ul>
 											</div>

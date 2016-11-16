@@ -276,7 +276,7 @@ angular
                 };
                 $rootScope.getCurrency($rootScope.currentLocation.lng, $rootScope.currentLocation.lat);
             }, err => {
-                console.log(err);
+                growl.error('Error when tracking your location');
             });
         } else {
             $rootScope.getCurrency($rootScope.currentLocation.lng, $rootScope.currentLocation.lat);
@@ -333,3 +333,11 @@ angular
     growlProvider.globalTimeToLive(3000);
     growlProvider.globalDisableCountDown(true);
 })
+.filter('currencyTranslate', () => {
+    return (price, currency) => {
+        if (currency) {
+            price = price*currency.rate;
+        }
+        return price + currency.icon;
+    };
+});
