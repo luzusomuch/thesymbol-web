@@ -132,13 +132,13 @@
 	                          			<div class="item"> 
 	                            			<div class="item-img"> 
 	                            				<span class="bg-img"></span> 
-	                            				<a href="#">
+	                            				<a href="#/product/{{product._id}}">
 	                            					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
                             					</a> 
                           					</div> 
                           					<div class="item-data"> 
                           						<p> 
-                          							<a href="#/product/{{product._id}}" title="{{product.title}}" class="ng-binding">{{product.title}}</a><br> <span class="ng-binding">${{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay}}</span> 
+                          							<a href="#/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
                         							</p> 
                       							</div> 
 	                          			</div>
@@ -184,7 +184,8 @@
 														<div class="item-data">
 															<p>
 																<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
-																<span>${{prod.pricing.after_discount}}</span>
+																<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
+																<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
 															</p>
 														</div>
 													</div>

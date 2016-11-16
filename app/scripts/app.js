@@ -223,7 +223,34 @@ angular
     })
 
 
-.run(['$rootScope', '$location', 'sessionService', '$http', function($rootScope, $location, sessionService, $http) {
+.run(['$rootScope', '$location', 'sessionService', '$http', 'endpoint', 'growl', function($rootScope, $location, sessionService, $http, endpoint, growl) {
+    $rootScope.getCurrency = (lng, lat) => {
+        if (lng && lat) {
+            delete $http.defaults.headers.common.Authorization;
+            $http.get(
+                'https://maps.googleapis.com/maps/api/geocode/json',
+                {params: {
+                    latlng: lat+','+lng,
+                    sensor: false
+                }}
+            ).then(response => {
+                if (response.data && response.data.results[0] && response.data.results[0].address_components) {
+                    _.each(response.data.results[0].address_components, (item) => {
+                        if (item.types[0]==='country') {
+                            $http.get(endpoint+'/currencies/get-by-country-code', {params: {countryCode: item.short_name}}).then(resp => {
+                                if (resp.data.status==='success') {
+                                    $rootScope.locationCurrency = resp.data.response;
+                                } else {
+                                    growl.error(resp.data.statusMessage);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    };
+
     $rootScope.$on('$routeChangeStart', function(event, newUrl) {
         $http.defaults.headers.common['Authorization'] = sessionService.get('user_token');
         if (sessionService.get("token") == null) {
@@ -246,6 +273,20 @@ angular
             event.preventDefault();
             $location.path('/');
         }
+
+        if (!$rootScope.currentLocation) {
+            navigator.geolocation.getCurrentPosition(data => {
+                $rootScope.currentLocation = {
+                    lat: data.coords.latitude,
+                    lng: data.coords.longitude
+                };
+                $rootScope.getCurrency($rootScope.currentLocation.lng, $rootScope.currentLocation.lat);
+            }, err => {
+                growl.error('Error when tracking your location');
+            });
+        } else {
+            $rootScope.getCurrency($rootScope.currentLocation.lng, $rootScope.currentLocation.lat);
+        }
     });
 
     gapi.load('auth2:client', () => {
@@ -260,6 +301,7 @@ angular
     if (!window.gapi) {
         window.gapi = gapi;
     }
+
 }])
 .config(function(socialProvider) {
     //socialProvider.setLinkedInKey("75uycyp6us7n1l");
@@ -297,3 +339,11 @@ angular
     growlProvider.globalTimeToLive(3000);
     growlProvider.globalDisableCountDown(true);
 })
+.filter('currencyTranslate', () => {
+    return (price, currency) => {
+        if (currency) {
+            price = price*currency.rate;
+        }
+        return price + currency.icon;
+    };
+});

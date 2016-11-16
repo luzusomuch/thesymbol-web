@@ -43,7 +43,7 @@
 							<span>{{ProdC.product.shipping_details.duration}}  </span> {{"views.pd.Will be Dispatched in " | translate}}
 						</span>
 						<span ng-if="ProdC.product.paid_by_buyer == true">
-							<span>{{"views.pd.Shipping Charges" | translate}}</span> ${{ProdC.product.shipping_details.fee}}
+							<span>{{"views.pd.Shipping Charges" | translate}}</span> {{ProdC.product.shipping_details.fee | currencyTranslate: locationCurrency}}
 						</span>
 					</p>
 				</div>
@@ -63,23 +63,23 @@
 							<br>
 							<span ng-repeat="vari in ProdC.product.variants" ng-if="ProdC.cart.product_variant==vari._id ">
 							<span>
-							<b>${{vari.after_discount}}</b>
+							<b>{{vari.after_discount | currencyTranslate: locationCurrency}}</b>
 							</span>
 							<span>
-								<b style="text-decoration:line-through;color:#e53935;">${{vari.original}}</b> 
+								<b style="text-decoration:line-through;color:#e53935;">{{vari.original | currencyTranslate: locationCurrency}}</b> 
 							</span>
 							<span class=offer >{{((vari.original - vari.after_discount)/vari.original) * 100 | number:0}}% {{"views.main.OFF" | translate}}
 							</span>
 							</span>
 							<span ng-if="ProdC.product.variants.length==0 || !ProdC.cart.product_variant" >
 							<span>
-							<b>${{ProdC.product.pricing.after_discount}}</b> </span>
+							<b>{{ProdC.product.pricing.after_discount | currencyTranslate: locationCurrency}}</b> </span>
 							<span>
-								<b style="text-decoration:line-through;color:#e53935;">${{ProdC.product.pricing.original}}</b> 
+								<b style="text-decoration:line-through;color:#e53935;">{{ProdC.product.pricing.original | currencyTranslate: locationCurrency}}</b> 
 							</span>
 							<span class=offer>{{((ProdC.product.pricing.original - ProdC.product.pricing.after_discount)/ProdC.product.pricing.original) * 100 | number:0}}% {{"views.main.OFF" | translate}}</span>
 							</span>
-							<span ng-if="ProdC.product.paid_by_buyer == true" style=color:#3b5998>+ ${{ProdC.product.shipping_details.fee}}  {{"views.pd.Shipping Charges" | translate}} </span>
+							<span ng-if="ProdC.product.paid_by_buyer == true" style=color:#3b5998>+ {{ProdC.product.shipping_details.fee | currencyTranslate: locationCurrency}}  {{"views.pd.Shipping Charges" | translate}} </span>
 							<span ng-if="ProdC.product.paid_by_buyer == false" style=color:#3b5998> Free Shipping </span>
 							<div class="row"  ng-if="ProdC.product.quantity!=0">
 								<div class="product-quantity col-xs-12 col-lg-8" >
@@ -111,18 +111,18 @@
 							<br>
 							<span ng-repeat="lic in ProdC.product.licenses" ng-if="ProdC.cart.product_license==lic._id ">
 							<span>
-							<b>${{lic.after_discount}}</b> </span>
+							<b>{{lic.after_discount | currencyTranslate: locationCurrency}}</b> </span>
 							<span>
-								<b style="text-decoration:line-through;color:#e53935;">${{lic.original}}</b> 
+								<b style="text-decoration:line-through;color:#e53935;">{{lic.original | currencyTranslate: locationCurrency}}</b> 
 							</span>
 							<span class=offer>{{((lic.original - lic.after_discount)/lic.original) * 100 | number:0}}% {{"views.main.OFF" | translate}}
 							</span>
 							</span>
 							<span ng-if="ProdC.product.licenses.length==0 || !ProdC.cart.product_license" >
 							<span>
-							<b>${{ProdC.product.pricing.after_discount}}</b> </span>
+							<b>{{ProdC.product.pricing.after_discount | currencyTranslate: locationCurrency}}</b> </span>
 							<span>
-								<b style="text-decoration:line-through;color:#e53935;">${{ProdC.product.pricing.original}}</b> 
+								<b style="text-decoration:line-through;color:#e53935;">{{ProdC.product.pricing.original | currencyTranslate: locationCurrency}}</b> 
 							</span>
 							<span class=offer>{{((ProdC.product.pricing.original - ProdC.product.pricing.after_discount)/ProdC.product.pricing.original) * 100 | number:0}}% {{"views.main.OFF" | translate}}</span>
 							</span>
@@ -287,7 +287,7 @@
 							<div class="row">
 								<div class="col-xs-12 col-md-6">
 									<p class="lead">
-										 <h4 class="pricetitle pmdtop">${{rel.pricing.after_discount}}</h4>&nbsp;
+										 <h4 class="pricetitle pmdtop">{{rel.pricing.after_discount | currencyTranslate: locationCurrency}}</h4>&nbsp;
 										<span class=offer>{{((rel.pricing.original - rel.pricing.after_discount)/rel.pricing.original) * 100 | number:0}}%  {{"views.main.OFF" | translate}}</span></p>
 								</div>
 							</div>

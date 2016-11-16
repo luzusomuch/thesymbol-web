@@ -111,6 +111,7 @@ angular.module('eCommerceUserApp')
             if (extra_pay) {
                 price += extra_pay;
             }
+            console.log(price);
             return price;
         }
     });

@@ -88,7 +88,7 @@
 												
 												<div class="news-feed-product-details-data " ng-if="$index%4==0 || $index%4==1">
 													<div class="product-details-data-inner clearfix">
-														<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+														<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
 														<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
 															<div class="user-img">
 																<button class="btn btn-default likes_btn">
@@ -108,7 +108,7 @@
 														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
 														<div class="news-feed-product-details-data data6">
 															<div class="product-details-data-inner clearfix">
-																<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+																<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
 																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
 																<div class="user-img">
 																	<button class="btn btn-default likes_btn">
@@ -129,7 +129,7 @@
 														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
 														<div class="news-feed-product-details-data data6">
 															<div class="product-details-data-inner clearfix">
-																<button type="button" class="btn btn-default pull-right">${{prod.pricing.after_discount}}</button>
+																<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
 																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
 																<div class="user-img">
 																	<button class="btn btn-default likes_btn">
