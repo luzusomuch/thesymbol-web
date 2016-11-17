@@ -316,6 +316,8 @@ angular.module('eCommerceUserApp')
         }
 		
 		_this.download_url=endpoint;
+
+
        
     }])
 	.directive('fileModel', ['$parse', function ($parse) {
@@ -379,3 +381,26 @@ angular.module('eCommerceUserApp')
 
 		}
 	 }])
+
+	this.getWishlist = function () {
+        var CWishlist = new Wishlist.getWishlist({
+        	limit: 10,
+			user_id: angular.fromJson(sessionService.get('user'))._id
+		});
+
+        CWishlist.$get({
+        	guest_token: sessionService.get("token")
+        }, function(data) {
+            if (data.status == "success") {
+                _this.successs = data;
+            }
+            if (data.status == "fail"){
+				$scope.header.pageLoading = false;
+                _this.error = data;
+			}
+        }, function(data) {
+            if (data.status == "401") {
+                sessionService.get("token");
+            }
+        });
+    }

@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce) {
+    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist) {
 
         var _this = this;
         this.close = function() {
@@ -167,9 +167,32 @@ angular.module('eCommerceUserApp')
                         sessionService.get("token");
                     }
                 })
-		
+
 		this.addWishlist = function () {
-			
+			if (sessionService.get('user') && angular.fromJson(sessionService.get('user'))._id) {
+				var CWishlist = new Wishlist.addWishlist({
+					product_id: $routeParams.pid,
+					user_id: angular.fromJson(sessionService.get('user'))._id
+				});
+				
+                CWishlist.$get({}, {
+                	guest_token: sessionService.get("token")
+                }, function(data) {
+                    if (data.status == "success") {
+                        _this.successs = data;
+                    }
+                    if (data.status == "fail"){
+						$scope.header.pageLoading = false;
+                        _this.error = data;
+					}
+                }, function(data) {
+                    if (data.status == "401") {
+                        sessionService.get("token");
+                    }
+                });
+			} else {
+				growl.error('Please login');
+			}
 		}
 
         this.buyNow = function() {
