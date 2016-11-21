@@ -123,40 +123,41 @@
 	                  <div class="panel-heading">
 	                    <h3 class="panel-title">Prime Products</h3>
 	                  </div>
-	                    <div class="panel-body">
-	                      <div class="slider-products">
-	                        <div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
-	                          <div class="owl-wrapper-outer">
-	                          	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
-	                          		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
-	                          			<div class="item"> 
-	                            			<div class="item-img"> 
-	                            				<span class="bg-img"></span> 
-	                            				<a href="#/product/{{product._id}}">
-	                            					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
-                            					</a> 
-                          					</div> 
-                          					<div class="item-data"> 
-                          						<p> 
-                          							<a href="#/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
-                        							</p> 
-                      							</div> 
-	                          			</div>
+                    <div class="panel-body">
+                      <div class="slider-products">
+                        <div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
+                          <div class="owl-wrapper-outer">
+                          	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
+                          		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
+                          			<div class="item"> 
+                            			<div class="item-img"> 
+                            				<span class="bg-img"></span> 
+                            				<a href="#/product/{{product._id}}">
+                            					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
+                          					</a> 
+                        					</div> 
+                        					<div class="item-data"> 
+                        						<p> 
+                        							<a href="#/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
+                      							</p> 
+                    							</div> 
                           			</div>
-	                          	</slick>
-                      			</div>
-	                      </div>
-	                  </div>
-	                </div>
+                        			</div>
+                          	</slick>
+                    			</div>
+                      	</div>
+                  		</div>
+                		</div>
+                	</div>
 									<!-- prime production -->
 
-									<div class="user-actions">
+									<!-- old filter -->
+									<!-- <div class="user-actions">
 										<div class="user-action-inner">
 											<div class="row nav nav-tabs">
 												<div class="col-lg-2">
 													<a href="" data-toggle="tab">Products <span>{{shopC.length}}</span></a>
 												</div>
-												
 												<div class="col-lg-2 pull-right" >
 													<select class="form-control" ng-model=sortBy>
 														<option value="">--sort--
@@ -164,43 +165,103 @@
 														<option value=pricing.after_discount>Sort by price: low to high
 														<option value=-pricing.after_discount>Sort by price: high to low</select>
 												</div>
-												
 											</div>
 										</div>
-											
-									</div>
-									 <div class="tab-content">
-										
+									</div> -->
+									<!-- old filter -->
+
+									<!-- search and filter -->
+									<div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>PRODUCTS  <span>{{shopC.length}}</span></h4>
+                      <hr>
+                      <div class="row search-line">
+                        <div class="col-sm-8">
+                          <div class="row">
+                            <div class="col-sm-8">
+                            	<input type="text" class="form-control" name="productName" ng-model="productName" placeholder="Product name">
+                          	</div>
+                            <div class="col-sm-4">
+                            	<select class="form-control" ng-model="shopC.category">
+                            		<option value="">All Category</option>
+                            		<option ng-repeat="cat in shopC.categories" value="{{cat._id}}">{{cat.name}}</option>
+                          		</select>
+                          	</div>
+                            <!-- <div class="col-sm-4"><select class="form-control"><option>All Price</option></select></div> -->
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                         	<div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6">
+	                            <select class="form-control" ng-model="sortBy">
+	                            	<option value="">--Sort--
+																<option value=created_at>Sort by newness
+																<option value=pricing.after_discount>Sort by price: low to high
+																<option value=-pricing.after_discount>Sort by price: high to low</select>
+	                          	</select>
+                          	</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+	                </div>
+	                <!-- search and filter -->
+
+								 	<div class="tab-content">
 										<div id="menu3" class=" tab-pane fade in active">
-										 	<div class="container-fluid" style="padding:0px;">
+	                		<!-- without search -->
+										 	<div ng-show="!shopC.isSearch" class="container-fluid" style="padding:0px;">
 										    <div class="row">
-												
-												<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
-													<div class="item">
-														<div class="item-img">
-														<Span class="bg-img"></span>
-														<a href=#/product/{{prod._id}}  title="{{prod.name}}">	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
-														</div>
-														<div class="item-data">
-															<p>
-																<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
-																<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
-																<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
-															</p>
+													<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+														<div class="item">
+															<div class="item-img">
+																<Span class="bg-img"></span>
+																<a href=#/product/{{prod._id}}  title="{{prod.name}}">	
+																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
+																</a>
+															</div>
+															<div class="item-data">
+																<p>
+																	<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
+																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
+																</p>
+															</div>
 														</div>
 													</div>
 												</div>
-												
-												
+												<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
+												<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
 											</div>
-											<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
-											<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
+											<!-- without search -->
+
+											<!-- search -->
+											<div ng-show="shopC.isSearch" class="container-fluid" style="padding:0px;">
+										    <div class="row">
+													<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.searchData.items | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+														<div class="item">
+															<div class="item-img">
+																<Span class="bg-img"></span>
+																<a href=#/product/{{prod._id}}  title="{{prod.name}}">	
+																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
+																</a>
+															</div>
+															<div class="item-data">
+																<p>
+																	<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
+																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
+																</p>
+															</div>
+														</div>
+													</div>
 												</div>
-												
+												<button ng-if="shopC.searchData.totalItem > shopC.searchData.items.length" ng-click="shopC.searchProduct(productName, shopC.category, shopC.$routeParams.sid)" class="loadmore btn-block" type="button">Load More</button>
+												<button ng-if="shopC.searchData.items.length === 0" class="btn-block loadmore nomore " type="button">No product found</button>
 											</div>
-											</div>
+											<!-- search -->
 										</div>
-									  </div>
 									</div>
 								</div><!--col-lg-9 col-sm-9 col-xs-12-->
 							</div>
