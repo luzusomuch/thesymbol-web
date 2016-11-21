@@ -168,9 +168,15 @@
 											</i>
 										</a>
 										
-										<a href="javascript:void(0);" ng-click="ProdC.addWishlist()">
+										<a href="javascript:void(0);" ng-click="ProdC.addWishlist()" ng-hide="ProdC.wishlisted">
 											<i class="fa fa-heart-o col-xs-7">
 												<span>Add to Wishlist</span>
+											</i>
+										</a>
+
+										<a href="javascript:void(0);" ng-show="ProdC.wishlisted" style="color:#F44336">
+											<i class="fa fa-heart col-xs-7">
+												<span> Wishlisted</span>
 											</i>
 										</a>
 									</div>

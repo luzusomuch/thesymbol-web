@@ -39,6 +39,7 @@ angular.module('eCommerceUserApp')
                         CProduct
                             .$get(function(data) {
                                 if (data.status == "success") {
+                                	console.log(data.response.product);
                                     _this.related = data.response.product;
                                 }
                             }, function(data) {
@@ -65,8 +66,32 @@ angular.module('eCommerceUserApp')
                     if (data.status == "401") {
                         sessionService.get("token");
                     }
-                })
+                });
             
+            _this.wishlisted = false;
+            if (angular.fromJson(sessionService.get('user'))) {
+	            var CWishlist = new Wishlist.checkWishlist({
+	            	product_id: $routeParams.pid,
+	            	user_id: angular.fromJson(sessionService.get('user'))._id
+	            });
+
+             	CWishlist.$get({
+                	guest_token: sessionService.get("token"),
+                	product_id: $routeParams.pid,
+                	user_id: angular.fromJson(sessionService.get('user'))._id
+            	}, function(data) {
+                    if (data.status == "success") {
+                        if (data.response && data.response.length > 0) {
+                        	_this.wishlisted = true;
+                        }
+                        console.log(_this.wishlisted);
+                    }
+                }, function(data) {
+                    if (data.status == "401") {
+                        sessionService.get("token");
+                    }
+                });
+            }
 
         }
 
@@ -175,13 +200,12 @@ angular.module('eCommerceUserApp')
 					user_id: angular.fromJson(sessionService.get('user'))._id
 				});
 				
-                CWishlist.$get({}, {
-                	guest_token: sessionService.get("token")
-                }, function(data) {
+                CWishlist.$get(function(data) {
                     if (data.status == "success") {
-                        _this.successs = data;
+                        //_this.success = data;
+                        _this.wishlisted = true;
                     }
-                    if (data.status == "fail"){
+                    if (data.status == "fail") {
 						$scope.header.pageLoading = false;
                         _this.error = data;
 					}

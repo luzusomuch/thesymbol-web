@@ -343,7 +343,8 @@ angular
     return (price, currency) => {
         if (currency) {
             price = price*currency.rate;
+            price += currency.icon
         }
-        return price + currency.icon;
+        return price;
     };
 });
