@@ -8,10 +8,20 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint) {
+    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search) {
 
         var _this = this;
-
+        this.$routeParams = $routeParams;
+        this.categories = [];
+        this.getCategories = () => {
+            var CCategory = new Category.getCategory();
+            CCategory.$get({}, resp => {
+                if (resp.status==='success') {
+                    this.categories = resp.response.categories;
+                }
+            });
+        };
+        this.getCategories();
 
         this.close = function() {
             _this.error = '';
@@ -95,6 +105,35 @@ angular.module('eCommerceUserApp')
             })
 		}
 
+        $scope.$watchGroup(['productName', 'shopC.category'], (nv) => {
+            var productName = nv[0];
+            var category = nv[1];
+            if (productName || (category && category.length > 0)) {
+                this.searchData = {page: 1};
+                this.isSearch = true;
+                this.searchProduct(productName, category, $routeParams.sid);
+            } else {
+                this.isSearch = false;
+                this.searchData = {page: 1};
+            }
+        }, true);
+
+        this.searchData = {page: 1};
+        this.searchProduct = (productName, category, shopId) => {
+            search.searchProducts({
+                productName: productName,
+                category: category,
+                shopId: shopId,
+                page: this.searchData.page
+            }).then(resp => {
+                if (resp.data.status==='success') {
+                    this.searchData.page++;
+                    this.searchData.totalItem = resp.data.response.totalItem;
+                    this.searchData.items = (this.searchData.items) ? this.searchData.items.concat(resp.data.response.items) : resp.data.response.items;
+                }
+            });
+        };
+
 
     }])
     .filter('productPrimeImageFilter', function() {
@@ -111,7 +150,6 @@ angular.module('eCommerceUserApp')
             if (extra_pay) {
                 price += extra_pay;
             }
-            console.log(price);
             return price;
         }
     });
