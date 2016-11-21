@@ -85,6 +85,12 @@
 .modal-content {
     box-shadow: none;
 }
+.wishlist-title {
+    font-weight: bold;
+}
+.nav-products-sort {
+    padding-bottom: 10px;
+}
 @media (min-width: 768px) {
     .modal-sm {
         width: 400px;

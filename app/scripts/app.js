@@ -147,6 +147,12 @@ angular
                 controllerAs: 'acc',
                 requireAuth: true
             })
+            .when('/wishlist', {
+                templateUrl: 'views/wishlist.html',
+                controller: 'AccountCtrl',
+                controllerAs: 'acc',
+                requireAuth: true
+            })
             .when('/success', {
                 templateUrl: 'views/success.html',
                 controller: 'SuccessCtrl',
