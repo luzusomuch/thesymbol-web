@@ -119,17 +119,21 @@ angular.module('eCommerceUserApp')
         }, true);
 
         this.searchData = {page: 1};
-        this.searchProduct = (productName, category, shopId) => {
+        this.searchProduct = (productName, category, shopId, lat, lng) => {
             search.searchProducts({
                 productName: productName,
                 category: category,
                 shopId: shopId,
-                page: this.searchData.page
+                page: this.searchData.page,
+                lat: lat,
+                lng: lng
             }).then(resp => {
                 if (resp.data.status==='success') {
                     this.searchData.page++;
                     this.searchData.totalItem = resp.data.response.totalItem;
                     this.searchData.items = (this.searchData.items) ? this.searchData.items.concat(resp.data.response.items) : resp.data.response.items;
+                } else {
+                    alert('Error when fetching data');
                 }
             });
         };
