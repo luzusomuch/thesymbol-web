@@ -16,11 +16,21 @@ angular.module('eCommerceUserApp')
 				method: 'POST'
 			}
 		}),
-		getWishlist: $resource(endpoint + '/users/wishlist/get-wishlist', null, {
+		getWishlist: $resource(endpoint + '/users/wishlist/get-wishlist', {user_id:"@user_id"}, {
 	        'get': {
 	        	method: 'GET'
 	        }
 	    }),
+	    deleteWishlist: $resource(endpoint + '/users/wishlist/delete-wishlist', null, {
+			'get': {
+				method: 'GET'
+			}
+		}),
+		checkWishlist: $resource(endpoint + '/users/wishlist/check-wishlist', null, {
+			'get': {
+				method: 'GET'
+			}
+		})
 	};
 
 }]);

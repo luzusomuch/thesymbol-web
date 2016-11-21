@@ -68,12 +68,13 @@
 									<div class="panel-heading">
 										<h3 class="panel-title wishlist-title">Wishlist</h3>
 									</div>
-							        <div class="panel-body">
+							        <!-- <div class="panel-body">
 							          	<div class="slider-products">
 							                <div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
 							                  	<div class="owl-wrapper-outer">
 							                      	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
-							                      		<div ng-repeat="product in acc.getWishlist()" class="owl-item" style="width: 204px;">
+							                      		
+							                      		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
 							                      			<div class="item"> 
 							                        			<div class="item-img"> 
 							                        				<span class="bg-img"></span> 
@@ -88,24 +89,26 @@
 							              						</div> 
 							                      			</div>
 							                  			</div>
+
 							                      	</slick>
 							          			</div>
 							              	</div>
 							      		</div>
-							    	</div>
+							    	</div> -->
 
 									<div class="user-actions">
 										<div class="user-action-inner">
-											<div class="nav nav-tabs nav-products-sort">
+											<div class="nav nav-tabs nav-products-sort" style="padding-bottom:0px">
 												<div class="col-lg-2">
-													<a href="" data-toggle="tab">Products <span>{{shopC.length}}</span></a>
+													<a data-toggle="tab" style="line-height:30px">Products <span>{{acc.length}}</span></a>
 												</div>
 												<div class="col-lg-2 pull-right" >
-													<select class="form-control" ng-model=sortBy>
-														<option value="">--sort--
-														<option value=created_at>Sort by newness
-														<option value=pricing.after_discount>Sort by price: low to high
-														<option value=-pricing.after_discount>Sort by price: high to low</select>
+													<!-- <select class="form-control" ng-model=sortBy>
+														<option value="">--sort--</option>
+														<option value=created_at>Sort by newness</option>
+														<option value=pricing.after_discount>Sort by price: low to high</option>
+														<option value=-pricing.after_discount>Sort by price: high to low</option>
+													</select> -->
 												</div>
 											</div>
 										</div>
@@ -113,25 +116,29 @@
 
 									<div class="tab-content">
 										<div id="menu3" class=" tab-pane fade in active">
-										 	<div class="container-fluid" style="padding:0px;">
-											    <div class="row">
-													<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
-														<div class="item">
-															<div class="item-img">
-																<span class="bg-img"></span>
-																<a href=#/product/{{prod._id}}  title="{{prod.name}}">	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
-															</div>
-															<div class="item-data">
-																<p>
-																	<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
-																	<span>${{prod.pricing.after_discount}}</span>
-																</p>
-															</div>
-														</div>
-													</div>
+										 	<div class="container-fluid" style="padding:0px">
+											    <div class="col-md-12" style="padding:0px">
+
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-repeat="prod in acc.wishlist | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+			<div class="item" style="height:225px;margin-top:15px;margin-bottom:15px">
+				<div class="item-img">
+					<span class="bg-img"></span>
+					<a href=#/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">
+					<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.product_id.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
+				</div>
+				<div class="item-data">
+					<p>
+						<a href=#/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">{{prod.product_id.name | cut:true:60:' ...'}}</a><br/>
+						<span>${{prod.product_id.pricing.after_discount}}</span>
+						<a href="javascript:void(0);" ng-click="acc.deleteWishlist(prod)" style="color:#d14;"><span style="float:right"><i class="fa fa-heartbeat" aria-hidden="true"></i> Remove</span></a>
+					</p>
+				</div>
+			</div>
+		</div>
+
 												</div>
-												<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
-												<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
+												<!-- <button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button> -->
+												<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button> 
 											</div>
 										</div>
 									</div>

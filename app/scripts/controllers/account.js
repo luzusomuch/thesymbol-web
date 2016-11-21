@@ -8,8 +8,9 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('AccountCtrl', ['$routeParams', 'Product', 'Main', 'Checkout', 'Account', 'Order', "$location", "sessionService", 'endpoint', "$scope", "fileUpload","$http", function($routeParams, Product, Main, Checkout, Account, Order, $location, sessionService, endpoint, $scope, fileUpload,$http) {
-        var _this = this;
+    .controller('AccountCtrl', ['$routeParams', 'Product', 'Main', 'Checkout', 'Account', 'Order', "$location", "sessionService", 'endpoint', "$scope", "fileUpload","$http", "Wishlist", function($routeParams, Product, Main, Checkout, Account, Order, $location, sessionService, endpoint, $scope, fileUpload,$http, Wishlist) {
+    
+    var _this = this;
     $scope.myImage='';
     $scope.myCroppedImage='';
 
@@ -178,9 +179,6 @@ angular.module('eCommerceUserApp')
                 }
             })
 		}
-		
-		
-		
 
         this.addToReturn = function() {
 			$scope.header.pageLoading=true;
@@ -226,8 +224,6 @@ angular.module('eCommerceUserApp')
 						})
 			
 		}
-
-		
 		
 		this.addAddress = function(aid) {
 			$scope.header.pageLoading=true;
@@ -263,7 +259,6 @@ angular.module('eCommerceUserApp')
 				}
 			})
 		}
-
 
 		this.removeAddress = function(aid) {
 			$scope.header.pageLoading=true;
@@ -317,7 +312,56 @@ angular.module('eCommerceUserApp')
 		
 		_this.download_url=endpoint;
 
+		this.getWishlist = function () {
+			var CProduct = new Wishlist.getWishlist();
 
+            CProduct.$get({
+                user_id: angular.fromJson(sessionService.get('user'))._id
+            }, function(data) {
+                if (data.status == "success") {
+                    _this.wishlist = data.response.products;
+                    _this.length = data.response.products.length;
+                }
+            }, function(data) {
+                if (data.status == "401") {
+                    sessionService.get("token");
+                }
+            })
+	    }
+	    this.getWishlist();
+
+	    this.deleteWishlist = function (wishlist) {
+					
+			var CWishlist = new Wishlist.deleteWishlist({
+				wishlist_id: wishlist._id
+			});
+
+			CWishlist.$get({
+				guest_token: sessionService.get("token"),
+				wishlist_id: wishlist._id
+			}, function(data) {
+				if (data.status == "success") {
+					_this.success = data;
+					wishlist.is_deleted = true;
+					var index =  _.findIndex(_this.wishlist, function(n){
+						return n._id == wishlist._id;
+					});
+					if (index !== -1) {
+						_this.wishlist.splice(index, 1);
+						_this.length--;
+					}
+
+				}
+				if (data.status == "fail") {
+					$scope.header.pageLoading = false;
+					_this.error = data;
+				}
+			}, function(data) {
+				if (data.status == "401") {
+					sessionService.get("token");
+				}
+			});
+	    }
        
     }])
 	.directive('fileModel', ['$parse', function ($parse) {
@@ -380,27 +424,4 @@ angular.module('eCommerceUserApp')
 			}
 
 		}
-	 }])
-
-	this.getWishlist = function () {
-        var CWishlist = new Wishlist.getWishlist({
-        	limit: 10,
-			user_id: angular.fromJson(sessionService.get('user'))._id
-		});
-
-        CWishlist.$get({
-        	guest_token: sessionService.get("token")
-        }, function(data) {
-            if (data.status == "success") {
-                _this.successs = data;
-            }
-            if (data.status == "fail"){
-				$scope.header.pageLoading = false;
-                _this.error = data;
-			}
-        }, function(data) {
-            if (data.status == "401") {
-                sessionService.get("token");
-            }
-        });
-    }
+	}])
