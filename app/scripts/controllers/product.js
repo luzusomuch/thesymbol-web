@@ -8,8 +8,9 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist) {
-
+    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService) {
+    	this.currentUser = angular.fromJson(sessionService.get('user'));
+    	
         var _this = this;
         this.close = function() {
             _this.error = '';
@@ -258,15 +259,48 @@ angular.module('eCommerceUserApp')
                     }
                 })
         }
+
+        // comment section
+        this.comment = {
+        	page: 1
+        };
+        this.getComments = () => {
+        	CommentService.findAllByType($routeParams.pid, 'Product', {page: this.comment.page}).then(resp => {
+        		if (resp.data.status==='success') {
+        			this.comment.page++;
+        			this.comment.totalItem = resp.data.response.totalItem;
+        			this.comment.items = this.comment.items ? this.comment.items.concat(resp.data.response.items) : resp.data.response.items;
+        		} else {
+        			alert('Error when loading comments');
+        		}
+        	});
+        };
+
+        this.submitted = false;
+        this.postComment = (form) => {
+        	this.submitted = true;
+        	if (form.$valid) {
+        		CommentService.create({text: this.commentText, type: 'Product', objectId: $routeParams.pid}).then(resp => {
+        			if (resp.data.status==='success') {
+        				this.submitted = false;
+        				this.commentText = null;
+        				this.comment.items.push(resp.data.response);
+        				this.comment.totalItem+=1;
+        			} else {
+        				alert('Error when posting comment');
+        			}
+        		});
+        	} else {
+        		alert('Check your data again.');
+        	}
+        };
+        // end comment section
         
         if ($routeParams.pid != undefined){
-            this.productDetails(); 
-			this.reviewDetails();
-			
-			
-			
-			
-		}
+          this.productDetails(); 
+					this.reviewDetails();
+					this.getComments();
+				}
 		
 		
 		$scope.$on('ngSliderFinsh', function(ngRepeatFinishedEvent) {
