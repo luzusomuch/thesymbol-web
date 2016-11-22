@@ -24,14 +24,14 @@
 													</p>
 												</div>
 												<div class="panel-footer text-center">
-													<a href="#/register">Join {{admin.title}}</a>
+													<a href="/#!/register">Join {{admin.title}}</a>
 												</div>
 											</div>
 										</div>
 										<dl>
 											<dt>Shop</dt>
 											<dd>
-												<a href="#/shop">
+												<a href="/#!/shop">
 												<i class="fa fa-paper-plane" aria-hidden="true"></i>
 													Explore
 												</a>
@@ -47,7 +47,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -62,7 +62,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -84,12 +84,12 @@
 												 <iframe  ng-repeat="vid in prod.product_videos | limitTo:1" width="560" height="315"  src="{{getIframeSrc(vid.url)}}" frameborder="0" allowfullscreen></iframe>
 												</div>
 												<div ng-if="($index%4==0 || $index%4==1) && !prod.product_videos.length" >
-												<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive" /></a></div>
+												<a href=/#!/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive" /></a></div>
 												
 												<div class="news-feed-product-details-data " ng-if="$index%4==0 || $index%4==1">
 													<div class="product-details-data-inner clearfix">
 														<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
-														<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+														<a ng-href="/#!/product/{{prod._id}}">{{prod.name}}</a>
 															<div class="user-img">
 																<button class="btn btn-default likes_btn">
 																	<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
@@ -105,11 +105,11 @@
 												</div>
 												
 													<div class="col-lg-6 col-sm-6 col-xs-12 first_col6" ng-if="$index%4==2">
-														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
+														<a href=/#!/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
 														<div class="news-feed-product-details-data data6">
 															<div class="product-details-data-inner clearfix">
 																<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
-																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+																<a ng-href="/#!/product/{{prod._id}}">{{prod.name}}</a>
 																<div class="user-img">
 																	<button class="btn btn-default likes_btn">
 																		<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
@@ -126,11 +126,11 @@
 													</div>
 													
 													<div class="col-lg-6 col-sm-6 col-xs-12 second_col6" ng-if="$index%4==3">
-														<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
+														<a href=/#!/product/{{prod._id}}  title="{{prod.name}}"><img ng-repeat="img in prod.images | limitTo:1"  ng-src="{{img.cdn.url}}" class="img-responsive"/></a>
 														<div class="news-feed-product-details-data data6">
 															<div class="product-details-data-inner clearfix">
 																<button type="button" class="btn btn-default pull-right">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</button>
-																<a ng-href="#/product/{{prod._id}}">{{prod.name}}</a>
+																<a ng-href="/#!/product/{{prod._id}}">{{prod.name}}</a>
 																<div class="user-img">
 																	<button class="btn btn-default likes_btn">
 																		<i class="fa fa-star-o">&nbsp; {{prod.ratings.length}}</i>
@@ -168,7 +168,7 @@
 													</p>
 												</div>
 												<div class="panel-footer text-center">
-													<a href="#/register">Join {{admin.title}}</a>
+													<a href="/#!/register">Join {{admin.title}}</a>
 												</div>
 											</div>
 										</div>
@@ -205,7 +205,7 @@
 													<div class="panel-body" style="padding: 0px 15px;padding-top: 5px;">
 														<div class="row">
 															<div class="col-lg-6 col-xs-6 popular_section_img_outer" ng-repeat="rel in Main.best_offer | limitTo:8">
-																<a ng-href=#/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="img-responsive" /></a>
+																<a ng-href=/#!/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="img-responsive" /></a>
 															</div>
 															
 														</div>
@@ -225,7 +225,7 @@
 														<div class="panel-body" style="padding:0px 15px;padding-bottom: 4px;">
 															<div class="row">
 																<div class="col-lg-12 col-xs-12 collection_img_outer" ng-repeat="cate in category | limitTo:5" >
-																	<a ng-href="#/search/category/{{cate._id}}" >
+																	<a ng-href="/search/category/{{cate._id}}" >
 																		<img src="{{cate.image.cdn.url}}" class="img-responsive"  alt="img" />
 																		<!--<div class="data">{{cate.name}}</div>
 																		<div class="bg"></div>
@@ -257,7 +257,7 @@
 																				<img alt={{shop.name}} ng-if=shop.logo.url src={{shop.logo.cdn.url}} > <img alt={{shop.name}} ng-if=!shop.logo.url ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shop.name | limitTo:1}}_7.png" >
 																			</div>
 																			<div class="store-heading-right-inner">
-																				<a href=#/shop/{{shop._id}}>{{shop.name}}</a><br>
+																				<a href=/#!/shop/{{shop._id}}>{{shop.name}}</a><br>
 																				<em>{{shop.overall_ratings.length}} Reviews</em>
 																				
 																			</div>
@@ -268,7 +268,7 @@
 															</div>
 														</div>
 														<div class="panel-footer text-center">
-															<a href="#/shop">SEE MORE</a>
+															<a href="/#!/shop">SEE MORE</a>
 														</div>
 													</div>
 												</div>
@@ -290,7 +290,7 @@
 																				<img alt={{shop.name}} ng-if=shop.logo.url src={{shop.logo.cdn.url}} > <img alt={{shop.name}} ng-if=!shop.logo.url ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shop.name | limitTo:1}}_7.png" >
 																			</div>
 																			<div class="store-heading-right-inner">
-																				<a href=#/shop/{{shop._id}}>{{shop.name}}</a><br>
+																				<a href=/#!/shop/{{shop._id}}>{{shop.name}}</a><br>
 																				<em >{{shop.overall_ratings.length}} Reviews</em>
 																				
 																			</div>
@@ -300,7 +300,7 @@
 															</div>
 														</div>
 														<div class="panel-footer text-center">
-															<a href="#/shop">SEE MORE</a>
+															<a href="/#!/shop">SEE MORE</a>
 														</div>
 													</div>
 												</div>

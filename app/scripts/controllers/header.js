@@ -41,7 +41,6 @@ angular.module('eCommerceUserApp')
             }, function(data) {
                 if (data.status == "success") {
                     $scope.admin = data.response;
-					
                 }
             }, function(data) {
                 if (data.status == "401") {

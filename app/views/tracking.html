@@ -9,7 +9,7 @@
 
 							<div class="col-lg-3 col-sm-3 col-xs-12">
 								<div class="track-product-img">
-									<a ng-href="#/product/{{prd._id}}"><img  data-ng-repeat="img in prd.images |  limitTo:1" ng-src="{{img.cdn.url}}" alt="img" class="image-responsive" width="100%" /></a>
+									<a ng-href="/#!/product/{{prd._id}}"><img  data-ng-repeat="img in prd.images |  limitTo:1" ng-src="{{img.cdn.url}}" alt="img" class="image-responsive" width="100%" /></a>
 								</div>
 							</div>
 							<div class="col-lg-9 col-sm-9 col-xs-12">
@@ -17,7 +17,7 @@
 									<div class="p-data clearfix">
 										<span class="pull-left">
 											{{pro.created_at | date:'mediumDate'}}<br/>
-											<a ng-href="#/product/{{prd._id}}">{{prd.title}}</a>
+											<a ng-href="/#!/product/{{prd._id}}">{{prd.title}}</a>
 										</span>
 										<span class="pull-right">
 											<b>${{pro.products.price}}</b>
@@ -27,7 +27,7 @@
 									<div class="row">
 										<div class="col-lg-4 col-sm-4">
 											<b>Product:</b><br/>
-											<a ng-href="#/product/{{prd._id}}">{{prd.title}}</a>
+											<a ng-href="/#!/product/{{prd._id}}">{{prd.title}}</a>
 										</div>
 										<div class="col-lg-2 col-sm-2">
 											<b>Quantity:</b><br/>

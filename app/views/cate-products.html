@@ -42,7 +42,7 @@
 										<dl>
 											<dt>Shop</dt>
 											<dd>
-												<a href="#/shop">
+												<a href="/#!/shop">
 												<i class="fa fa-paper-plane" aria-hidden="true"></i>
 													Explore
 												</a>
@@ -57,7 +57,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category" on-finish-render=ngRepeatFinisheds>
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -72,7 +72,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category" on-finish-render=ngRepeatFinisheds>
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -113,11 +113,11 @@
 													<div class="item">
 														<div class="item-img">
 														<Span class="bg-img"></span>
-															<a href=#/product/{{prod._id}}  title="{{prod.name}}"><img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
+															<a href=/#!/product/{{prod._id}}  title="{{prod.name}}"><img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
 														</div>
 														<div class="item-data">
 															<p>
-																<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name |  cut:true:88:' ...'}}</a><br/>
+																<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name |  cut:true:88:' ...'}}</a><br/>
 																<span>${{prod.pricing.after_discount}}</span>
 															</p>
 														</div>

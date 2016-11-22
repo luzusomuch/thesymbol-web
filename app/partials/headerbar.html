@@ -17,17 +17,17 @@
 							</div>
 							<div class="col-lg-5 hidden-xs hidden-md hidden-sm">
 								<div class="brand" style="margin-left:28px;">
-								<a ng-href="#/"><!--<img width="173px" height="40px" ng-src="{{admin.site_logo.cdn.url}}" />--> {{admin.title}}</a>
+								<a ng-href="/#!/"><!--<img width="173px" height="40px" ng-src="{{admin.site_logo.cdn.url}}" />--> {{admin.title}}</a>
 								</div>
 							</div>
 							<div class="col-xs-4 col-lg-4 navbar-right" style="margin-right: 0px;padding: 0px;">
 								<div class="iconbox" style="display:inline-flex;padding-left:10px;">
 									
 										<a ng-href="{{header.sellerurl}}register" class="btn">Become A Seller</a>
-										<a ng-if="!header.user"  ng-href="#/register" class="btn">Join {{admin.title}}</a>
-										<a ng-if="!header.user" ng-href="#/login" class="btn">Login</a>
-										<a ng-href="#/shop" class="btn">Shop</a>
-										<a href="#/cart" class="btn"><i class="fa fa-shopping-cart"> {{header.carts.length}}</i></a>
+										<a ng-if="!header.user"  ng-href="/#!/register" class="btn">Join {{admin.title}}</a>
+										<a ng-if="!header.user" ng-href="/#!/login" class="btn">Login</a>
+										<a ng-href="/#!/shop" class="btn">Shop</a>
+										<a href="/#!/cart" class="btn"><i class="fa fa-shopping-cart"> {{header.carts.length}}</i></a>
 										 <!--3-->
 					  <div class="dropdown dropdown-inline"  ng-if="header.user">
 						<a href="" class="btn  dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-animations="zoomIn zoomIn zoomIn zoomIn"><i class="fa fa-user"></i></a>
@@ -46,10 +46,10 @@
 							</a>
 						  </li>
 						  <li class="divider"></li>
-						  <li><a href="#/account">{{"views.headerbar.My Account" | translate}}</a></li>
-						  <li><a href="#/invite-friend">{{"views.headerbar.Invite Friend" | translate}}</a></li>
-						  <li><a href="#/order">My Orders</a></li>
-						  <li><a href="#/wishlist">My Wishlist</a></li>
+						  <li><a href="/#!/account">{{"views.headerbar.My Account" | translate}}</a></li>
+						  <li><a href="/#!/invite-friend">{{"views.headerbar.Invite Friend" | translate}}</a></li>
+						  <li><a href="/#!/order">My Orders</a></li>
+						  <li><a href="/#!/wishlist">My Wishlist</a></li>
 						  <logout></logout>
 						</ul>
 					  </div>
@@ -68,7 +68,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						  </button>
-						  <a class="navbar-brand" href="#/" style="text-transform:uppercase;font-family: 'Nunito', sans-serif;font-weight: 500;font-size:23px;"><!--<img width="173px" height="40px" ng-src="{{admin.site_logo.cdn.url}}" />-->{{admin.title}}</a>
+						  <a class="navbar-brand" href="/#!/" style="text-transform:uppercase;font-family: 'Nunito', sans-serif;font-weight: 500;font-size:23px;"><!--<img width="173px" height="40px" ng-src="{{admin.site_logo.cdn.url}}" />-->{{admin.title}}</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,13 +83,13 @@
 						 
 						  <ul class="nav navbar-nav navbar-right">
 							<li><a ng-href="{{header.sellerurl}}register" >Become A Seller</a></li>
-							<li ng-if="!header.user" ><a  ng-href="#/register" >Join {{admin.title}}</a></li>
-							<li ng-if="!header.user" ><a  ng-href="#/login" >Login</a></li>
-							<li ng-if="header.user" ><a  ng-href="#/account" >Account</a></li>
-							<li ><a  ng-href="#/shop" >Shop</a></li>
-							<li ><a  ng-href="#/cart" >Cart</a></li>
-							<li ng-if="header.user"><a href="#/order">My Orders</a></li>
-							<li ng-if="header.user" ><a href="#/wishlist" >My Wishlist</a></li>
+							<li ng-if="!header.user" ><a  ng-href="/#!/register" >Join {{admin.title}}</a></li>
+							<li ng-if="!header.user" ><a  ng-href="/#!/login" >Login</a></li>
+							<li ng-if="header.user" ><a  ng-href="/#!/account" >Account</a></li>
+							<li ><a  ng-href="/#!/shop" >Shop</a></li>
+							<li ><a  ng-href="/#!/cart" >Cart</a></li>
+							<li ng-if="header.user"><a href="/#!/order">My Orders</a></li>
+							<li ng-if="header.user" ><a href="/#!/wishlist" >My Wishlist</a></li>
 							<li ng-if="header.user" ><logout></logout></li>
 						  </ul>
 						</div><!-- /.navbar-collapse -->

@@ -52,7 +52,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -67,7 +67,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -132,13 +132,13 @@
                           			<div class="item"> 
                             			<div class="item-img"> 
                             				<span class="bg-img"></span> 
-                            				<a href="#/product/{{product._id}}">
+                            				<a href="/#!/product/{{product._id}}">
                             					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
                           					</a> 
                         					</div> 
                         					<div class="item-data"> 
                         						<p> 
-                        							<a href="#/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
+                        							<a href="/#!/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
                       							</p> 
                     							</div> 
                           			</div>
@@ -217,13 +217,13 @@
 														<div class="item">
 															<div class="item-img">
 																<Span class="bg-img"></span>
-																<a href=#/product/{{prod._id}}  title="{{prod.name}}">	
+																<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
 																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
 																</a>
 															</div>
 															<div class="item-data">
 																<p>
-																	<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+																	<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
 																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
 																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
 																</p>
@@ -243,13 +243,13 @@
 														<div class="item">
 															<div class="item-img">
 																<Span class="bg-img"></span>
-																<a href=#/product/{{prod._id}}  title="{{prod.name}}">	
+																<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
 																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
 																</a>
 															</div>
 															<div class="item-data">
 																<p>
-																	<a href=#/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+																	<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
 																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
 																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
 																</p>

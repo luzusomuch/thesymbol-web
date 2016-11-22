@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-
+    <meta name="fragment" content="!">
     <meta name="viewport" content="width=device-width">
 
     <link href="styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -42,6 +42,7 @@
 </head>
 
 <body>
+    <script> window.prerenderReady = false; </script>
     <div growl></div>
     <div autoscroll="true" ng-view=""></div>
 
@@ -154,7 +155,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCptVIl-Ib0M8Q9pNQnHQiXOtRjm1gtyU" async defer></script>
     <script src="https://plus.google.com/js/client:platform.js"></script>
 
-
+    <script> window.prerenderReady = true; </script>
 </body>
 
 </html>

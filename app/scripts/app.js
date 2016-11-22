@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var myApp = angular
     .module('eCommerceUserApp', [
         'ngAnimate',
         'ngCookies',
@@ -27,8 +27,10 @@ angular
         'angular-growl',
         'slick'
     ])
-    .config(function(stripeProvider) {
+    .config(function(stripeProvider, $locationProvider) {
         stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
+        $locationProvider.html5Mode(false);
+        $locationProvider.hashPrefix('!');
     })
     .constant('DEBUG_MODE', /*DEBUG_MODE*/ true /*DEBUG_MODE*/ )
     .constant('VERSION_TAG', /*VERSION_TAG_START*/ new Date().getTime() /*VERSION_TAG_END*/ )
@@ -43,7 +45,7 @@ angular
         // 'endpoint': 'http://104.236.48.110:3000/api/v1',
         'endpoint': 'http://localhost:3000/api/v1',
         'dpath': 'http://www.thesymbol.store/#/',
-        'seller': 'http://seller.thesymbol.store/#/'
+        'seller': 'http://seller.thesymbol.store/#'
     })
     // Router
     .config(function($routeProvider) {
@@ -301,7 +303,6 @@ angular
     if (!window.gapi) {
         window.gapi = gapi;
     }
-
 }])
 .config(function(socialProvider) {
     //socialProvider.setLinkedInKey("75uycyp6us7n1l");

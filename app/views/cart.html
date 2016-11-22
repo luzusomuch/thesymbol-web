@@ -55,7 +55,7 @@
 							<p class="browse">
 								Browse the Shop to find popular sale items<br/>
 							</p>
-							<a href="#/" class="btn btn-primary">Shop Now </a>
+							<a href="/#!/" class="btn btn-primary">Shop Now </a>
 						</div>
 					</div>
 				</div>
@@ -90,8 +90,8 @@
 												</div>
 												<div class="col-lg-7 col-sm-7 col-xs-12 ">
 													<div class="cart_product_description">
-														<p><b><a ng-href="#/product/{{cat.product_id._id}}">{{cat.product_id.title}}</a></b></p>
-														<p>Sold by <a ng-href="#/shop/{{cat.product_id.created_by._id}}">{{cat.product_id.created_by.name}}</a></p>
+														<p><b><a ng-href="/#!/product/{{cat.product_id._id}}">{{cat.product_id.title}}</a></b></p>
+														<p>Sold by <a ng-href="/#!/shop/{{cat.product_id.created_by._id}}">{{cat.product_id.created_by.name}}</a></p>
 														<span>
 														<div ng-if="cat.product_type=='digital'">
 														<div class="item-option" ng-if=cat.selected_pricing.license.name>{{cat.selected_pricing.license.name}}
@@ -195,7 +195,7 @@
 										
 										</div>
 										<div class="panel-footer">
-											<a href="#/checkout" class="btn btn-success btn-block">Place Order</a>
+											<a href="/#!/checkout" class="btn btn-success btn-block">Place Order</a>
 										</div>
 									</div>
 								</div>
@@ -208,7 +208,7 @@
 							<div class="panel-body owl_pb" style="">
 								<div id="owl-demo">
 								  <div class="item" on-finish-render="ngRepeatFinishedcart1"  ng-repeat="rel in cart.best_offer | orderBy:'-created_at' | limitTo:8">
-								  <a ng-href=#/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="img-responsive" /></a>
+								  <a ng-href=/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="img-responsive" /></a>
 								  </div>
 								</div>
 							</div>

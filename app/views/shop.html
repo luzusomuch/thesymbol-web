@@ -14,7 +14,7 @@
 										<dl>
 											<dt>Shop</dt>
 											<dd>
-												<a href="#/shop">
+												<a href="/#!/shop">
 												<i class="fa fa-paper-plane" aria-hidden="true"></i>
 													Explore
 												</a>
@@ -29,7 +29,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -44,7 +44,7 @@
 												</a>
 											</dt>
 											<dd  ng-repeat="cate in category">
-											<a ng-href="#/search/category/{{cate._id}}">
+											<a ng-href="/#!/search/category/{{cate._id}}">
 												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
 												{{cate.name}}
 											</a>
@@ -75,13 +75,13 @@
 														<div class="row shop_detailed_images" style="min-height:65px">
 															<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4 shop_vi" ng-repeat="pro in shop.products" >
 																<div class="shop_view_img">
-																	<a href="#/product/{{pro._id}}"><img  ng-repeat="img in pro.images | limitTo:1"  style="height: 61px; width: 61px;" src="{{img.cdn.url}}" alt="img" class="img-responsive" /></a>
+																	<a href="/#!/product/{{pro._id}}"><img  ng-repeat="img in pro.images | limitTo:1"  style="height: 61px; width: 61px;" src="{{img.cdn.url}}" alt="img" class="img-responsive" /></a>
 																</div>
 															</div>
 															
 														</div>
 														<hr>
-														<a ng-href="#/shop/{{shop._id}}">more</a>
+														<a ng-href="/#!/shop/{{shop._id}}">more</a>
 													</div>
 												</div>
 												<!--/.Card-->

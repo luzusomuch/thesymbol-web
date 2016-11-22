@@ -54,7 +54,7 @@
 						<div class="product-details">
 							<h4>{{ProdC.product.name}}</h4>
 							<span class="smtitle">
-								{{"views.main.by" | translate}} <em class="primary"><a ng-href=#/shop/{{ProdC.product.seller_id}}>{{ProdC.product.seller_name}}</a></em>
+								{{"views.main.by" | translate}} <em class="primary"><a ng-href=/#!/shop/{{ProdC.product.seller_id}}>{{ProdC.product.seller_name}}</a></em>
 							</span>
 							<div class=mtbtop ng-if="ProdC.product.type=='normal'"><span>  {{"views.pd.Stock:" | translate}} {{ProdC.product.quantity}}</span> <span>  {{"views.pd.Weight:" | translate}} {{ProdC.product.shipping_details.weight}} {{ProdC.product.shipping_details.unit}}</div>
 							
@@ -162,7 +162,7 @@
 							<div class="share">
 								<div class="row">
 									<div class="col-xs-12">
-										<a href="javascript:void(0);" socialshare socialshare-provider="facebook" socialshare-text="Product Share" socialshare-hashtags="angularjs, angular-socialshare" socialshare-url="#/product/{{ProdC.product._id}}">
+										<a href="javascript:void(0);" socialshare socialshare-provider="facebook" socialshare-text="Product Share" socialshare-hashtags="angularjs, angular-socialshare" socialshare-url="/#!/product/{{ProdC.product._id}}">
 											<i class="fa fa-share col-xs-5">
 												<span  >Share</span>
 											</i>
@@ -208,7 +208,7 @@
 										<div class="row">
 												<div class="col-xs-4 more_store_col" style="" ng-repeat="ral in ProdC.shopproduct.product | limitTo:3">
 													<div class="ad_img">
-														<a ng-href="#/product/{{ral._id}}"><img style="" class="img-responsive" ng-repeat="img in ral.images | limitTo:1" ng-src="{{img.cdn.url}}"></a>
+														<a ng-href="/#!/product/{{ral._id}}"><img style="" class="img-responsive" ng-repeat="img in ral.images | limitTo:1" ng-src="{{img.cdn.url}}"></a>
 													</div>
 												</div>
 
@@ -216,7 +216,7 @@
 									</div>
 								</div>
 								<div class="panel-footer text-center">
-									<a href="#/shop/{{ProdC.shopproduct.seller._id}}">More</a>
+									<a href="/#!/shop/{{ProdC.shopproduct.seller._id}}">More</a>
 								</div>
 							</div>
 						</div>
@@ -226,7 +226,7 @@
 							<ul class="list-group">
 								
 								<li class="list-group-item" ng-repeat="cat in ProdC.product.categories | orderBy: 'created_at'"> 
-									<a ng-href=#/search/category/{{cat._id}}>More in<br/><b>{{cat.name}}</b> 
+									<a ng-href=/#!/search/category/{{cat._id}}>More in<br/><b>{{cat.name}}</b> 
 										<span class="icon pull-right">></span>
 									</a>
 								</li>
@@ -285,9 +285,9 @@
 						<!--<div class="item-hover text-center">
 							<button class="btn btn-default"><i class="fa fa-shopping-cart"></i>&nbsp; Add to cart</button>
 						</div>-->
-						<a ng-href=#/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="group list-group-image" width="250" height="250"  /></a>
+						<a ng-href=/#!/product/{{rel._id}} target=_self><img alt="" ng-src={{img.cdn.url}} ng-repeat="img in rel.images | limitTo:1" class="group list-group-image" width="250" height="250"  /></a>
 						<div class="caption">
-							<a ng-href="#/product/{{rel._id}}" title="{{rel.name}}"><p class="group inner list-group-item-text">
+							<a ng-href="/#!/product/{{rel._id}}" title="{{rel.name}}"><p class="group inner list-group-item-text">
 								{{rel.name}} <br>
 							</p></a>
 							<div class="row">

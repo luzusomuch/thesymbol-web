@@ -84,7 +84,7 @@
 							                  					</div> 
 							                  					<div class="item-data"> 
 							                  						<p> 
-							                  							<a href="#/product/{{product._id}}" title="{{product.title}}" class="ng-binding">{{product.title}}</a><br> <span class="ng-binding">${{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay}}</span> 
+							                  							<a href="/product/{{product._id}}" title="{{product.title}}" class="ng-binding">{{product.title}}</a><br> <span class="ng-binding">${{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay}}</span> 
 							                						</p> 
 							              						</div> 
 							                      			</div>
@@ -123,12 +123,12 @@
 			<div class="item" style="height:225px;margin-top:15px;margin-bottom:15px">
 				<div class="item-img">
 					<span class="bg-img"></span>
-					<a href=#/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">
+					<a href=/#!/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">
 					<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.product_id.images | limitTo:1" alt="img" width="100%" class="img-responsive" /></a>
 				</div>
 				<div class="item-data">
 					<p>
-						<a href=#/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">{{prod.product_id.name | cut:true:60:' ...'}}</a><br/>
+						<a href=/#!/product/{{prod.product_id._id}}  title="{{prod.product_id.name}}">{{prod.product_id.name | cut:true:60:' ...'}}</a><br/>
 						<span>${{prod.product_id.pricing.after_discount}}</span>
 						<a href="javascript:void(0);" ng-click="acc.deleteWishlist(prod)" style="color:#d14;"><span style="float:right"><i class="fa fa-heartbeat" aria-hidden="true"></i> Remove</span></a>
 					</p>
@@ -205,18 +205,18 @@
 													
 													<div class="col-lg-2 col-md-2 col-sm-2">
 														<div class="product_image text-center">
-															<a href="#/product/{{pro.id._id}}" style="color:#337ab7"><img width="100px" height="100px"	 src="{{img.cdn.url}}" ng-repeat="img in pro.id.images | limitTo:1" /></a>
+															<a href="/#!/product/{{pro.id._id}}" style="color:#337ab7"><img width="100px" height="100px"	 src="{{img.cdn.url}}" ng-repeat="img in pro.id.images | limitTo:1" /></a>
 														</div>
 													</div>
 													<div class="col-lg-3 col-md-3 col-sm-3">
 														<div class="product_descp">
-															<a href="#/product/{{pro.id._id}}" style="color:#337ab7">{{pro.id.title}} </a>
+															<a href="/#!/product/{{pro.id._id}}" style="color:#337ab7">{{pro.id.title}} </a>
 															<p class="small" ng-if="pro.id.type=='normal'" >
 																 {{pro.variant}} &nbsp; Qty: {{pro.quantity}} &nbsp;
-																<br>Seller: <a ng-href="#/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a> </p>
+																<br>Seller: <a ng-href="/#!/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a> </p>
 																<p class="small" ng-if="pro.id.type=='digital'" >
 																 {{pro.license.name}} &nbsp; 
-																<br>Seller: <a ng-href="#/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a></p>
+																<br>Seller: <a ng-href="/#!/shop/{{pro.shop_id._id}}">{{pro.shop_id.name}} </a></p>
 																<a data-backdrop="static"  data-toggle="modal" data-target="#return" data-keyboard="false"  ng-if="pro.id.type=='normal' && pro.tracking.status=='Delivered'"   ng-click="acc.returnShow(pro.id._id,oder._id)" href="" class="">Return</a>
 														</div>
 													</div>
@@ -235,7 +235,7 @@
 														</div>
 													</div>
 												<div class="col-lg-4 col-md-4 col-sm-4">
-													<a ng-if="pro.id.type=='normal' && pro.tracking.status!='Rejected'" href="#/track-product/{{pro.id._id}}/{{oder._id}}" class="btn btn-default track pull-right ">
+													<a ng-if="pro.id.type=='normal' && pro.tracking.status!='Rejected'" href="/#!/track-product/{{pro.id._id}}/{{oder._id}}" class="btn btn-default track pull-right ">
 														<i class="fa fa-map-marker map-tack-icon"></i>
 																&nbsp; Track
 														</a>
@@ -243,7 +243,7 @@
 
 														<a  ng-if="pro.id.type=='digital'" href="{{acc.download_url}}/users/order/digital-products/{{pro.id._id}}?dt={{pro.download_token}}" target="_blank" class="btn btn-info pull-right">Download</a>
 														
-														<a  href="#/review-product/{{pro.id._id}}/{{oder._id}}"  class="btn btn-default pull-right">Review</a>
+														<a  href="/#!/review-product/{{pro.id._id}}/{{oder._id}}"  class="btn btn-default pull-right">Review</a>
 													</div>
 												</div><hr>
 												
