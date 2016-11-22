@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search) {
+    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', 'Rating', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search, Rating) {
 
         var _this = this;
         this.$routeParams = $routeParams;
@@ -138,6 +138,31 @@ angular.module('eCommerceUserApp')
             });
         };
 
+        this.addReview = function () {
+            console.log(2);
+            if (sessionService.get('user') && angular.fromJson(sessionService.get('user'))._id) {
+                var CRating = new Rating.addReview({
+                    user: angular.fromJson(sessionService.get('user'))._id,
+                    seller: $routeParams.sid
+                });
+                
+                CRating.$get(function(data) {
+                    if (data.status == "success") {
+                        _this.success = true;
+                    }
+                    if (data.status == "fail") {
+                        $scope.header.pageLoading = false;
+                        _this.error = data;
+                    }
+                }, function(data) {
+                    if (data.status == "401") {
+                        sessionService.get("token");
+                    }
+                });
+            } else {
+                growl.error('Please login');
+            }
+        }
 
     }])
     .filter('productPrimeImageFilter', function() {

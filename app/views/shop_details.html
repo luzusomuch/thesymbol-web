@@ -23,249 +23,300 @@
 	min-height:130px !important;
 }
 </style>
+
 <!--outer-starts-->
-		<div class="outer">
-			<div class="index-outer">
-				<header-bar></header-bar>
-				<div class="news-feed">
-						<div class="container">
-							<div class="row">
-								<!--news-feed-left-->
-								<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;">
-									<div class="news-feed-left">
-										<dl>
-											<dt>Shop</dt>
-											<dd>
-												<a href="#shop">
-												<i class="fa fa-paper-plane" aria-hidden="true"></i>
-													Explore
-												</a>
-											</dd>
-											
-											
-										</dl>
-										<!--phone-view-->
-										<dl class="hidden-lg">
-											<dt>
-												<a href="">
-													Browse
-												</a>
-											</dt>
-											<dd  ng-repeat="cate in category">
-											<a ng-href="/#!/search/category/{{cate._id}}">
-												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
-												{{cate.name}}
-											</a>
-											</dd>
-											
-										</dl>
-										<!--web and tab view-->
-										<dl class="hidden-xs hidden-md hidden-sm" id="trending">
-											<dt>
-												<a href="">
-													Browse
-												</a>
-											</dt>
-											<dd  ng-repeat="cate in category">
-											<a ng-href="/#!/search/category/{{cate._id}}">
-												<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
-												{{cate.name}}
-											</a>
-											</dd>
-											
-										</dl>
+<div class="outer">
+	<div class="index-outer">
+		<header-bar></header-bar>
+		<div class="news-feed">
+			<div class="container">
+				<div class="row">
+					<!--news-feed-left-->
+					<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;">
+						<div class="news-feed-left">
+							<dl>
+								<dt>Shop</dt>
+								<dd>
+									<a href="#shop">
+									<i class="fa fa-paper-plane" aria-hidden="true"></i>
+										Explore
+									</a>
+								</dd>
+							</dl>
+							<!--phone-view-->
+							<dl class="hidden-lg">
+								<dt>
+									<a href="">Browse</a>
+								</dt>
+								<dd  ng-repeat="cate in category">
+								<a ng-href="/#!/search/category/{{cate._id}}">
+									<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+									{{cate.name}}
+								</a>
+								</dd>
+							</dl>
+							<!--web and tab view-->
+							<dl class="hidden-xs hidden-md hidden-sm" id="trending">
+								<dt>
+									<a href="">
+										Browse
+									</a>
+								</dt>
+								<dd  ng-repeat="cate in category">
+								<a ng-href="/#!/search/category/{{cate._id}}">
+									<img src="{{cate.icon.cdn.url}}" style="width:15px;" />
+									{{cate.name}}
+								</a>
+								</dd>
+								
+							</dl>
+						</div>
+					</div>
+
+					<!--news-feed-center-->
+					<div class="col-lg-9 col-sm-9 col-xs-12">
+						<div class="shop-cover-outer">
+							<div class="shop-cover-inner">
+								<div class="shop-cover-image">
+									<img src="{{shopC.seller.banner.cdn.url}}" ng-if=shopC.seller.banner.cdn.url  alt="cover-banner" style="width: 962px; height: 274px;" class="img-responsive"/>
+									<img ng-if=!shopC.seller.banner.cdn.url src={{admin.overall_banner.cdn.url}} style="width: 962px; height: 274px;"   alt="cover-banner" class="img-responsive"/>
+									<div class="image-detailed">
+										<div class="row">
+											<div class="col-lg-2 col-xs-5">
+												<div class="info-img">
+													<img ng-if="!shopC.seller.logo" ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shopC.seller.name | limitTo:1}}_7.png"  alt="info-img" class="img-responsive"  />
+													<img  ng-if="shopC.seller.logo" src={{shopC.seller.logo.cdn.url}}  alt="info-img" class="img-responsive"  />
+												</div>
+											</div>
+											<div class="col-lg-6 col-xs-12">
+												<div class="info-img-description">
+													<h3>{{shopC.seller.name}}</h3>
+														<small>{{shopC.seller.email}}</small><br/>
+													<em>Phone: {{shopC.seller.phone}}</em>
+													
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-
-
-
-								<!--news-feed-center-->
-								<div class="col-lg-9 col-sm-9 col-xs-12">
-
-									<div class="shop-cover-outer">
-										<div class="shop-cover-inner">
-											<div class="shop-cover-image">
-												<img src="{{shopC.seller.banner.cdn.url}}" ng-if=shopC.seller.banner.cdn.url  alt="cover-banner" style="width: 962px; height: 274px;" class="img-responsive"/>
-												<img ng-if=!shopC.seller.banner.cdn.url src={{admin.overall_banner.cdn.url}} style="width: 962px; height: 274px;"   alt="cover-banner" class="img-responsive"/>
-												<div class="image-detailed">
-													<div class="row">
-														<div class="col-lg-2 col-xs-5">
-															<div class="info-img">
-																<img ng-if="!shopC.seller.logo" ng-src="https://kartrocket-res.cloudinary.com/image/fetch/w_169,h_169,c_fit,g_center,r_3,f_auto/https:/nozzle.s3-ap-southeast-1.amazonaws.com/default-shop-logo/{{shopC.seller.name | limitTo:1}}_7.png"  alt="info-img" class="img-responsive"  />
-																<img  ng-if="shopC.seller.logo" src={{shopC.seller.logo.cdn.url}}  alt="info-img" class="img-responsive"  />
-															</div>
-														</div>
-														<div class="col-lg-6 col-xs-12">
-															<div class="info-img-description">
-																<h3>{{shopC.seller.name}}</h3>
-																	<small>{{shopC.seller.email}}</small><br/>
-																<em>Phone: {{shopC.seller.phone}}</em>
-																
-															</div>
-														</div>
-														<!--<div class="col-lg-4 col-xs-12">
-															<div class="info-details">
-																<div class="btn-group text-center">
-																	<button type="button" class="btn btn-default">Follow Store</button>
-																	<button type="button" class="btn btn-default">Send Message</button>
-																</div>
-															</div>
-														</div>-->
-													</div>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-
-									<!-- prime production -->
-									<div class="panel panel-default">
-	                  <div class="panel-heading">
-	                    <h3 class="panel-title">Prime Products</h3>
-	                  </div>
-                    <div class="panel-body">
-                      <div class="slider-products">
-                        <div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
-                          <div class="owl-wrapper-outer">
-                          	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
-                          		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
-                          			<div class="item"> 
-                            			<div class="item-img"> 
-                            				<span class="bg-img"></span> 
-                            				<a href="/#!/product/{{product._id}}">
-                            					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
-                          					</a> 
-                        					</div> 
-                        					<div class="item-data"> 
-                        						<p> 
-                        							<a href="/#!/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
-                      							</p> 
-                    							</div> 
-                          			</div>
-                        			</div>
-                          	</slick>
-                    			</div>
-                      	</div>
-                  		</div>
-                		</div>
-                	</div>
-									<!-- prime production -->
-
-									<!-- old filter -->
-									<!-- <div class="user-actions">
-										<div class="user-action-inner">
-											<div class="row nav nav-tabs">
-												<div class="col-lg-2">
-													<a href="" data-toggle="tab">Products <span>{{shopC.length}}</span></a>
-												</div>
-												<div class="col-lg-2 pull-right" >
-													<select class="form-control" ng-model=sortBy>
-														<option value="">--sort--
-														<option value=created_at>Sort by newness
-														<option value=pricing.after_discount>Sort by price: low to high
-														<option value=-pricing.after_discount>Sort by price: high to low</select>
-												</div>
-											</div>
-										</div>
-									</div> -->
-									<!-- old filter -->
-
-									<!-- search and filter -->
-									<div class="panel panel-default">
-                    <div class="panel-body">
-                      <h4>PRODUCTS  <span>{{shopC.length}}</span></h4>
-                      <hr>
-                      <div class="row search-line">
-                        <div class="col-sm-8">
-                          <div class="row">
-                            <div class="col-sm-8">
-                            	<input type="text" class="form-control" name="productName" ng-model="productName" placeholder="Product name">
-                          	</div>
-                            <div class="col-sm-4">
-                            	<select class="form-control" ng-model="shopC.category">
-                            		<option value="">All Category</option>
-                            		<option ng-repeat="cat in shopC.categories" value="{{cat._id}}">{{cat.name}}</option>
-                          		</select>
-                          	</div>
-                            <!-- <div class="col-sm-4"><select class="form-control"><option>All Price</option></select></div> -->
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                         	<div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6">
-	                            <select class="form-control" ng-model="sortBy">
-	                            	<option value="">--Sort--
-																<option value=created_at>Sort by newness
-																<option value=pricing.after_discount>Sort by price: low to high
-																<option value=-pricing.after_discount>Sort by price: high to low</select>
-	                          	</select>
-                          	</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-	                </div>
-	                <!-- search and filter -->
-
-								 	<div class="tab-content">
-										<div id="menu3" class=" tab-pane fade in active">
-	                		<!-- without search -->
-										 	<div ng-show="!shopC.isSearch" class="container-fluid" style="padding:0px;">
-										    <div class="row">
-													<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
-														<div class="item">
-															<div class="item-img">
-																<Span class="bg-img"></span>
-																<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
-																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
-																</a>
-															</div>
-															<div class="item-data">
-																<p>
-																	<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
-																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
-																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
-																</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
-												<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
-											</div>
-											<!-- without search -->
-
-											<!-- search -->
-											<div ng-show="shopC.isSearch" class="container-fluid" style="padding:0px;">
-										    <div class="row">
-													<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.searchData.items | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
-														<div class="item">
-															<div class="item-img">
-																<Span class="bg-img"></span>
-																<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
-																	<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
-																</a>
-															</div>
-															<div class="item-data">
-																<p>
-																	<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
-																	<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
-																	<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
-																</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<button ng-if="shopC.searchData.totalItem > shopC.searchData.items.length" ng-click="shopC.searchProduct(productName, shopC.category, shopC.$routeParams.sid)" class="loadmore btn-block" type="button">Load More</button>
-												<button ng-if="shopC.searchData.items.length === 0" class="btn-block loadmore nomore " type="button">No product found</button>
-											</div>
-											<!-- search -->
-										</div>
-									</div>
-								</div><!--col-lg-9 col-sm-9 col-xs-12-->
 							</div>
-						</div><!--container-->
-					</div><!--news-feed-->
-			
-			</div><!--index-outer-->
+						</div>
+
+						<!-- prime production -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Prime Products</h3>
+							</div>
+				            <div class="panel-body">
+								<div class="slider-products">
+									<div id="owl-products" class="owl-carousel owl-theme" style="display: block; opacity: 1;">
+										<div class="owl-wrapper-outer">
+										  	<slick infinite=false speed=300 slides-to-show=4 slides-to-scroll=4>
+										  		<div ng-repeat="product in shopC.primeProducts" class="owl-item" style="width: 204px;">
+										  			<div class="item"> 
+														<div class="item-img"> 
+										    				<span class="bg-img"></span> 
+										    				<a href="/#!/product/{{product._id}}">
+										    					<img alt="" src="{{product.images | productPrimeImageFilter}}" width="100%">
+										  					</a> 
+														</div> 
+														<div class="item-data"> 
+															<p> 
+																<a href="/#!/product/{{product._id}}" title="{{product.name}}" class="ng-binding">{{product.name}}</a><br> <span class="ng-binding">{{product.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span> 
+															</p> 
+														</div> 
+										  			</div>
+												</div>
+										  	</slick>
+										</div>
+									</div>
+								</div>
+				        	</div>
+    					</div>
+						<!-- prime production -->
+
+						<!-- search and filter -->
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h4>PRODUCTS  <span>{{shopC.length}}</span></h4>
+								<hr>
+								<div class="row search-line">
+									<div class="col-sm-8">
+										<div class="row">
+											<div class="col-sm-8">
+												<input type="text" class="form-control" name="productName" ng-model="productName" placeholder="Product name">
+											</div>
+											<div class="col-sm-4">
+												<select class="form-control" ng-model="shopC.category">
+													<option value="">All Category</option>
+													<option ng-repeat="cat in shopC.categories" value="{{cat._id}}">{{cat.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="row">
+											<div class="col-sm-6"></div>
+											<div class="col-sm-6">
+												<select class="form-control" ng-model="sortBy">
+													<option value="">--Sort--</option>
+													<option value=created_at>Sort by newness</option>
+													<option value=pricing.after_discount>Sort by price: low to high</option>
+													<option value=-pricing.after_discount>Sort by price: high to low</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				        </div>
+				        <!-- search and filter -->
+
+					 	<div class="tab-content">
+							<div id="menu3" class=" tab-pane fade in active">
+        					<!-- without search -->
+							 	<div ng-show="!shopC.isSearch" class="container-fluid" style="padding:0px;">
+							    	<div class="row">
+										<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.sellerp | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+											<div class="item">
+												<div class="item-img">
+													<span class="bg-img"></span>
+													<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
+														<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
+													</a>
+												</div>
+												<div class="item-data">
+													<p>
+														<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+														<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
+														<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button ng-if="shopC.length > shopC.sellerp.length && shopC.length!=shopC.sellerp.length" ng-click="shopC.shopDetailsPage(shopC.sellerp.length)" class="loadmore btn-block" type="button">Load More</button>
+									<button  ng-if="shopC.length == shopC.sellerp.length" class="btn-block loadmore nomore " type="button">No product found</button>
+								</div>
+								<!-- without search -->
+
+								<!-- search -->
+								<div ng-show="shopC.isSearch" class="container-fluid" style="padding:0px;">
+							    	<div class="row">
+										<div class="col-lg-3 col-sm-3 col-xs-12" style="padding:0px;" ng-repeat="prod in shopC.searchData.items | orderBy:sortBy " on-finish-render=ngRepeatImagePreview>
+											<div class="item">
+												<div class="item-img">
+													<span class="bg-img"></span>
+													<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">	
+														<img title="{{img.cdn.url}}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8gMvvgxO7QVPoc2ntVOfQGTFAgchzh1YIJmjSLV75YgnN_NpAQ" ng-repeat="img in prod.images | limitTo:1" alt="img" width="100%" class="img-responsive" />
+													</a>
+												</div>
+												<div class="item-data">
+													<p>
+														<a href=/#!/product/{{prod._id}}  title="{{prod.name}}">{{prod.name | cut:true:60:' ...'}}</a><br/>
+														<span ng-show="!prod.primesubscription">{{prod.pricing.after_discount | currencyTranslate: locationCurrency}}</span>
+														<span ng-show="prod.primesubscription">{{prod.pricing.after_discount | productPrimeExtraPay: primesubscriptionData.extra_pay | currencyTranslate: locationCurrency}}</span>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button ng-if="shopC.searchData.totalItem > shopC.searchData.items.length" ng-click="shopC.searchProduct(productName, shopC.category, shopC.$routeParams.sid)" class="loadmore btn-block" type="button">Load More</button>
+									<button ng-if="shopC.searchData.items.length === 0" class="btn-block loadmore nomore " type="button">No product found</button>
+								</div>
+								<!-- search -->
+							</div>
+						</div><!-- tab-content-->
+						<!-- start rate -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Reviews</h3>
+							</div>
+                    		<div class="panel-body">
+		                        <div class="star-review">
+		                            <i class="fa fa-star active"></i>
+		                            <i class="fa fa-star active"></i>
+		                            <i class="fa fa-star active"></i>
+		                            <i class="fa fa-star active"></i>
+		                            <i class="fa fa-star"></i>
+		                            (4)
+		                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="float:right">Rate Seller</button>
+		                        </div>
+                        		
+		                        <!-- Modal -->
+		                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog  modal-sm" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Add Review</h4>
+											</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label>Description</label>
+												<textarea class="form-control" cols="4"></textarea>
+											</div>
+											<div class="form-group">
+												<label>Your rating for this product</label>
+												<div class="star-review">
+												    <i class="fa fa-star active"></i>
+												    <i class="fa fa-star active"></i>
+												    <i class="fa fa-star active"></i>
+												    <i class="fa fa-star active"></i>
+												    <i class="fa fa-star"></i>
+												</div>
+											</div>
+											<button type="button" class="btn btn-primary" ng-click="shopC.addReview()">Add feedback</button>
+										</div>
+
+										</div>
+									</div>
+		                        </div>
+
+				                <ul class="list-reviews">
+				                    <li>
+				                        <div class="media"> 
+				                            <div class="media-left"> 
+				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
+				                                </a> 
+				                            </div> 
+				                            <div class="media-body"> 
+				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
+				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
+				                            </div> 
+				                        </div>
+				                    </li>
+				                    <li>
+				                        <div class="media"> 
+				                            <div class="media-left"> 
+				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
+				                                </a> 
+				                            </div> 
+				                            <div class="media-body"> 
+				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
+				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
+				                            </div> 
+				                        </div>
+				                    </li>
+				                    <li>
+				                        <div class="media"> 
+				                            <div class="media-left"> 
+				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
+				                                </a> 
+				                            </div> 
+				                            <div class="media-body"> 
+				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
+				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
+				                            </div> 
+				                        </div>
+				                    </li>
+				                </ul>
+				            </div>
+				        </div>
+				        <!-- rate -->
+					</div><!--col-lg-9 col-sm-9 col-xs-12-->
+				</div>
+			</div><!--container-->
+		</div><!--news-feed-->
+	</div><!--index-outer-->
+</div><!--outer-->
