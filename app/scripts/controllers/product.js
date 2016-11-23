@@ -284,6 +284,7 @@ angular.module('eCommerceUserApp')
         			if (resp.data.status==='success') {
         				this.submitted = false;
         				this.commentText = null;
+        				resp.data.response.ownerId = this.currentUser;
         				this.comment.items.push(resp.data.response);
         				this.comment.totalItem+=1;
         			} else {
@@ -292,6 +293,26 @@ angular.module('eCommerceUserApp')
         		});
         	} else {
         		alert('Check your data again.');
+        	}
+        };
+
+        this.deleteComment = (comment) => {
+        	if (this.currentUser && this.currentUser._id.toString()===comment.ownerId._id.toString()) {
+        		CommentService.delete(comment._id).then(resp => {
+        			if (resp.data.status==='success') {
+        				var index = _.findIndex(this.comment.items, (item) => {
+        					return item._id.toString()===comment._id.toString();
+        				});
+        				if (index !== -1) {
+        					this.comment.items.splice(index, 1);
+        					this.comment.totalItem--;
+        				}
+        			} else {
+        				alert('Error when remove comment');
+        			}
+        		});
+        	} else {
+        		alert('Not allow to remove comment');
         	}
         };
         // end comment section

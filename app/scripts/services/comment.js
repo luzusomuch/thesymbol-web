@@ -26,7 +26,11 @@ angular.module('eCommerceUserApp')
   		return $http.put(endpoint + `/comment/${id}`, data);
   	},
   	delete: (id) => {
-  		return $http.delete(endpoint + `/comments/${id}`);
+  		return $http.delete(endpoint + `/comments/${id}`, {
+        headers: {
+          Authorization: sessionService.get('user_token')
+        }
+      });
   	}
 	}
 }]);

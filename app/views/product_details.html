@@ -65,9 +65,14 @@
 									<div class="media-body">
 										<h4 class="media-heading"><a href="#">{{comment.ownerId.name}}</a></h4>
 										{{comment.text}}
+										<br>
+										<a ng-show="ProdC.currentUser._id==comment.ownerId._id" href="javascript:void(0)" ng-click="ProdC.deleteComment(comment)">
+											<i class="fa fa-trash-o"></i>
+										</a>
 									</div>
 								</div>
 							</li>
+							<li ng-show="ProdC.comment.items.length < ProdC.comment.totalItem">Load more</li>
 						</ul>
 						<form ng-show="ProdC.currentUser._id" ng-submit="ProdC.postComment(commentForm)" name="commentForm" novalidate>
 							<div class="form-group">
