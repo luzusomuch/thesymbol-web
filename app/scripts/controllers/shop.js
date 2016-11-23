@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', 'Rating', 'growl', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search, Rating, growl) {
+    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', 'Rating', 'growl', '$anchorScroll', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search, Rating, growl, $anchorScroll) {
 
         var _this = this;
         this.$routeParams = $routeParams;
@@ -84,9 +84,6 @@ angular.module('eCommerceUserApp')
                     }
                 })
         }
-
-
-        
 
         if ($routeParams.sid != undefined)
             this.shopDetails();
@@ -174,7 +171,7 @@ angular.module('eCommerceUserApp')
                 },function(data) {
                 if (data.status == "success") {
                     _this.reviews = data.response.reviews;
-                    console.log(data.response.reviews);
+                    // console.log(data.response.reviews);
                     var total = 0;
                     var count = 0;
                     Object.keys(data.response.reviews).map(function(objectKey, index) {
@@ -196,6 +193,11 @@ angular.module('eCommerceUserApp')
             })
         }
         this.getReview();
+
+        $scope.scrollTo = function(id) {
+            $location.hash(id);
+            $anchorScroll();
+        }
 
     }])
     .filter('productPrimeImageFilter', function() {

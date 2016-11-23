@@ -77,7 +77,6 @@
 .star-review {
     font-size: 16px;
     color: #aeabab;
-    margin-bottom: 5px;
     cursor: pointer;
 }
 .star-review i {
@@ -85,6 +84,32 @@
 }
 .star-review i.active {
     color: #f4a806;
+}
+.star-review-top {
+    line-height: 108px;
+    float: right;
+}
+.star-review-top button {
+    margin-left: 5px;
+}
+.star-review-bottom {
+    border-bottom: 1px solid #ddd;
+    line-height: 30px;
+    position: relative;
+    margin-bottom: 15px;
+}
+.star-review-bottom .btn-rate {
+    position: absolute;
+    right: 0;
+    margin-top: -9px;
+}
+.star-review-product {
+    position: relative;
+}
+.star-review-product button {
+    position: absolute;
+    right: 0;
+    margin-top: -9px;
 }
 .modal-content {
     box-shadow: none;

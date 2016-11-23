@@ -96,6 +96,17 @@
 													
 												</div>
 											</div>
+											<div class="col-lg-4 col-xs-12">
+												<div class="star-review star-review-top">
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
+						                            <a ng-click="scrollTo('Reviews')">({{shopC.reviewsLength}})</a>
+						                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
+						                        </div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -228,19 +239,19 @@
 							</div>
 						</div><!-- tab-content-->
 						<!-- start rate -->
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="Reviews">
 							<div class="panel-heading">
 								<h3 class="panel-title">Reviews</h3>
 							</div>
                     		<div class="panel-body">
-		                        <div class="star-review">
+		                        <div class="star-review star-review-bottom">
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
 		                            ({{shopC.reviewsLength}})
-		                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="float:right">Rate Seller</button>
+		                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
 		                        </div>
                         		
 		                        <!-- Modal -->
@@ -278,8 +289,7 @@
 				                        <div class="media"> 
 				                            <div class="media-left"> 
 				                                <a href="#"> 
-				                                	<img ng-hide="review.user.image" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" >
-				                                	<img ng-show="review.user.image" alt="64x64" class="media-object" data-src="holder.js/64x64" ng-src="{{review.user.image.url}}">
+				                                	<img src="{{review.user | avatarUrl}}">
 				                                </a>
 				                            </div> 
 				                            <div class="media-body">
