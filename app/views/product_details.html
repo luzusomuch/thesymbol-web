@@ -47,6 +47,42 @@
 						</span>
 					</p>
 				</div>
+
+				<!-- comment -->
+				<div class="comment panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Comments ({{ProdC.comment.totalItem}})</h3>
+					</div>
+					<div class="panel-body">
+						<ul class="list-reviews">
+							<li ng-repeat="comment in ProdC.comment.items">
+								<div class="media">
+									<div class="media-left">
+										<a href="#">
+											<img alt="{{comment.ownerId.name}}" src="" class="media-object">
+										</a>
+									</div>
+									<div class="media-body">
+										<h4 class="media-heading"><a href="#">{{comment.ownerId.name}}</a></h4>
+										{{comment.text}}
+									</div>
+								</div>
+							</li>
+						</ul>
+						<form ng-show="ProdC.currentUser._id" ng-submit="ProdC.postComment(commentForm)" name="commentForm" novalidate>
+							<div class="form-group">
+								<textarea class="form-control" name="commentText" ng-model="ProdC.commentText" required placeholder="{{'views.pd.Leave your message' | translate}}"></textarea>
+
+								<span style="color: red" ng-show="ProdC.submitted && commentForm.commentText.$error.required">{{'views.pd.Message is required' | translate}}</span>
+							</div>
+							<div class="form-group">
+								<button type="submit">Send</button>
+							</div>
+						</form>
+						<p ng-show="!ProdC.currentUser._id">Please login to leave your comment</p>
+					</div>
+				</div>
+				<!-- comment -->
 			</div>
 			<div class="col-lg-4 col-sm-4 col-xs-12 firstadd_div">
 				<div class="row">
