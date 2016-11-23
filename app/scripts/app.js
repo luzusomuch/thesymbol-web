@@ -47,7 +47,7 @@ var myApp = angular
 
         // testing server
         'endpoint': 'http://104.236.38.133:3000/api/v1',
-        
+
         // local
         // 'endpoint': 'http://localhost:3000/api/v1',
         'dpath': 'http://www.thesymbol.store/#/',
@@ -232,7 +232,7 @@ var myApp = angular
 
 
 .run(['$rootScope', '$location', 'sessionService', '$http', 'endpoint', 'growl', function($rootScope, $location, sessionService, $http, endpoint, growl) {
-    $rootScope.getCurrency = (lng, lat) => {
+    $rootScope.getCurrency = function(lng, lat) {
         if (lng && lat) {
             delete $http.defaults.headers.common.Authorization;
             $http.get(
@@ -243,9 +243,9 @@ var myApp = angular
                 }}
             ).then(response => {
                 if (response.data && response.data.results[0] && response.data.results[0].address_components) {
-                    _.each(response.data.results[0].address_components, (item) => {
+                    _.each(response.data.results[0].address_components, function(item) {
                         if (item.types[0]==='country') {
-                            $http.get(endpoint+'/currencies/get-by-country-code', {params: {countryCode: item.short_name}}).then(resp => {
+                            $http.get(endpoint+'/currencies/get-by-country-code', {params: {countryCode: item.short_name}}).then(function(resp) {
                                 if (resp.data.status==='success') {
                                     $rootScope.locationCurrency = resp.data.response;
                                 } else {
@@ -283,13 +283,13 @@ var myApp = angular
         }
 
         if (!$rootScope.currentLocation) {
-            navigator.geolocation.getCurrentPosition(data => {
+            navigator.geolocation.getCurrentPosition(function(data) {
                 $rootScope.currentLocation = {
                     lat: data.coords.latitude,
                     lng: data.coords.longitude
                 };
                 $rootScope.getCurrency($rootScope.currentLocation.lng, $rootScope.currentLocation.lat);
-            }, err => {
+            }, function(err) {
                 growl.error('Error when tracking your location');
             });
         } else {
@@ -297,7 +297,7 @@ var myApp = angular
         }
     });
 
-    gapi.load('auth2:client', () => {
+    gapi.load('auth2:client', function() {
         gapi.auth2.init({
             // apiKey: 'AIzaSyBCptVIl-Ib0M8Q9pNQnHQiXOtRjm1gtyU',
             client_id: '1053545390049-kh8pd75t6g8tkg1lti7j08dg3o4a6ghi.apps.googleusercontent.com',
@@ -346,8 +346,8 @@ var myApp = angular
     growlProvider.globalTimeToLive(3000);
     growlProvider.globalDisableCountDown(true);
 })
-.filter('currencyTranslate', () => {
-    return (price, currency) => {
+.filter('currencyTranslate', function() {
+    return function(price, currency) {
         if (currency) {
             price = price*currency.rate;
             price += currency.icon
@@ -355,8 +355,8 @@ var myApp = angular
         return price;
     };
 })
-.filter('avatarUrl', () => {
-    return (owner) => {
+.filter('avatarUrl', function() {
+    return function(owner) {
         let url = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=';
         if (owner && owner.image) {
             url = owner.image.url;
