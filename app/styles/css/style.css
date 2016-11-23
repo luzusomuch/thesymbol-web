@@ -78,6 +78,10 @@
     font-size: 16px;
     color: #aeabab;
     margin-bottom: 5px;
+    cursor: pointer;
+}
+.star-review i {
+    cursor: pointer;
 }
 .star-review i.active {
     color: #f4a806;
