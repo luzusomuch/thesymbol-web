@@ -316,6 +316,12 @@ angular.module('eCommerceUserApp')
         	}
         };
         // end comment section
+
+        // like section
+        this.like = () => {
+        	this.likedProduct = !this.likedProduct;
+        }
+        // end like section
         
         if ($routeParams.pid != undefined){
           this.productDetails(); 

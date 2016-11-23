@@ -145,6 +145,13 @@
 							</div>
 							<div class="add_cart" ng-if="ProdC.product.quantity!=0 ">
 								<button type="submit" class="btn btn-success btn-block hvr-buzz-out">Add to Cart</button>
+
+								<button class="btn btn-block" type="button" ng-click="ProdC.addWishlist()" ng-hide="ProdC.wishlisted">
+									<i class="fa fa-heart-o"></i> Add to Wishlist
+								</button>
+								<button class="btn btn-block" type="button" ng-show="ProdC.wishlisted" style="color:#F44336">
+									<i class="fa fa-heart"></i>Wishlisted
+								</button>
 							</div>
 							<div style="margin-top:15px;" class="alert btn-danger" ng-if="ProdC.product.quantity==0  || ProdC.cart.product_variant==0"><strong> Sorry! Out of Stock</strong></div>
 							</div>
@@ -203,22 +210,14 @@
 							<div class="share">
 								<div class="row">
 									<div class="col-xs-12">
-										<a href="javascript:void(0);" socialshare socialshare-provider="facebook" socialshare-text="Product Share" socialshare-hashtags="angularjs, angular-socialshare" socialshare-url="/#!/product/{{ProdC.product._id}}">
-											<i class="fa fa-share col-xs-5">
+										<a class="col-xs-6" href="javascript:void(0);" socialshare socialshare-provider="facebook" socialshare-text="Product Share" socialshare-hashtags="angularjs, angular-socialshare" socialshare-url="/#!/product/{{ProdC.product._id}}">
+											<i class="fa fa-share">
 												<span  >Share</span>
 											</i>
 										</a>
 										
-										<a href="javascript:void(0);" ng-click="ProdC.addWishlist()" ng-hide="ProdC.wishlisted">
-											<i class="fa fa-heart-o col-xs-7">
-												<span>Add to Wishlist</span>
-											</i>
-										</a>
-
-										<a href="javascript:void(0);" ng-show="ProdC.wishlisted" style="color:#F44336">
-											<i class="fa fa-heart col-xs-7">
-												<span> Wishlisted</span>
-											</i>
+										<a class="col-xs-6" href="javascript:void(0)" ng-click="ProdC.like()" ng-class="{'liked': ProdC.likedProduct}">
+											<i class="fa fa-heart"></i> Like
 										</a>
 									</div>
 								</div>
