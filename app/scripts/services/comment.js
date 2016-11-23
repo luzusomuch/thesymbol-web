@@ -12,14 +12,15 @@ angular.module('eCommerceUserApp')
   return {
     findAllByType: (id, type, params) => {
     	return $http.get(endpoint + `/comments/${id}/${type}`, {
-    		params: params,
-    		headers: {
-	    		Authorization: sessionService.get('user_token')
-	    	}
+    		params: params
     	});
     },
   	create: (data) => {
-  		return $http.post(endpoint + `/comments`, data);
+  		return $http.post(endpoint + `/comments`, data, {
+        headers: {
+          Authorization: sessionService.get('user_token')
+        }
+      })
   	},
   	update: (id, data) => {
   		return $http.put(endpoint + `/comment/${id}`, data);
