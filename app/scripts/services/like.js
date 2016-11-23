@@ -11,7 +11,7 @@ angular.module('eCommerceUserApp')
 .factory('LikeService', ['$http', 'endpoint', 'sessionService', function($http, endpoint, sessionService) {
   return {
     check: (id, type) => {
-    	return $http.get(endpoint + `/likes/${id}/${type}`);
+    	return $http.get(endpoint + `/likes/${id}/${type}/check`);
     },
   	like: (data) => {
   		return $http.post(endpoint + `/likes`, data, {
