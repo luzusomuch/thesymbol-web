@@ -408,7 +408,7 @@ angular.module('eCommerceUserApp')
         };
 
         this.checkLikedProduct = function() {
-            LikeService.check($routeParams.pid, 'Product').then(resp => {
+            LikeService.check($routeParams.pid, 'Product').then(function(resp) {
                 if (resp.data.status==='success') {
                     _this.likedProduct = resp.data.response.liked;
                 }
