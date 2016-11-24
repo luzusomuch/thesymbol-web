@@ -77,14 +77,14 @@ module.exports = function (grunt) {
         // livereload: 35729
 
         // test server env
-        // port: 9200,
-        // hostname: '104.236.38.133',
-        // livereload: 35729
+        port: 9200,
+        hostname: '104.236.38.133',
+        livereload: 35729
 
         // development env
-        port: 9200,
-        hostname: 'localhost',
-        livereload: 35729
+        // port: 9200,
+        // hostname: 'localhost',
+        // livereload: 35729
       },
       livereload: {
         options: {
