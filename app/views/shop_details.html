@@ -96,6 +96,17 @@
 													
 												</div>
 											</div>
+											<div class="col-lg-4 col-xs-12">
+												<div class="star-review star-review-top">
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
+						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
+						                            <a ng-click="scrollTo('Reviews')">({{shopC.reviewsLength}})</a>
+						                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
+						                        </div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -228,19 +239,19 @@
 							</div>
 						</div><!-- tab-content-->
 						<!-- start rate -->
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="Reviews">
 							<div class="panel-heading">
 								<h3 class="panel-title">Reviews</h3>
 							</div>
                     		<div class="panel-body">
-		                        <div class="star-review">
-		                            <i class="fa fa-star active"></i>
-		                            <i class="fa fa-star active"></i>
-		                            <i class="fa fa-star active"></i>
-		                            <i class="fa fa-star active"></i>
-		                            <i class="fa fa-star"></i>
-		                            (4)
-		                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="float:right">Rate Seller</button>
+		                        <div class="star-review star-review-bottom">
+		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
+		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
+		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
+		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
+		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
+		                            ({{shopC.reviewsLength}})
+		                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
 		                        </div>
                         		
 		                        <!-- Modal -->
@@ -254,16 +265,16 @@
 										<div class="modal-body">
 											<div class="form-group">
 												<label>Description</label>
-												<textarea class="form-control" cols="4"></textarea>
+												<textarea class="form-control" cols="4" ng-model="comment"></textarea>
 											</div>
 											<div class="form-group">
 												<label>Your rating for this product</label>
 												<div class="star-review">
-												    <i class="fa fa-star active"></i>
-												    <i class="fa fa-star active"></i>
-												    <i class="fa fa-star active"></i>
-												    <i class="fa fa-star active"></i>
-												    <i class="fa fa-star"></i>
+												    <i class="fa fa-star" ng-class="{'active': stars>=1}" ng-click="stars = 1"></i>
+												    <i class="fa fa-star" ng-class="{'active': stars>=2}" ng-click="stars = 2"></i>
+												    <i class="fa fa-star" ng-class="{'active': stars>=3}" ng-click="stars = 3"></i>
+												    <i class="fa fa-star" ng-class="{'active': stars>=4}" ng-click="stars = 4"></i>
+												    <i class="fa fa-star" ng-class="{'active': stars>=5}" ng-click="stars = 5"></i>
 												</div>
 											</div>
 											<button type="button" class="btn btn-primary" ng-click="shopC.addReview()">Add feedback</button>
@@ -273,40 +284,17 @@
 									</div>
 		                        </div>
 
-				                <ul class="list-reviews">
+				                <ul class="list-reviews" ng-repeat="review in shopC.reviews">
 				                    <li>
 				                        <div class="media"> 
 				                            <div class="media-left"> 
-				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
-				                                </a> 
+				                                <a href="#"> 
+				                                	<img src="{{review.user | avatarUrl}}">
+				                                </a>
 				                            </div> 
-				                            <div class="media-body"> 
-				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
-				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
-				                            </div> 
-				                        </div>
-				                    </li>
-				                    <li>
-				                        <div class="media"> 
-				                            <div class="media-left"> 
-				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
-				                                </a> 
-				                            </div> 
-				                            <div class="media-body"> 
-				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
-				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
-				                            </div> 
-				                        </div>
-				                    </li>
-				                    <li>
-				                        <div class="media"> 
-				                            <div class="media-left"> 
-				                                <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTg0MjAyNTEzNyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODQyMDI1MTM3Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> 
-				                                </a> 
-				                            </div> 
-				                            <div class="media-body"> 
-				                                <h4 class="media-heading"><a href="#">Jessica Alba</a></h4> 
-				                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
+				                            <div class="media-body">
+				                                <h4 class="media-heading"><a href="#">{{review.user.name}}</a></h4>
+				                                {{review.comment}}
 				                            </div> 
 				                        </div>
 				                    </li>

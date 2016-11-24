@@ -48,6 +48,71 @@
 					</p>
 				</div>
 
+				<!-- start rate -->
+				<div class="panel panel-default" id="Reviews">
+					<div class="panel-heading">
+						<h3 class="panel-title">Reviews</h3>
+					</div>
+            		<div class="panel-body">
+                        <div class="star-review star-review-bottom">
+                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=1}"></i>
+                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=2}"></i>
+                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=3}"></i>
+                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=4}"></i>
+                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=5}"></i>
+                            <a ng-click="scrollTo('Reviews')">({{ProdC.reviewsLength}})</a>
+                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
+                        </div>
+                		
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog  modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Add Review</h4>
+									</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label>Description</label>
+										<textarea class="form-control" cols="4" ng-model="comment"></textarea>
+									</div>
+									<div class="form-group">
+										<label>Your rating for this product</label>
+										<div class="star-review">
+										    <i class="fa fa-star" ng-class="{'active': stars>=1}" ng-click="stars = 1"></i>
+										    <i class="fa fa-star" ng-class="{'active': stars>=2}" ng-click="stars = 2"></i>
+										    <i class="fa fa-star" ng-class="{'active': stars>=3}" ng-click="stars = 3"></i>
+										    <i class="fa fa-star" ng-class="{'active': stars>=4}" ng-click="stars = 4"></i>
+										    <i class="fa fa-star" ng-class="{'active': stars>=5}" ng-click="stars = 5"></i>
+										</div>
+									</div>
+									<button type="button" class="btn btn-primary" ng-click="ProdC.addReview(stars)">Add feedback</button>
+								</div>
+
+								</div>
+							</div>
+                        </div>
+
+		                <ul class="list-reviews" ng-repeat="review in ProdC.reviews">
+		                    <li>
+		                        <div class="media"> 
+		                            <div class="media-left">
+		                                <a href="#"> 
+		                                	<img src="{{review.user | avatarUrl}}">
+		                                </a>
+		                            </div> 
+		                            <div class="media-body">
+		                                <h4 class="media-heading"><a href="#">{{review.user.name}}</a></h4>
+		                                {{review.comment}}
+		                            </div> 
+		                        </div>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+		        <!-- rate -->
+
 				<!-- comment -->
 				<div class="comment panel panel-default">
 					<div class="panel-heading">
@@ -150,9 +215,50 @@
 									<i class="fa fa-heart-o"></i> Add to Wishlist
 								</button>
 								<button class="btn btn-block" type="button" ng-show="ProdC.wishlisted" style="color:#F44336">
-									<i class="fa fa-heart"></i>Wishlisted
+									<i class="fa fa-heart"></i> Wishlisted
 								</button>
 							</div>
+
+							<div class="star-review star-review-product">
+	                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=1}"></i>
+	                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=2}"></i>
+	                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=3}"></i>
+	                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=4}"></i>
+	                            <i class="fa fa-star" ng-class="{'active': ProdC.ratingTotal>=5}"></i>
+	                            <a ng-click="scrollTo('Reviews')">({{ProdC.reviewsLength}})</a>
+	                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
+	                        </div>
+
+	                        <!-- Modal -->
+	                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog  modal-sm" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Add Review</h4>
+										</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label>Description</label>
+											<textarea class="form-control" cols="4" ng-model="comment"></textarea>
+										</div>
+										<div class="form-group">
+											<label>Your rating for this product</label>
+											<div class="star-review">
+											    <i class="fa fa-star" ng-class="{'active': stars>=1}" ng-click="stars = 1"></i>
+											    <i class="fa fa-star" ng-class="{'active': stars>=2}" ng-click="stars = 2"></i>
+											    <i class="fa fa-star" ng-class="{'active': stars>=3}" ng-click="stars = 3"></i>
+											    <i class="fa fa-star" ng-class="{'active': stars>=4}" ng-click="stars = 4"></i>
+											    <i class="fa fa-star" ng-class="{'active': stars>=5}" ng-click="stars = 5"></i>
+											</div>
+										</div>
+										<button type="button" class="btn btn-primary" ng-click="ProdC.addReview(stars)">Add feedback</button>
+									</div>
+
+									</div>
+								</div>
+	                        </div>
+
 							<div style="margin-top:15px;" class="alert btn-danger" ng-if="ProdC.product.quantity==0  || ProdC.cart.product_variant==0"><strong> Sorry! Out of Stock</strong></div>
 							</div>
 							<div ng-if="ProdC.product.type=='digital'"  >
@@ -194,7 +300,7 @@
                 <button class=close type=button data-ng-click=ProdC.close(this)>x</button><strong>Success!</strong> {{ProdC.success.statusMessage}}</div>
             <div class="alert btn-danger" ng-show=ProdC.error>
                 <button class=close type=button data-ng-click=ProdC.close(this)>x</button><strong>Oops!</strong> {{ProdC.error.statusMessage}}</div>
-							<div class="fbsimilar-like"  ng-if="ProdC.product.total_star!=0" >
+							<!-- <div class="fbsimilar-like"  ng-if="ProdC.product.total_star!=0" >
 								<button class="btn btn-default likes_btn">
 									<i class="fa fa-star-o">&nbsp; {{ProdC.product.total_star / ProdC.product.total_ratings | number:1}}</i>
 								</button>
@@ -206,7 +312,7 @@
 									</span>
 								</div>
 								
-							</div>
+							</div> -->
 							<div class="share">
 								<div class="row">
 									<div class="col-xs-12">
@@ -274,6 +380,7 @@
 							
 						</div>
 					</div>
+					
 					<div class="col-lg-12 col-xs-12" >
 						<div class="pull-left line-class-inner clearfix" ng-repeat="rate in ProdC.rating">
 							<div class="pl-top">

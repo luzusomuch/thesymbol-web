@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', 'Rating', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search, Rating) {
+    .controller('ShopCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", '$http', 'endpoint', 'search', 'Rating', 'growl', '$anchorScroll', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $http, endpoint, search, Rating, growl, $anchorScroll) {
 
         var _this = this;
         this.$routeParams = $routeParams;
@@ -85,9 +85,6 @@ angular.module('eCommerceUserApp')
                 })
         }
 
-
-        
-
         if ($routeParams.sid != undefined)
             this.shopDetails();
 		else
@@ -139,11 +136,12 @@ angular.module('eCommerceUserApp')
         };
 
         this.addReview = function () {
-            console.log(2);
             if (sessionService.get('user') && angular.fromJson(sessionService.get('user'))._id) {
                 var CRating = new Rating.addReview({
                     user: angular.fromJson(sessionService.get('user'))._id,
-                    seller: $routeParams.sid
+                    seller: $routeParams.sid,
+                    stars: $scope.stars,
+                    comment: $scope.comment
                 });
                 
                 CRating.$get(function(data) {
@@ -162,6 +160,43 @@ angular.module('eCommerceUserApp')
             } else {
                 growl.error('Please login');
             }
+        }
+
+        this.getReview = function () {
+            var CRating = new Rating.getReview();
+
+            CRating.$get({
+                    guest_token: sessionService.get("token"),
+                    seller: $routeParams.sid
+                },function(data) {
+                if (data.status == "success") {
+                    _this.reviews = data.response.reviews;
+                    // console.log(data.response.reviews);
+                    var total = 0;
+                    var count = 0;
+                    Object.keys(data.response.reviews).map(function(objectKey, index) {
+                        var value = data.response.reviews[objectKey];
+                        total += value.stars;
+                        count++;
+                    });
+                    _this.rating = total / count;
+                    _this.reviewsLength = data.response.reviews.length;
+                }
+                if (data.status == "fail") {
+                    $scope.header.pageLoading = false;
+                    _this.error = data;
+                }
+            }, function(data) {
+                if (data.status == "401") {
+                    sessionService.get("token");
+                }
+            })
+        }
+        this.getReview();
+
+        $scope.scrollTo = function(id) {
+            $location.hash(id);
+            $anchorScroll();
         }
 
     }])

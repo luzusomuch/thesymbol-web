@@ -16,6 +16,11 @@ angular.module('eCommerceUserApp')
 				method: 'POST'
 			}
 		}),
+		getReview: $resource(endpoint + '/ratings/get-review', null, {
+			'get': {
+				method: 'GET'
+			}
+		})
 	};
 
 }]);

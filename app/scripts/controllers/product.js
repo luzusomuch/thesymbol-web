@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService) {
+    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', 'Rating', '$anchorScroll', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService, Rating, $anchorScroll) {
     	this.currentUser = angular.fromJson(sessionService.get('user'));
     	
         var _this = this;
@@ -16,7 +16,6 @@ angular.module('eCommerceUserApp')
             _this.error = '';
             _this.success = '';
         }
-        
 		
 		this.range = function(min, max, step){
 			step = step || 1;
@@ -40,7 +39,7 @@ angular.module('eCommerceUserApp')
                         CProduct
                             .$get(function(data) {
                                 if (data.status == "success") {
-                                	console.log(data.response.product);
+                                	// console.log(data.response.product);
                                     _this.related = data.response.product;
                                 }
                             }, function(data) {
@@ -112,6 +111,69 @@ angular.module('eCommerceUserApp')
                 })
         }
 
+        this.addReview = function (stars) {
+            if (sessionService.get('user') && angular.fromJson(sessionService.get('user'))._id) {
+                var CRating = new Rating.addReview({
+                    user: angular.fromJson(sessionService.get('user'))._id,
+                    product: $routeParams.pid,
+                    stars: stars,
+                    comment: $scope.comment
+                });
+                
+                CRating.$get(function(data) {
+                    if (data.status == "success") {
+                        _this.success = true;
+                    }
+                    if (data.status == "fail") {
+                        $scope.header.pageLoading = false;
+                        _this.error = data;
+                    }
+                }, function(data) {
+                    if (data.status == "401") {
+                        sessionService.get("token");
+                    }
+                });
+            } else {
+                growl.error('Please login');
+            }
+        }
+
+        this.getReview = function () {
+            var CRating = new Rating.getReview();
+
+            CRating.$get({
+                    guest_token: sessionService.get("token"),
+                    product: $routeParams.pid
+                },function(data) {
+                if (data.status == "success") {
+                    _this.reviews = data.response.reviews;
+                     console.log(data.response.reviews);
+                    var total = 0;
+                    var count = 0;
+                    Object.keys(data.response.reviews).map(function(objectKey, index) {
+                        var value = data.response.reviews[objectKey];
+                        total += value.stars;
+                        count++;
+                    });
+                    _this.ratingTotal = total / count;
+                    _this.reviewsLength = data.response.reviews.length;
+                }
+                if (data.status == "fail") {
+                    $scope.header.pageLoading = false;
+                    _this.error = data;
+                }
+            }, function(data) {
+                if (data.status == "401") {
+                    sessionService.get("token");
+                }
+            })
+        }
+        this.getReview();
+
+        $scope.scrollTo = function(id) {
+            $location.hash(id);
+            $anchorScroll();
+        }
 
         this.addToCart = function() {
 			$scope.header.pageLoading=true;
@@ -1206,5 +1268,6 @@ angular.module('eCommerceUserApp')
 		$scope.getIframeSrc = function(src) {
 			  return $sce.trustAsResourceUrl(src);
 		};
+
     }])
 	
