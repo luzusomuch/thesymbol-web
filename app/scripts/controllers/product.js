@@ -8,10 +8,11 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', 'Rating', '$anchorScroll', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService, Rating, $anchorScroll) {
-    	this.currentUser = angular.fromJson(sessionService.get('user'));
-    	
+    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', 'Rating', '$anchorScroll', 'LikeService', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService, Rating, $anchorScroll, LikeService) {
+        
         var _this = this;
+    	this.currentUser = angular.fromJson(sessionService.get('user'));
+
         this.close = function() {
             _this.error = '';
             _this.success = '';
@@ -323,32 +324,32 @@ angular.module('eCommerceUserApp')
         }
 
         // comment section
-        this.comment = {
+        _this.comment = {
         	page: 1
         };
         this.getComments = function() {
-        	CommentService.findAllByType($routeParams.pid, 'Product', {page: this.comment.page}).then(function(resp) {
-        		if (resp.data.status==='success') {
-        			this.comment.page++;
-        			this.comment.totalItem = resp.data.response.totalItem;
-        			this.comment.items = this.comment.items ? this.comment.items.concat(resp.data.response.items) : resp.data.response.items;
+        	CommentService.findAllByType($routeParams.pid, 'Product', {page: _this.comment.page}).then(function(resp) {
+                if (resp.data.status==='success') {
+        			_this.comment.page++;
+        			_this.comment.totalItem = resp.data.response.totalItem;
+        			_this.comment.items = _this.comment.items ? _this.comment.items.concat(resp.data.response.items) : resp.data.response.items;
         		} else {
         			alert('Error when loading comments');
         		}
         	});
         };
 
-        this.submitted = false;
+        _this.submitted = false;
         this.postComment = function(form) {
-        	this.submitted = true;
+        	_this.submitted = true;
         	if (form.$valid) {
-        		CommentService.create({text: this.commentText, type: 'Product', objectId: $routeParams.pid}).then(function(resp) {
+        		CommentService.create({text: _this.commentText, type: 'Product', objectId: $routeParams.pid}).then(function(resp) {
         			if (resp.data.status==='success') {
-        				this.submitted = false;
-        				this.commentText = null;
-        				resp.data.response.ownerId = this.currentUser;
-        				this.comment.items.push(resp.data.response);
-        				this.comment.totalItem+=1;
+        				_this.submitted = false;
+        				_this.commentText = null;
+        				resp.data.response.ownerId = _this.currentUser;
+        				_this.comment.items.push(resp.data.response);
+        				_this.comment.totalItem+=1;
         			} else {
         				alert('Error when posting comment');
         			}
@@ -359,15 +360,15 @@ angular.module('eCommerceUserApp')
         };
 
         this.deleteComment = function(comment) {
-        	if (this.currentUser && this.currentUser._id.toString()===comment.ownerId._id.toString()) {
+        	if (_this.currentUser && _this.currentUser._id.toString()===comment.ownerId._id.toString()) {
         		CommentService.delete(comment._id).then(function(resp) {
         			if (resp.data.status==='success') {
-        				var index = _.findIndex(this.comment.items, function(item) {
+        				var index = _.findIndex(_this.comment.items, function(item) {
         					return item._id.toString()===comment._id.toString();
         				});
         				if (index !== -1) {
-        					this.comment.items.splice(index, 1);
-        					this.comment.totalItem--;
+        					_this.comment.items.splice(index, 1);
+        					_this.comment.totalItem--;
         				}
         			} else {
         				alert('Error when remove comment');
@@ -381,15 +382,46 @@ angular.module('eCommerceUserApp')
 
         // like section
         this.like = function() {
-        	this.likedProduct = !this.likedProduct;
-        }
+            if (_this.currentUser && _this.currentUser._id) {
+                if (_this.likedProduct) {
+                    // remove liked product
+                    LikeService.unlike($routeParams.pid).then(function(resp) {
+                        if (resp.data.status==='success') {
+                            _this.likedProduct = false;
+                        } else {
+                            alert('Error when unlike product');
+                        }
+                    });
+                } else {
+                    // like product
+                    LikeService.like({objectId: $routeParams.pid, type: 'Product'}).then(function(resp) {
+                        if (resp.data.status==='success') {
+                            _this.likedProduct = true;
+                        } else {
+                            alert('Error when like product');
+                        }
+                    });
+                }
+            } else {
+                alert('Please login');
+            }
+        };
+
+        this.checkLikedProduct = function() {
+            LikeService.check($routeParams.pid, 'Product').then(resp => {
+                if (resp.data.status==='success') {
+                    _this.likedProduct = resp.data.response.liked;
+                }
+            });
+        };
         // end like section
         
         if ($routeParams.pid != undefined){
-          this.productDetails(); 
-					this.reviewDetails();
-					this.getComments();
-				}
+            this.productDetails(); 
+			this.reviewDetails();
+			this.getComments();
+            this.checkLikedProduct();
+		}
 		
 		
 		$scope.$on('ngSliderFinsh', function(ngRepeatFinishedEvent) {
