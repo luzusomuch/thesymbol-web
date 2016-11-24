@@ -10,23 +10,23 @@
 angular.module('eCommerceUserApp')
 .factory('CommentService', ['$routeParams', '$http', 'endpoint', 'sessionService', function($routeParams,$http, endpoint, sessionService) {
   return {
-    findAllByType: (id, type, params) => {
-    	return $http.get(endpoint + `/comments/${id}/${type}`, {
+    findAllByType: function(id, type, params) {
+    	return $http.get(endpoint + '/comments/'+id+'/'+type, {
     		params: params
     	});
     },
-  	create: (data) => {
-  		return $http.post(endpoint + `/comments`, data, {
+  	create: function(data) {
+  		return $http.post(endpoint + '/comments', data, {
         headers: {
           Authorization: sessionService.get('user_token')
         }
       })
   	},
-  	update: (id, data) => {
-  		return $http.put(endpoint + `/comment/${id}`, data);
+  	update: function(id, data) {
+  		return $http.put(endpoint + '/comment/'+id, data);
   	},
-  	delete: (id) => {
-  		return $http.delete(endpoint + `/comments/${id}`, {
+  	delete: function(id) {
+  		return $http.delete(endpoint + '/comments/'+id, {
         headers: {
           Authorization: sessionService.get('user_token')
         }

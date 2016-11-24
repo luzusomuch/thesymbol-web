@@ -16,7 +16,7 @@ angular.module('eCommerceUserApp')
     	searchPriceProduct:$resource(endpoint+'/users/product/get-products', null,{
         'get': { method:'GET' }
       }),
-      searchProducts: (data) => {
+      searchProducts: function(data) {
         return $http.post(endpoint + '/products/search-products', data);
       }
 	 };

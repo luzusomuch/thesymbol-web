@@ -9,21 +9,21 @@
  */
 angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'growl', function($scope, growl) {
 	
-	this.inviteFriend = (type) => {
+	this.inviteFriend = function(type) {
 		if (type==='google') {
 			var auth2 = gapi.auth2.getAuthInstance();
-			auth2.signIn().then(() => {
+			auth2.signIn().then(function() {
 				window.gapi.client.plus.people.list({
 			  	'userId' : 'me',
 			  	'collection' : 'visible'
-				}).execute(resp => {
+				}).execute(function(resp) {
 					if (resp.error) {
 						growl.error('Something went wrong');
 					} else {
-						let friends = [];
-						_.each(resp.items, (item) => {
+						var friends = [];
+						_.each(resp.items, function(item) {
 							if (item.objectType==='person') {
-								window.gapi.client.plus.people.get({userId: item.id}).execute(profile => {
+								window.gapi.client.plus.people.get({userId: item.id}).execute(function(profile) {
 									friends.push(profile);
 								});
 							}
@@ -35,7 +35,7 @@ angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'gr
 		} else if (type==='facebook') {
 			window.FB.login(function(resp) {
 		    if (resp.authResponse) {
-		    	FB.api('/me/friends', (resp) => {
+		    	FB.api('/me/friends', function(resp) {
 		    		console.log(resp);
 		    	});
 		    }

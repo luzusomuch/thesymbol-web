@@ -10,18 +10,18 @@
 angular.module('eCommerceUserApp')
 .factory('LikeService', ['$http', 'endpoint', 'sessionService', function($http, endpoint, sessionService) {
   return {
-    check: (id, type) => {
-    	return $http.get(endpoint + `/likes/${id}/${type}/check`);
+    check: function(id, type) {
+    	return $http.get(endpoint + '/likes/'+id+'/'+type+'/check');
     },
-  	like: (data) => {
-  		return $http.post(endpoint + `/likes`, data, {
+  	like: function(data) {
+  		return $http.post(endpoint + '/likes', data, {
         headers: {
           Authorization: sessionService.get('user_token')
         }
       })
   	},
-  	unlike: (id) => {
-  		return $http.delete(endpoint + `/likes/${id}`, {
+  	unlike: function(id) {
+  		return $http.delete(endpoint + '/likes/'+id, {
         headers: {
           Authorization: sessionService.get('user_token')
         }

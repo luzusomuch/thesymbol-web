@@ -13,9 +13,9 @@ angular.module('eCommerceUserApp')
         var _this = this;
         this.$routeParams = $routeParams;
         this.categories = [];
-        this.getCategories = () => {
+        this.getCategories = function() {
             var CCategory = new Category.getCategory();
-            CCategory.$get({}, resp => {
+            CCategory.$get({}, function(resp) {
                 if (resp.status==='success') {
                     this.categories = resp.response.categories;
                 }
@@ -34,16 +34,16 @@ angular.module('eCommerceUserApp')
 		}
 
         this.primeProducts = [];
-        this.getPrimeProducts = () => {
+        this.getPrimeProducts = function() {
             var primesubscriptionData_url = endpoint + '/primesubscriptions';
-            $http.get(primesubscriptionData_url).success(resp => {
+            $http.get(primesubscriptionData_url).success(function(resp) {
               $scope.primesubscriptionData = resp.response[0];
             });
 
             var CProduct = new Product.shopProducts();
-            CProduct.$get({limit: 10, seller: $routeParams.sid, primesubscription: true}, (resp) => {
+            CProduct.$get({limit: 10, seller: $routeParams.sid, primesubscription: true}, function(resp) {
                 this.primeProducts = resp.response.product;
-            }, (err) => {
+            }, function(err) {
                 console.log(err);
             });
         }
@@ -105,7 +105,7 @@ angular.module('eCommerceUserApp')
             })
 		}
 
-        $scope.$watchGroup(['productName', 'shopC.category'], (nv) => {
+        $scope.$watchGroup(['productName', 'shopC.category'], function(nv) {
             var productName = nv[0];
             var category = nv[1];
             if (productName || (category && category.length > 0)) {
@@ -119,7 +119,7 @@ angular.module('eCommerceUserApp')
         }, true);
 
         this.searchData = {page: 1};
-        this.searchProduct = (productName, category, shopId, lat, lng) => {
+        this.searchProduct = function(productName, category, shopId, lat, lng) {
             search.searchProducts({
                 productName: productName,
                 category: category,
@@ -127,7 +127,7 @@ angular.module('eCommerceUserApp')
                 page: this.searchData.page,
                 lat: lat,
                 lng: lng
-            }).then(resp => {
+            }).then(function(resp) {
                 if (resp.data.status==='success') {
                     this.searchData.page++;
                     this.searchData.totalItem = resp.data.response.totalItem;
@@ -167,7 +167,7 @@ angular.module('eCommerceUserApp')
     }])
     .filter('productPrimeImageFilter', function() {
         return function(images) {
-            let tmp = 'http://res.cloudinary.com/primefusion/image/upload/v1475749826/p2kb4zz0pi2zentrygnj.png';
+            var tmp = 'http://res.cloudinary.com/primefusion/image/upload/v1475749826/p2kb4zz0pi2zentrygnj.png';
             if (images && images.length > 0) {
                 tmp = (images[0].cdn) ? images[0].cdn.url : tmp;
             }

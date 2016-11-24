@@ -264,8 +264,8 @@ angular.module('eCommerceUserApp')
         this.comment = {
         	page: 1
         };
-        this.getComments = () => {
-        	CommentService.findAllByType($routeParams.pid, 'Product', {page: this.comment.page}).then(resp => {
+        this.getComments = function() {
+        	CommentService.findAllByType($routeParams.pid, 'Product', {page: this.comment.page}).then(function(resp) {
         		if (resp.data.status==='success') {
         			this.comment.page++;
         			this.comment.totalItem = resp.data.response.totalItem;
@@ -277,10 +277,10 @@ angular.module('eCommerceUserApp')
         };
 
         this.submitted = false;
-        this.postComment = (form) => {
+        this.postComment = function(form) {
         	this.submitted = true;
         	if (form.$valid) {
-        		CommentService.create({text: this.commentText, type: 'Product', objectId: $routeParams.pid}).then(resp => {
+        		CommentService.create({text: this.commentText, type: 'Product', objectId: $routeParams.pid}).then(function(resp) {
         			if (resp.data.status==='success') {
         				this.submitted = false;
         				this.commentText = null;
@@ -296,11 +296,11 @@ angular.module('eCommerceUserApp')
         	}
         };
 
-        this.deleteComment = (comment) => {
+        this.deleteComment = function(comment) {
         	if (this.currentUser && this.currentUser._id.toString()===comment.ownerId._id.toString()) {
-        		CommentService.delete(comment._id).then(resp => {
+        		CommentService.delete(comment._id).then(function(resp) {
         			if (resp.data.status==='success') {
-        				var index = _.findIndex(this.comment.items, (item) => {
+        				var index = _.findIndex(this.comment.items, function(item) {
         					return item._id.toString()===comment._id.toString();
         				});
         				if (index !== -1) {
@@ -318,7 +318,7 @@ angular.module('eCommerceUserApp')
         // end comment section
 
         // like section
-        this.like = () => {
+        this.like = function() {
         	this.likedProduct = !this.likedProduct;
         }
         // end like section
