@@ -46,10 +46,10 @@ var myApp = angular
         // 'endpoint': 'http://104.236.48.110:3000/api/v1',
 
         // testing server
-        'endpoint': 'http://104.236.38.133:3000/api/v1',
+        // 'endpoint': 'http://104.236.38.133:3000/api/v1',
 
         // local
-        // 'endpoint': 'http://localhost:3000/api/v1',
+        'endpoint': 'http://localhost:3000/api/v1',
         
         'dpath': 'http://www.thesymbol.store/#/',
         'seller': 'http://seller.thesymbol.store/#'
@@ -160,6 +160,18 @@ var myApp = angular
                 templateUrl: 'views/wishlist.html',
                 controller: 'AccountCtrl',
                 controllerAs: 'acc',
+                requireAuth: true
+            })
+            .when('/dispute', {
+                templateUrl: 'views/dispute.html',
+                controller: 'AccountCtrl',
+                controllerAs: 'acc',
+                requireAuth: true
+            })
+            .when('/dispute/:dpid', {
+                templateUrl: 'views/dispute-detail.html',
+                controller: 'DisputeDetailCtrl',
+                controllerAs: 'dp',
                 requireAuth: true
             })
             .when('/success', {

@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('AccountCtrl', ['$routeParams', 'Product', 'Main', 'Checkout', 'Account', 'Order', "$location", "sessionService", 'endpoint', "$scope", "fileUpload","$http", "Wishlist", function($routeParams, Product, Main, Checkout, Account, Order, $location, sessionService, endpoint, $scope, fileUpload,$http, Wishlist) {
+    .controller('AccountCtrl', ['$routeParams', 'Product', 'Main', 'Checkout', 'Account', 'Order', "$location", "sessionService", 'endpoint', "$scope", "fileUpload","$http", "Wishlist", 'DisputeService', function($routeParams, Product, Main, Checkout, Account, Order, $location, sessionService, endpoint, $scope, fileUpload,$http, Wishlist, DisputeService) {
     
     var _this = this;
     $scope.myImage='';
@@ -78,6 +78,42 @@ angular.module('eCommerceUserApp')
             _this.error = '';
             _this.success = '';
         }
+
+   	// dispute management
+   	this.dispute = function(productId, shopId, orderId) {
+   		DisputeService.create({
+   			shopId: shopId, 
+   			productId: productId, 
+   			ownerId: angular.fromJson(sessionService.get('user'))._id,
+   			orderId: orderId
+   		}).then(resp => {
+   			if (resp.data.status==='success') {
+   				alert('Create dispute successfully');
+   			} else {
+   				if (resp.data.statusCode===409) {
+   					alert('This dispute was created');
+   				} else {
+   					alert('Error when create dispute');
+   				}
+   			}
+   		});
+   	};
+
+   	this.dispute = {
+   		page: 1
+   	};
+   	this.findMyDispute = function() {
+   		DisputeService.findMyDispute({page: _this.dispute.page}).then(function(resp) {
+   			if (resp.data.status==='success') {
+   				_this.dispute.page++;
+   				_this.dispute.totalItem = resp.data.response.totalItem;
+   				_this.dispute.items = (_this.dispute.items) ? _this.dispute.items.concat(resp.data.response.items) : resp.data.response.items;
+   			}
+   		});
+   	}
+
+   	this.findMyDispute();
+		// dispute management
 
 		var getCountry = Main.getCountry;
         var gC = new getCountry();

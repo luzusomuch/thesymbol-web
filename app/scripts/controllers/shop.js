@@ -17,7 +17,7 @@ angular.module('eCommerceUserApp')
             var CCategory = new Category.getCategory();
             CCategory.$get({}, function(resp) {
                 if (resp.status==='success') {
-                    this.categories = resp.response.categories;
+                    _this.categories = resp.response.categories;
                 }
             });
         };
@@ -42,7 +42,7 @@ angular.module('eCommerceUserApp')
 
             var CProduct = new Product.shopProducts();
             CProduct.$get({limit: 10, seller: $routeParams.sid, primesubscription: true}, function(resp) {
-                this.primeProducts = resp.response.product;
+                _this.primeProducts = resp.response.product;
             }, function(err) {
                 console.log(err);
             });
@@ -106,12 +106,12 @@ angular.module('eCommerceUserApp')
             var productName = nv[0];
             var category = nv[1];
             if (productName || (category && category.length > 0)) {
-                this.searchData = {page: 1};
-                this.isSearch = true;
-                this.searchProduct(productName, category, $routeParams.sid);
+                _this.searchData = {page: 1};
+                _this.isSearch = true;
+                _this.searchProduct(productName, category, $routeParams.sid);
             } else {
-                this.isSearch = false;
-                this.searchData = {page: 1};
+                _this.isSearch = false;
+                _this.searchData = {page: 1};
             }
         }, true);
 
@@ -121,14 +121,14 @@ angular.module('eCommerceUserApp')
                 productName: productName,
                 category: category,
                 shopId: shopId,
-                page: this.searchData.page,
+                page: _this.searchData.page,
                 lat: lat,
                 lng: lng
             }).then(function(resp) {
                 if (resp.data.status==='success') {
-                    this.searchData.page++;
-                    this.searchData.totalItem = resp.data.response.totalItem;
-                    this.searchData.items = (this.searchData.items) ? this.searchData.items.concat(resp.data.response.items) : resp.data.response.items;
+                    _this.searchData.page++;
+                    _this.searchData.totalItem = resp.data.response.totalItem;
+                    _this.searchData.items = (_this.searchData.items) ? _this.searchData.items.concat(resp.data.response.items) : resp.data.response.items;
                 } else {
                     alert('Error when fetching data');
                 }

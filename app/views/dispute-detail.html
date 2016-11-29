@@ -1,0 +1,141 @@
+<title>Dispute detail</title>
+<style>
+.loadmore {
+  background: #ef6644 none repeat scroll 0 0;
+  border: 1px solid #ef6644;
+  color: #fff;
+  font-weight: bold;
+  height: 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 400ms ease-out 0s;
+   /* width: 169px; */
+}
+
+.nomore {
+  background: gray none repeat scroll 0 0;
+  border: medium none gray;
+}
+</style>
+<!--outer-starts-->
+<div class="outer user-setting">
+	<div class="user-setting-outer">
+		<header-bar></header-bar>
+	</div>
+		
+	<div class="container setting-container">
+		<div class="col-md-12">
+			<div class="row navstarting">
+			<div ng-if=acc.dataLoading style="width:100%;position:absolute;height:100%;background-color:rgba(0,0,0,.39);box-shadow:0 0 36px #000;z-index:80"><img style=margin-left:50%;margin-top:25%;z-index:80;position:absolute src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></div>
+			<div class="col-md-12 grid_08" >
+				<div class="tab-content">
+					<div class="tab-pane tab-paneimg active" id="home">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title wishlist-title">Dispute</h3>
+							</div>
+							<div class="user-actions">
+								<div class="user-action-inner">
+									<div class="nav nav-tabs nav-products-sort" style="padding-bottom:0px">
+										<div class="col-lg-2">
+											<a data-toggle="tab" style="line-height:30px">Dispute detail</a>
+										</div>
+										<div class="col-lg-2 pull-right" >
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-content">
+								<div id="menu3" class=" tab-pane fade in active">
+								 	<div class="container-fluid" style="padding:0px">
+								    <div class="col-md-12" style="padding:0px">
+								    	<div class="dispute-detail">
+								    		<p>Dispute for order ID: {{dp.dispute.orderId}} - created at: {{dp.dispute.created_at | date:'medium'}}</p>
+								    		<p>Status: {{dp.dispute.status}}</p>
+								    		<div class="dispute-product-detail">
+								    			Product named: <a href="/#!/product/{{dp.dispute.productId._id}}">{{dp.dispute.productId.name}}</a>
+								    			<br>
+								    			<button class="btn" type="button" ng-click="dp.changeStatus=!dp.changeStatus">Change status of this dispute</button>
+								    			<!-- shop status -->
+								    			<div style="margin-top: 10px" ng-show="dp.changeStatus===true && dp.currentUser._id==dp.dispute.shopId">
+								    				<button class="btn btn-success" type="button" ng-click="dp.updateStatus('refund')">Refund</button>
+								    				<button class="btn btn-warning" type="button" ng-click="dp.updateStatus('raiseClaim')">Raise claim</button>
+								    			</div>
+								    			<!-- shop status -->
+								    			<!-- buyer status -->
+								    			<div style="margin-top: 10px" ng-show="dp.changeStatus===true && dp.currentUser._id==dp.dispute.ownerId">
+								    				<button class="btn btn-success" type="button" ng-click="dp.updateStatus('close')">Close</button>
+								    				<button class="btn btn-warning" type="button" ng-click="dp.updateStatus('raiseClaim')">Raise claim</button>
+								    			</div>
+								    			<!-- buyer status -->
+								    		</div>
+								    	</div>
+								    	<div class="dispute-message">
+								    		<div class="comment panel panel-default">
+													<div class="panel-heading">
+														<h3 class="panel-title">Comments ({{dp.dispute.messages.length}})</h3>
+													</div>
+													<div class="panel-body">
+														<ul class="list-reviews">
+															<li ng-repeat="comment in dp.dispute.messages">
+																<div class="media">
+																	<div class="media-left">
+																		<a href="#">
+																			<img alt="{{comment.ownerId.name}}" src="{{comment.ownerId | avatarUrl}}" class="media-object">
+																		</a>
+																	</div>
+																	<div class="media-body">
+																		<h4 class="media-heading"><a href="#">{{comment.ownerId.name}}</a></h4>
+																		{{comment.text}}
+																		<br>
+																		<a ng-show="dp.currentUser._id==comment.ownerId._id" href="javascript:void(0)" ng-click="dp.deleteComment(comment)">
+																			<i class="fa fa-trash-o"></i>
+																		</a>
+																	</div>
+																</div>
+															</li>
+														</ul>
+														<form ng-submit="dp.postComment(commentForm)" name="commentForm" novalidate>
+															<div class="form-group">
+																<textarea class="form-control" name="commentText" ng-model="dp.commentText" required placeholder="{{'views.pd.Leave your message' | translate}}"></textarea>
+
+																<span style="color: red" ng-show="dp.submitted && commentForm.commentText.$error.required">{{'views.pd.Message is required' | translate}}</span>
+															</div>
+															<div class="form-group">
+																<button type="submit">Send</button>
+															</div>
+														</form>
+													</div>
+												</div>
+								    	</div>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	  </div>
+	</div>
+</div>
+<script>function readURL(e){if(e.files&&e.files[0]){var a=new FileReader;a.onload=function(e){$(".imgs").attr("src",e.target.result)},a.readAsDataURL(e.files[0])}}function readURL1(e){if(e.files&&e.files[0]){var a=new FileReader;a.onload=function(e){$("#heading-banner").css("background","rgba(0, 0, 0, 0) url('"+e.target.result+"') repeat scroll 0 0 !important")},a.readAsDataURL(e.files[0])}}$("#icon").change(function(){readURL(this)}),$("#icon1").change(function(){readURL1(this)})
+
+ var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>

@@ -50,6 +50,7 @@
 						  <li><a href="/#!/invite-friend">{{"views.headerbar.Invite Friend" | translate}}</a></li>
 						  <li><a href="/#!/order">My Orders</a></li>
 						  <li><a href="/#!/wishlist">My Wishlist</a></li>
+						  <li><a href="/#!/dispute">My Dispute</a></li>
 						  <logout></logout>
 						</ul>
 					  </div>
@@ -90,6 +91,7 @@
 							<li ><a  ng-href="/#!/cart" >Cart</a></li>
 							<li ng-if="header.user"><a href="/#!/order">My Orders</a></li>
 							<li ng-if="header.user" ><a href="/#!/wishlist" >My Wishlist</a></li>
+							<li ng-if="header.user" ><a href="/#!/dispute" >My Dispute</a></li>
 							<li ng-if="header.user" ><logout></logout></li>
 						  </ul>
 						</div><!-- /.navbar-collapse -->
