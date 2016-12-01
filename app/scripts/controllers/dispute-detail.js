@@ -33,11 +33,11 @@ angular.module('eCommerceUserApp')
   this.postComment = function(form) {
   	_this.submitted = true;
   	if (form.$valid) {
-  		DisputeService.sendMessage($routeParams.dpid, {text: _this.commentText}).then(resp => {
+  		DisputeService.sendMessage($routeParams.dpid, {text: _this.commentText}).then(function(resp) {
   			if (resp.data.status==='success') {
   				_this.submitted = false;
   				_this.commentText = null;
-  				resp.data.response.ownerId = this.currentUser;
+  				resp.data.response.ownerId = _this.currentUser;
   				_this.dispute.messages.push(resp.data.response);
   			} else {
   				alert('Something wrong');
@@ -49,7 +49,7 @@ angular.module('eCommerceUserApp')
   };
 
   this.updateStatus = function(status) {
-  	DisputeService.updateStatus($routeParams.dpid, {status: status}).then(resp => {
+  	DisputeService.updateStatus($routeParams.dpid, {status: status}).then(function(resp) {
   		if (resp.data.status==='success') {
   			_this.dispute.status = resp.data.response.status;
   			_this.changeStatus = false;

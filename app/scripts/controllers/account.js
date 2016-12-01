@@ -86,7 +86,7 @@ angular.module('eCommerceUserApp')
    			productId: productId, 
    			ownerId: angular.fromJson(sessionService.get('user'))._id,
    			orderId: orderId
-   		}).then(resp => {
+   		}).then(function(resp) {
    			if (resp.data.status==='success') {
    				alert('Create dispute successfully');
    			} else {
