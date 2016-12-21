@@ -98,12 +98,12 @@
 		                    <li>
 		                        <div class="media"> 
 		                            <div class="media-left">
-		                                <a href="#"> 
+		                                <a href="javascript:void(0)"> 
 		                                	<img src="{{review.user | avatarUrl}}">
 		                                </a>
 		                            </div> 
 		                            <div class="media-body">
-		                                <h4 class="media-heading"><a href="#">{{review.user.name}}</a></h4>
+		                                <h4 class="media-heading"><a href="javascript:void(0)">{{review.user.name}}</a></h4>
 		                                {{review.comment}}
 		                            </div> 
 		                        </div>
@@ -123,15 +123,15 @@
 							<li ng-repeat="comment in ProdC.comment.items">
 								<div class="media">
 									<div class="media-left">
-										<a href="#">
+										<a href="javascript:void(0)">
 											<img alt="{{comment.ownerId.name}}" src="{{comment.ownerId | avatarUrl}}" class="media-object">
 										</a>
 									</div>
 									<div class="media-body">
-										<h4 class="media-heading"><a href="#">{{comment.ownerId.name}}</a></h4>
+										<h4 class="media-heading"><a href="javascript:void(0)">{{comment.ownerId.name}}</a></h4>
 										{{comment.text}}
 										<br>
-										<a ng-show="ProdC.currentUser._id==comment.ownerId._id" href="javascript:void(0)" ng-click="ProdC.deleteComment(comment)">
+										<a ng-show="ProdC.currentUser._id==comment.ownerId._id || ProdC.currentUser.roles[0]==='admin'" href="javascript:void(0)" ng-click="ProdC.deleteComment(comment)">
 											<i class="fa fa-trash-o"></i>
 										</a>
 									</div>

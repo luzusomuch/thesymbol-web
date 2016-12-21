@@ -356,7 +356,7 @@ var myApp = angular
     tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
 })
 .config(function(growlProvider) {
-    growlProvider.globalTimeToLive(3000);
+    growlProvider.globalTimeToLive(5000);
     growlProvider.globalDisableCountDown(true);
 })
 .filter('currencyTranslate', function() {
