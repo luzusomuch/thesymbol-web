@@ -360,7 +360,7 @@ angular.module('eCommerceUserApp')
         };
 
         this.deleteComment = function(comment) {
-        	if (_this.currentUser && (_this.currentUser._id.toString()===comment.ownerId._id.toString() || _this.currentUser.roles[0]==='admin') {
+        	if (_this.currentUser && (_this.currentUser._id.toString()===comment.ownerId._id.toString() || _this.currentUser.roles[0]==='admin')) {
         		CommentService.delete(comment._id).then(function(resp) {
         			if (resp.data.status==='success') {
         				var index = _.findIndex(_this.comment.items, function(item) {
