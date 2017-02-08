@@ -44,15 +44,20 @@ var myApp = angular
     .constant({
         // real server
         // 'endpoint': 'http://104.236.48.110:3000/api/v1',
+        // 'dpath': 'http://www.thesymbol.store/#/',
+        // 'seller': 'http://seller.thesymbol.store/#'
 
-        // testing server
-        'endpoint': 'http://192.241.154.223:3000/api/v1',
+        // client testing server
+        // 'endpoint': 'http://192.241.154.223:3000/api/v1',
+
+        // our testing server
+        'endpoint': 'http://159.203.165.170:3000/api/v1',
+        'dpath': 'http://www.ecommercemarketplace.org/#/',
+        'seller': 'http://seller.ecommercemarketplace.org/#'
 
         // local
         // 'endpoint': 'http://localhost:3000/api/v1',
         
-        'dpath': 'http://www.thesymbol.store/#/',
-        'seller': 'http://seller.thesymbol.store/#'
     })
     // Router
     .config(function($routeProvider) {
@@ -272,6 +277,14 @@ var myApp = angular
         }
     };
 
+    // get site config
+    $rootScope.siteTitle = 'The symbol';
+    $http.get(endpoint + '/admin/settings').then(function(resp) {
+        if (resp.data.status==='success') {
+            $rootScope.siteTitle = resp.data.response.title;
+        }
+    });
+
     $rootScope.$on('$routeChangeStart', function(event, newUrl) {
         $http.defaults.headers.common['Authorization'] = sessionService.get('user_token');
         if (!sessionService.get('token')) {
@@ -327,7 +340,7 @@ var myApp = angular
     //socialProvider.setLinkedInKey("75uycyp6us7n1l");
     socialProvider.setGoogleKey("631542298819-7bpqphmjec9mg4ak7v7a1onpr4pr0058.apps.googleusercontent.com");
     socialProvider.setFbKey({
-        appId: "1665314757112099",
+        appId: "351199811947466",
         apiVersion: "v2.7"
     });
 })

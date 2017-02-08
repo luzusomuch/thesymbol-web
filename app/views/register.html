@@ -4,12 +4,12 @@
 			<div class="login_outer reg_outer">
 			<div ng-if=RC.dataLoading style="width:400px;position:absolute;height:544px;background-color:rgba(0,0,0,.39);box-shadow:0 0 36px #000;z-index:80"><img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" style=margin-left:50%;margin-top:64%;z-index:80;position:absolute></div>
 				<div class="padd03">
-					<h3>Join Fancy</h3>
+					<h3>Join {{siteTitle}}</h3>
 					<div class="alert btn-danger" ng-show=RC.error >
 						<button class=close type=button data-ng-click=RC.close(this)>x</button><strong>Sorry!</strong> {{RC.error.statusMessage}}</div>
 						<div class="alert btn-success" ng-show=RC.success >
 						<button class=close type=button data-ng-click=RC.close(this)>x</button><strong>GREAT GOING! REGISTRATION SUCCESSFUL!</strong>{{RC.success.statusMessage}}</div>
-					<p class="join_community">Fancy is the place to discover and buy amazing things curated by our global community.</p>
+					<p class="join_community">{{siteTitle}} is the place to discover and buy amazing things curated by our global community.</p>
 					<div class="gplus_twitter_btn col-xs-12 grid_cls">
 						<a  g-login href="javascript:void(0);" class="btn btn-default gplus col-xs-6">
 							Google+
@@ -28,7 +28,7 @@
 							<input  class="form-control mailid" name=email type="email" ng-model=RC.register.email ng-required=true placeholder="{{'views.reg.Email Address' | translate}}">
 							<input  type="password" class="form-control mailid" name=password ng-model=RC.register.password ng-required=true placeholder="{{'views.reg.Password' | translate}}" id=password type=password >
 							<input type="text" class="form-control mailid" name=phone ng-model=RC.register.phone ng-required=true placeholder="{{'views.reg.Phone Number' | translate}}"   pattern="[0-9]{10,10}"   title="{{'views.reg.Please enter valid' | translate}}" >
-							<button type="submit" class="btn col-xs-12 login" ng-disabled="RC.dataLoading" >Join Fancy </button>
+							<button type="submit" class="btn col-xs-12 login" ng-disabled="RC.dataLoading" >Join {{siteTitle}} </button>
 							<div class="social_media">
 								<!--<a href="javascript:void(0);">More social networks</a>--><br/>
 									<span class="new">Already have an account? &nbsp; </span><a href="/#!/login">Sign In now
