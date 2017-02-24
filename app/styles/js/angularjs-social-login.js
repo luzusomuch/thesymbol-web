@@ -162,12 +162,14 @@ socialLogin.directive("gLogin", function($rootScope, $location, $http, SocialLog
 	        		var profile = googleUser.getBasicProfile();
 	        		var idToken = googleUser.getAuthResponse().id_token
 	        		socialLoginService.setProvider("google");
-					var idToken = googleUser.getAuthResponse().access_token;
-					var userDetails={};
-	        		userDetails.access_token=idToken;
-					userDetails.gateway='google';
-					var User = new SocialLogin(userDetails);
+							var idToken = googleUser.getAuthResponse().access_token;
+							var userDetails={};
+		      		userDetails.access_token=idToken;
+							userDetails.gateway='google';
+							console.log(userDetails);
+							var User = new SocialLogin(userDetails);
 							User.$sociallogin({guest_token: sessionService.get("token")}).then(function(data) {
+								console.log(data);
 								if (data.status == "success") {
 									// console.log(data);
 									sessionService.set('user', JSON.stringify(data.response));

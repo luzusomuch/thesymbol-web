@@ -98,14 +98,14 @@
 											</div>
 											<div class="col-lg-4 col-xs-12">
 												<div class="star-review star-review-top">
-						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
-						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
-						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
-						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
-						                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
-						                            <a ng-click="scrollTo('Reviews')">({{shopC.reviewsLength}})</a>
-						                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myRateModal">Rate Seller</button>
-						                        </div>
+                          <i class="fa fa-star" ng-class="{'active': shopC.rating>=1}"></i>
+                          <i class="fa fa-star" ng-class="{'active': shopC.rating>=2}"></i>
+                          <i class="fa fa-star" ng-class="{'active': shopC.rating>=3}"></i>
+                          <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
+                          <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
+                          <a ng-click="scrollTo('Reviews')">({{shopC.reviewsLength}})</a>
+                          <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myRateModal">Rate Seller</button>
+                        </div>
 											</div>
 										</div>
 									</div>
@@ -251,7 +251,7 @@
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=4}"></i>
 		                            <i class="fa fa-star" ng-class="{'active': shopC.rating>=5}"></i>
 		                            ({{shopC.reviewsLength}})
-		                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myModal">Rate Seller</button>
+		                            <button type="button" class="btn btn-default btn-rate" data-toggle="modal" data-target="#myRateModal">Rate Seller</button>
 		                        </div>
                         		
 		                        
@@ -281,12 +281,12 @@
 	</div><!--index-outer-->
 </div><!--outer-->
 
+
 <!-- Modal -->
 <div class="modal fade" id="myRateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Review</h4>
 			</div>
 

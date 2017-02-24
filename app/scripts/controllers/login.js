@@ -57,7 +57,6 @@ angular.module('eCommerceUserApp')
                 })
         }
 		
-		
         this.logout = function() {
             sessionService.destroy('token');
             sessionService.destroy('user');

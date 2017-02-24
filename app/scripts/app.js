@@ -51,12 +51,14 @@ var myApp = angular
         // 'endpoint': 'http://192.241.154.223:3000/api/v1',
 
         // our testing server
-        'endpoint': 'http://159.203.165.170:3000/api/v1',
-        'dpath': 'http://www.ecommercemarketplace.org/#/',
-        'seller': 'http://seller.ecommercemarketplace.org/#'
+        // 'endpoint': 'http://159.203.165.170:3000/api/v1',
+        // 'dpath': 'http://www.ecommercemarketplace.org/#/',
+        // 'seller': 'http://seller.ecommercemarketplace.org/#'
 
         // local
-        // 'endpoint': 'http://localhost:3000/api/v1',
+        'endpoint': 'http://localhost:3000/api/v1',
+        'dpath': 'http://localhost:9200/#/',
+        'seller': 'http://localhost:9100/#'
         
     })
     // Router
@@ -336,11 +338,12 @@ var myApp = angular
         window.gapi = gapi;
     }
 }])
-.config(function(socialProvider) {
+.config(function(socialProvider, endpoint) {
     //socialProvider.setLinkedInKey("75uycyp6us7n1l");
     socialProvider.setGoogleKey("631542298819-7bpqphmjec9mg4ak7v7a1onpr4pr0058.apps.googleusercontent.com");
+    var apiKey = endpoint==='http://localhost:3000/api/v1' ? "360504027683711" : "351199811947466";
     socialProvider.setFbKey({
-        appId: "351199811947466",
+        appId: apiKey,
         apiVersion: "v2.7"
     });
 })

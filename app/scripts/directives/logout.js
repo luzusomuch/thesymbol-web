@@ -11,8 +11,7 @@ angular.module('eCommerceUserApp')
     return {
       template: '<li><a class="logout"  ng-click="LC.logout()">Logout</a></li>',
       restrict: 'E',
-	  controller: 'LoginCtrl',
+	  	controller: 'LoginCtrl',
       controllerAs: 'LC',
-      restrict: 'E'
     };
   });

@@ -8,7 +8,7 @@
  * Factory in the eCommerceUserApp.
  */
 angular.module('eCommerceUserApp')
-  .factory('sessionService', ['$cookieStore', function($cookieStore) {
+  .factory('sessionService', ['$cookies', '$cookieStore', function($cookies, $cookieStore) {
     return {
       set: function(key, value) {
         return $cookieStore.put(key, value);

@@ -34,19 +34,18 @@ angular.module('eCommerceUserApp')
             })
 		
 		var getAdmin = Product.getAdmin;
-        var gA = new getAdmin();
-        gA
-            .$get({
-                guest_token: sessionService.get("token")
-            }, function(data) {
-                if (data.status == "success") {
-                    $scope.admin = data.response;
-                }
-            }, function(data) {
-                if (data.status == "401") {
-                    sessionService.get("token");
-                }
-            })
+    var gA = new getAdmin();
+    gA.$get({
+      guest_token: sessionService.get("token")
+    }, function(data) {
+      if (data.status == "success") {
+        $scope.admin = data.response;
+      }
+    }, function(data) {
+      if (data.status == "401") {
+        sessionService.get("token");
+      }
+    });
 		
 		if(sessionService.get('user')){
 			var getDetails = Account.getDetails;

@@ -136,6 +136,7 @@ angular.module('eCommerceUserApp')
         };
 
         this.addReview = function () {
+
             if (sessionService.get('user') && angular.fromJson(sessionService.get('user'))._id) {
                 var CRating = new Rating.addReview({
                     user: angular.fromJson(sessionService.get('user'))._id,
@@ -145,8 +146,13 @@ angular.module('eCommerceUserApp')
                 });
                 
                 CRating.$get(function(data) {
+                    
                     if (data.status == "success") {
                         _this.success = true;
+                        $scope.stars = 0;
+                        $scope.comment = null;
+                        $('#myRateModal').modal('toggle'); 
+                        _this.getReview();
                     }
                     if (data.status == "fail") {
                         $scope.header.pageLoading = false;
@@ -192,6 +198,7 @@ angular.module('eCommerceUserApp')
                 }
             })
         }
+
         this.getReview();
 
         $scope.scrollTo = function(id) {
