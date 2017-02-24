@@ -29,6 +29,7 @@ angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'gr
 							}
 						});
 						console.log(friends);
+						growl.success('Invite friends successfully');
 					}
 				});
 			});
@@ -37,9 +38,12 @@ angular.module('eCommerceUserApp').controller('InviteFriendCtrl', ['$scope', 'gr
 		    if (resp.authResponse) {
 		    	FB.api('/me/friends', function(resp) {
 		    		console.log(resp);
+		    		growl.success('Invite friends successfully');
 		    	});
 		    }
 			});
+		} else if (type==='twitter') {
+			growl.success('Invite friends successfully');
 		}
 	};
 
