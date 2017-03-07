@@ -51,14 +51,14 @@ var myApp = angular
         // 'endpoint': 'http://192.241.154.223:3000/api/v1',
 
         // our testing server
-        // 'endpoint': 'http://159.203.165.170:3000/api/v1',
-        // 'dpath': 'http://www.ecommercemarketplace.org/#/',
-        // 'seller': 'http://seller.ecommercemarketplace.org/#'
+        'endpoint': 'http://159.203.64.172:3000/api/v1',
+        'dpath': 'http://www.ecommercemarketplace.org/#/',
+        'seller': 'http://seller.ecommercemarketplace.org/#'
 
         // local
-        'endpoint': 'http://localhost:3000/api/v1',
-        'dpath': 'http://localhost:9200/#/',
-        'seller': 'http://localhost:9100/#'
+        // 'endpoint': 'http://localhost:3000/api/v1',
+        // 'dpath': 'http://localhost:9200/#/',
+        // 'seller': 'http://localhost:9100/#'
         
     })
     // Router
