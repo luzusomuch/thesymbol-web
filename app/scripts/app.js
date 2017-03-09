@@ -28,7 +28,11 @@ var myApp = angular
         'slick'
     ])
     .config(function(stripeProvider, $locationProvider) {
-        stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
+        // the symbol key
+        // stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
+
+        // ecommerce key
+        stripeProvider.setPublishableKey('pk_test_LbABRxHmOD2v4mP5rseUC4oK');
         $locationProvider.html5Mode(false);
         $locationProvider.hashPrefix('!');
     })
