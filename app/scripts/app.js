@@ -52,7 +52,7 @@ var myApp = angular
 
         // our testing server
         'endpoint': 'http://159.203.64.172:3000/api/v1',
-        'dpath': 'http://www.ecommercemarketplace.org/#/',
+        'dpath': 'http://ecommercemarketplace.org/#!/',
         'seller': 'http://seller.ecommercemarketplace.org/#'
 
         // local

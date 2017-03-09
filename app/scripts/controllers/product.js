@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', 'Rating', '$anchorScroll', 'LikeService', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService, Rating, $anchorScroll, LikeService) {
+    .controller('ProductCtrl', ['$routeParams', 'Product', 'Category', "Cart", "$location", "sessionService", "$scope", "$sce", "growl", "Wishlist", 'CommentService', 'Rating', '$anchorScroll', 'LikeService', 'Socialshare', 'dpath', function($routeParams, Product, Category, Cart, $location, sessionService, $scope, $sce, growl, Wishlist, CommentService, Rating, $anchorScroll, LikeService, Socialshare, dpath) {
         
         var _this = this;
     	this.currentUser = angular.fromJson(sessionService.get('user'));
@@ -16,7 +16,17 @@ angular.module('eCommerceUserApp')
         this.close = function() {
             _this.error = '';
             _this.success = '';
-        }
+        };
+
+        this.share = function() {
+            Socialshare.share({
+                'provider': 'facebook',
+                'attrs': {
+                    'socialshareUrl': dpath + 'product/' + _this.product._id,
+                    'socialshareText': "Product Share " + _this.product.name
+                }
+            });
+        };
 		
 		this.range = function(min, max, step){
 			step = step || 1;
