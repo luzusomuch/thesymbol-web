@@ -22,7 +22,10 @@ angular.module('eCommerceUserApp')
       }),
 	  getAddress: $resource(endpoint + '/users/checkout/get-address', null, {
         'get': {
-          method: 'GET'
+          method: 'GET',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       })
 	}

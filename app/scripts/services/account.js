@@ -12,12 +12,18 @@ angular.module('eCommerceUserApp')
     return {
       getDetails: $resource(endpoint + '/users/account/get-details', null, {
         'get': {
-          method: 'GET'
+          method: 'GET',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
 	  getSingleAddress: $resource(endpoint + '/users/account/get-address/:id', {id:'@id'}, {
         'get': {
-          method: 'GET'
+          method: 'GET',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
 	  saveDetails: $resource(endpoint + '/users/account/update', null, {

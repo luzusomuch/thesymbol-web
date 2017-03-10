@@ -59,9 +59,9 @@ var myApp = angular
 
         // local
         // 'endpoint': 'http://localhost:3000/api/v1',
-        // 'dpath': 'http://localhost:9200/#/',
+        // 'dpath': 'http://localhost:9200/#!/',
         // 'seller': 'http://localhost:9100/#',
-        'stripeKey': 'pk_test_LbABRxHmOD2v4mP5rseUC4oK',
+        // 'stripeKey': 'pk_test_LbABRxHmOD2v4mP5rseUC4oK',
         
     })
     // Router
