@@ -8,7 +8,7 @@
  * Controller of the eCommerceUserApp
  */
 angular.module('eCommerceUserApp')
-    .controller('CheckoutCtrl', ['$routeParams', 'Account', 'dpath', 'Product', 'Payment', 'Main', 'Cart', 'Checkout', "$location", "sessionService", 'endpoint', "$scope", "$timeout", "stripe", function($routeParams, Account, dpath, Product, Payment, Main, Cart, Checkout, $location, sessionService, endpoint, $scope, $timeout, stripe) {
+    .controller('CheckoutCtrl', ['$routeParams', 'Account', 'dpath', 'Product', 'Payment', 'Main', 'Cart', 'Checkout', "$location", "sessionService", 'endpoint', "$scope", "$timeout", "stripe", 'stripeKey', function($routeParams, Account, dpath, Product, Payment, Main, Cart, Checkout, $location, sessionService, endpoint, $scope, $timeout, stripe, stripeKey) {
 		
         var _this = this;
 		
@@ -314,8 +314,8 @@ angular.module('eCommerceUserApp')
                     }
                 })
 
-        
-		Stripe.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY')
+		Stripe.setPublishableKey(stripeKey)
+		
 		this.onSubmit = function () {
 			_this.pageLoading=true;
 		};

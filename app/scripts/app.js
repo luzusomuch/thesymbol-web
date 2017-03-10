@@ -27,12 +27,8 @@ var myApp = angular
         'angular-growl',
         'slick'
     ])
-    .config(function(stripeProvider, $locationProvider) {
-        // the symbol key
-        // stripeProvider.setPublishableKey('pk_test_Ny36HAIYzTRPj2oCQkBQ10IY');
-
-        // ecommerce key
-        stripeProvider.setPublishableKey('pk_test_LbABRxHmOD2v4mP5rseUC4oK');
+    .config(function(stripeProvider, $locationProvider, stripeKey) {
+        stripeProvider.setPublishableKey(stripeKey);
         $locationProvider.html5Mode(false);
         $locationProvider.hashPrefix('!');
     })
@@ -49,7 +45,8 @@ var myApp = angular
         // real server
         // 'endpoint': 'http://104.236.48.110:3000/api/v1',
         // 'dpath': 'http://www.thesymbol.store/#/',
-        // 'seller': 'http://seller.thesymbol.store/#'
+        // 'seller': 'http://seller.thesymbol.store/#',
+        // 'stripeKey': 'pk_test_Ny36HAIYzTRPj2oCQkBQ10IY'
 
         // client testing server
         // 'endpoint': 'http://192.241.154.223:3000/api/v1',
@@ -57,12 +54,14 @@ var myApp = angular
         // our testing server
         'endpoint': 'http://159.203.64.172:3000/api/v1',
         'dpath': 'http://ecommercemarketplace.org/#!/',
-        'seller': 'http://seller.ecommercemarketplace.org/#'
+        'seller': 'http://seller.ecommercemarketplace.org/#',
+        'stripeKey': 'pk_test_LbABRxHmOD2v4mP5rseUC4oK',
 
         // local
         // 'endpoint': 'http://localhost:3000/api/v1',
         // 'dpath': 'http://localhost:9200/#/',
-        // 'seller': 'http://localhost:9100/#'
+        // 'seller': 'http://localhost:9100/#',
+        'stripeKey': 'pk_test_LbABRxHmOD2v4mP5rseUC4oK',
         
     })
     // Router
