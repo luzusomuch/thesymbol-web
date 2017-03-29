@@ -33,7 +33,10 @@ angular.module('eCommerceUserApp')
       }),
 	  CheckCoupon: $resource(endpoint + '/coupons/is-valid/:coupon', {coupon:'@coupon'}, {
         'get': {
-          method: 'GET'
+          method: 'GET',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
 	   parseFeed : function(url){

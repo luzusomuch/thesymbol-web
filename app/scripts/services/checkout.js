@@ -12,12 +12,18 @@ angular.module('eCommerceUserApp')
     return {
       addAddress: $resource(endpoint + '/users/account/add-address', null, {
         'get': {
-          method: 'POST'
+          method: 'POST',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
 	  addBillAddress: $resource(endpoint + '/users/checkout/add-billaddress', null, {
         'get': {
-          method: 'POST'
+          method: 'POST',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
 	  getAddress: $resource(endpoint + '/users/checkout/get-address', null, {

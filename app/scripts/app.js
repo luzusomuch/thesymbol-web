@@ -383,6 +383,8 @@ var myApp = angular
         if (currency) {
             price = price*currency.rate;
             price += currency.icon
+        } else {
+            price = '$'+price;
         }
         return price;
     };
