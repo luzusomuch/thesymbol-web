@@ -153,12 +153,11 @@ angular.module('eCommerceUserApp')
             var CRating = new Rating.getReview();
 
             CRating.$get({
-                    guest_token: sessionService.get("token"),
-                    product: $routeParams.pid
-                },function(data) {
+                guest_token: sessionService.get("token"),
+                product: $routeParams.pid
+            },function(data) {
                 if (data.status == "success") {
                     _this.reviews = data.response.reviews;
-                     console.log(data.response.reviews);
                     var total = 0;
                     var count = 0;
                     Object.keys(data.response.reviews).map(function(objectKey, index) {
@@ -357,7 +356,6 @@ angular.module('eCommerceUserApp')
         			if (resp.data.status==='success') {
         				_this.submitted = false;
         				_this.commentText = null;
-        				resp.data.response.ownerId = _this.currentUser;
         				_this.comment.items.push(resp.data.response);
         				_this.comment.totalItem+=1;
         			} else {

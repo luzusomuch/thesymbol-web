@@ -31,42 +31,42 @@ angular.module('eCommerceUserApp')
           method: 'GET'
         }
       }),
-     getPopular: $resource(endpoint + '/users/product/popular', null, {
+      getPopular: $resource(endpoint + '/users/product/popular', null, {
         'get': {
           method: 'GET'
         }
       }),
-     detailsProduct: $resource(endpoint + '/users/product/get-single-product/:id', {id:"@id"}, {
+      detailsProduct: $resource(endpoint + '/users/product/get-single-product/:id', {id:"@id"}, {
         'get': {
           method: 'GET'
         }
       }),
-     cateProduct: $resource(endpoint + '/users/product/get-products?category=:category', {category:"@category"}, {
+      cateProduct: $resource(endpoint + '/users/product/get-products?category=:category', {category:"@category"}, {
         'get': { 
           method: 'GET'
         }
       }),
-     AddtoCart: $resource(endpoint + '/users/cart/add-product', null, {
+      AddtoCart: $resource(endpoint + '/users/cart/add-product', null, {
         'get': {
           method: 'POST'
         }
       }),
-     priceProduct: $resource(endpoint + '/users/product/get-products?category=:category', {category:"@category"}, {
+      priceProduct: $resource(endpoint + '/users/product/get-products?category=:category', {category:"@category"}, {
         'get': {
           method: 'GET'
         }
       }),
-     getAllProducts: $resource(endpoint + '/users/product/get-products', null, {
+      getAllProducts: $resource(endpoint + '/users/product/get-products', null, {
         'get': {
           method: 'GET'
         }
       }),
-     getRecentProducts: $resource(endpoint + '/users/product/get-products', null, {
+      getRecentProducts: $resource(endpoint + '/users/product/get-products', null, {
         'get': {
           method: 'GET'
         }
       }),
-     checkReview: $resource(endpoint + '/users/product/check-review/:id/:oid', {id:"@id",oid:"@oid"}, {
+      checkReview: $resource(endpoint + '/users/product/check-review/:id/:oid', {id:"@id",oid:"@oid"}, {
         'get': {
           method: 'GET'
         }
@@ -78,7 +78,10 @@ angular.module('eCommerceUserApp')
       }),
       addReturn: $resource(endpoint + '/users/product/add-return/:id/:oid', {id:"@id",oid:"@oid"}, {
         'get': {
-          method: 'POST'
+          method: 'POST',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
       reviewDetails: $resource(endpoint + '/users/product/get-review/:id', {id:"@id"}, {
@@ -96,22 +99,22 @@ angular.module('eCommerceUserApp')
           method: 'GET'
         }
       }),
-	  shopList: $resource(endpoint + '/users/get-sellers', null, {
+	   shopList: $resource(endpoint + '/users/get-sellers', null, {
         'get': {
           method: 'GET'
         }
       }),
-	  shopTop: $resource(endpoint + '/users/product/by/seller/:id/top-products', {id:"@id"}, {
+  	  shopTop: $resource(endpoint + '/users/product/by/seller/:id/top-products', {id:"@id"}, {
         'get': {
           method: 'GET'
         }
       }),
-	  shopProducts: $resource(endpoint + '/users/product/get-products', {id:"@id"}, {
+      shopProducts: $resource(endpoint + '/users/product/get-products', {id:"@id"}, {
         'get': {
           method: 'GET'
         }
       }),
-	  getAdmin: $resource(endpoint + '/admin/settings', null, {
+      getAdmin: $resource(endpoint + '/admin/settings', null, {
         'get': {
           method: 'GET'
         }

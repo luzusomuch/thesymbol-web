@@ -14,6 +14,8 @@ angular.module('eCommerceUserApp')
     $scope.myImage='';
     $scope.myCroppedImage='';
 
+    this.returnProId, this.returnOrderId;
+
     var handleFileSelect=function(evt) {
       var file=evt.currentTarget.files[0];
       var reader = new FileReader();
@@ -80,7 +82,29 @@ angular.module('eCommerceUserApp')
         }
 
    	// dispute management
-   	this.dispute = function(productId, shopId, orderId) {
+   	// this.dispute = function(productId, shopId, orderId) {
+   	// 	console.log(productId);
+   	// 	console.log(shopId);
+   	// 	console.log(orderId);
+   	// 	DisputeService.create({
+   	// 		shopId: shopId, 
+   	// 		productId: productId, 
+   	// 		ownerId: angular.fromJson(sessionService.get('user'))._id,
+   	// 		orderId: orderId
+   	// 	}).then(function(resp) {
+   	// 		if (resp.data.status==='success') {
+   	// 			alert('Create dispute successfully');
+   	// 		} else {
+   	// 			if (resp.data.statusCode===409) {
+   	// 				alert('This dispute was created');
+   	// 			} else {
+   	// 				alert('Error when create dispute');
+   	// 			}
+   	// 		}
+   	// 	});
+   	// };
+
+   	this.raiseDispute = function(productId, shopId, orderId) {
    		DisputeService.create({
    			shopId: shopId, 
    			productId: productId, 
@@ -97,7 +121,7 @@ angular.module('eCommerceUserApp')
    				}
    			}
    		});
-   	};
+   	}
 
    	this.dispute = {
    		page: 1
@@ -160,13 +184,12 @@ angular.module('eCommerceUserApp')
             _this.dataLoading = true;
 			var file = $scope.myFile;
 			
-		urltoFile($scope.myCroppedImage, 'a.png', 'image/png')
-        .then(function(file) {
-			var uploadUrl = endpoint+"/images/upload-single-image";
-           fileUpload.uploadFileToUrl(file, uploadUrl,_this.ud,_this);
-        })
-
+			urltoFile($scope.myCroppedImage, 'a.png', 'image/png').then(function(file) {
+				var uploadUrl = endpoint+"/images/upload-single-image";
+           		fileUpload.uploadFileToUrl(file, uploadUrl,_this.ud,_this);
+        	});
         }
+
         this.updateAddress = function(aid) {
 			$scope.header.pageLoading=true;
 			var putAddress = Account.putAddress;
@@ -203,39 +226,44 @@ angular.module('eCommerceUserApp')
 		this.returnShow = function(pid,oid) {
 			$scope.header.pageLoading=true;
 			var CProduct = new Product.detailsReturnProduct({ id: pid, oid: oid });
-        CProduct
-            .$get(function(data) {
+        	CProduct.$get(function(data) {
                 if (data.status == "success") {
                     _this.rproduct = data.response.product;
 					$scope.header.pageLoading=false;
+					_this.returnProId= pid;
+					_this.returnOrderId=oid;
                 }
             }, function(data) {
                 if (data.status == "401") {
                     sessionService.get("token");
                 }
-            })
+                _this.returnProId=null;
+				_this.returnOrderId=null;
+            });
 		}
 
         this.addToReturn = function() {
-			$scope.header.pageLoading=true;
-            var addReturn = new Product.addReturn(_this.return);
-            addReturn
-                .$get({
-                    id: pid,
-                    oid: oid
-                }, function(data) {
-                    if (data.status == "success") {
-						
-                        _this.success = data;
+        	if (_this.returnProId && _this.returnOrderId) {
+				$scope.header.pageLoading=true;
+	            var addReturn = new Product.addReturn(_this.return);
+	            addReturn.$get({
+	                id: _this.returnProId,
+	                oid: _this.returnOrderId
+	            }, function(data) {
+	                if (data.status == "success") {
+	                    _this.success = data;
 						$scope.header.pageLoading=false;
-                    } else
-                        _this.error = data;
-					$scope.header.pageLoading=false;
-                }, function(data) {
-                    if (data.status == "401") {
-                        sessionService.get("token");
-                    }
-                })
+	                } else
+	                    _this.error = data;
+						$scope.header.pageLoading=false;
+	            }, function(data) {
+	                if (data.status == "401") {
+	                    sessionService.get("token");
+	                }
+	            });
+        	} else {
+        		alert('Something went wrong');
+        	}
         }
 		
 		this.editShow = function(aid) {
@@ -416,36 +444,36 @@ angular.module('eCommerceUserApp')
 		};
 	 }])
 
-	.service('fileUpload', ['$http', 'Account', function ($http, Account) {
+	.service('fileUpload', ['$http', 'Account', 'sessionService', function ($http, Account, sessionService) {
 		this.uploadFileToUrl = function(file, uploadUrl,user,_this){
 			if(file.size!=234){
-			   var fd = new FormData();
-			   fd.append('image', file);
-			   $http.post(uploadUrl, fd, {
-				  transformRequest: angular.identity,
-				  headers: {'Content-Type': undefined}
-			   })
-			   .success(function(data){
-				   _this.dataLoading = false;
-				   user.logo=data.response._id;
+			   	var fd = new FormData();
+			   	fd.append('image', file);
+			   	$http.post(uploadUrl, fd, {
+				  	transformRequest: angular.identity,
+				  	headers: {
+				  		'Content-Type': undefined,
+				  		Authorization: sessionService.get('user_token')
+				  	}
+			   	}).success(function(data){
+				   	_this.dataLoading = false;
+				   	user.logo=data.response._id;
 
-				$("#image_id").attr("src",data.response.cdn.secure_url);
+					$("#image_id").attr("src",data.response.cdn.secure_url);
 			   
 		
 					var saveDetails = Account.saveDetails;
-				var save = new saveDetails(user);
-				save.$get().then(function(data) {
-					if (data.status == "success") {
-						_this.success = data;
-					} else {
-						_this.dataLoading = false;
-						_this.error = data;
-					}
-				});
-			   })
-			}
-			else
-			{
+					var save = new saveDetails(user);
+					save.$get().then(function(data) {
+						if (data.status == "success") {
+							_this.success = data;
+						} else {
+							_this.dataLoading = false;
+							_this.error = data;
+						}
+					});
+			   	})
+			} else {
 				 _this.dataLoading = false;
 				var saveDetails = Account.saveDetails;
 				var save = new saveDetails(user);
@@ -458,6 +486,5 @@ angular.module('eCommerceUserApp')
 					}
 				});
 			}
-
 		}
 	}])

@@ -244,6 +244,8 @@
 														<a  ng-if="pro.id.type=='digital'" href="{{acc.download_url}}/users/order/digital-products/{{pro.id._id}}?dt={{pro.download_token}}" target="_blank" class="btn btn-info pull-right">Download</a>
 														
 														<a  href="/#!/review-product/{{pro.id._id}}/{{oder._id}}"  class="btn btn-default pull-right">Review</a>
+
+														<button class="btn btn-default pull-right" type="button" ng-click="acc.raiseDispute(pro.id._id, pro.shop_id._id, oder._id)">Dispute</button>
 													</div>
 												</div><hr>
 												

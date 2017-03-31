@@ -18,7 +18,7 @@ angular.module('eCommerceUserApp')
           }
         }
       }),
-	  getSingleAddress: $resource(endpoint + '/users/account/get-address/:id', {id:'@id'}, {
+      getSingleAddress: $resource(endpoint + '/users/account/get-address/:id', {id:'@id'}, {
         'get': {
           method: 'GET',
           headers: {
@@ -26,24 +26,36 @@ angular.module('eCommerceUserApp')
           }
         }
       }),
-	  saveDetails: $resource(endpoint + '/users/account/update', null, {
+      saveDetails: $resource(endpoint + '/users/account/update', null, {
         'get': {
-          method: 'PUT'
+          method: 'PUT',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
-	  putAddress: $resource(endpoint + '/users/account/update-address/:id', {id:'@_id'}, {
+      putAddress: $resource(endpoint + '/users/account/update-address/:id', {id:'@_id'}, {
         'get': {
-          method: 'PUT'
+          method: 'PUT',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
-	  deleteAddress: $resource(endpoint + '/users/account/remove-address/:id', {id:'@id'}, {
+      deleteAddress: $resource(endpoint + '/users/account/remove-address/:id', {id:'@id'}, {
         'get': {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       }),
-	  updatePassword: $resource(endpoint + '/users/account/change-password', null, {
+      updatePassword: $resource(endpoint + '/users/account/change-password', null, {
         'get': {
-          method: 'POST'
+          method: 'POST',
+          headers: {
+            Authorization: sessionService.get('user_token')
+          }
         }
       })
 	}
